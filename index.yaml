@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   projectsveltos:
   - apiVersion: v2
+    appVersion: 0.19.0
+    created: "2023-10-31T09:02:41.393866129Z"
+    description: Projectsveltos helm chart for Kubernetes
+    digest: 40483826e364c591d22eceb17c75d93840f1c2c310fac4e64ce0a209799736a5
+    icon: https://github.com/projectsveltos/sveltos/raw/main/docs/assets/logo.png
+    name: projectsveltos
+    type: application
+    urls:
+    - https://github.com/projectsveltos/helm-charts/releases/download/projectsveltos-0.19.0/projectsveltos-0.19.0.tgz
+    version: 0.19.0
+  - apiVersion: v2
     appVersion: 0.18.2
     created: "2023-10-19T09:24:18.0781957Z"
     description: Projectsveltos helm chart for Kubernetes
@@ -320,4 +331,4 @@ entries:
     urls:
     - https://github.com/projectsveltos/helm-charts/releases/download/projectsveltos-0.4.0/projectsveltos-0.4.0.tgz
     version: 0.4.0
-generated: "2023-10-19T09:24:18.078659702Z"
+generated: "2023-10-31T09:02:41.394163844Z"
