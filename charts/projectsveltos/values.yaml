@@ -10,7 +10,7 @@ accessManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/access-manager
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       limits:
         cpu: 500m
@@ -28,22 +28,24 @@ addonController:
     - --report-mode=0
     - --shard-key=
     - --v=5
-    - --version=v0.38.4
+    - --version=v0.39.0
     argsAgentMgmtCluster:
     - --diagnostics-address=:8443
     - --report-mode=0
     - --agent-in-mgmt-cluster
     - --shard-key=
     - --v=5
-    - --version=v0.38.4
+    - --version=v0.39.0
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
         - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: docker.io/projectsveltos/addon-controller
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       requests:
         memory: 256Mi
@@ -57,14 +59,14 @@ classifierManager:
     - --report-mode=0
     - --shard-key=
     - --v=5
-    - --version=v0.38.4
+    - --version=v0.39.0
     argsAgentMgmtCluster:
     - --diagnostics-address=:8443
     - --report-mode=0
     - --agent-in-mgmt-cluster
     - --shard-key=
     - --v=5
-    - --version=v0.38.4
+    - --version=v0.39.0
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -72,7 +74,7 @@ classifierManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/classifier
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       limits:
         cpu: 500m
@@ -93,7 +95,7 @@ conversionWebhook:
         - ALL
     image:
       repository: docker.io/projectsveltos/webhook-conversion
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       limits:
         cpu: 500m
@@ -110,7 +112,7 @@ eventManager:
     - --diagnostics-address=:8443
     - --shard-key=
     - --v=5
-    - --version=v0.38.4
+    - --version=v0.39.0
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -118,7 +120,7 @@ eventManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/event-manager
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       limits:
         cpu: 500m
@@ -135,7 +137,7 @@ hcManager:
     - --diagnostics-address=:8443
     - --shard-key=
     - --v=5
-    - --version=v0.38.4
+    - --version=v0.39.0
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -143,7 +145,7 @@ hcManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/healthcheck-manager
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       limits:
         cpu: 500m
@@ -167,7 +169,7 @@ registerMgmtClusterJob:
         - ALL
     image:
       repository: docker.io/projectsveltos/register-mgmt-cluster
-      tag: v0.38.4
+      tag: v0.39.0
     imagePullPolicy: IfNotPresent
     resources:
       requests:
@@ -185,7 +187,7 @@ scManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/sveltoscluster-manager
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       limits:
         cpu: 500m
@@ -214,7 +216,7 @@ shardController:
         - ALL
     image:
       repository: docker.io/projectsveltos/shard-controller
-      tag: v0.38.4
+      tag: v0.39.0
     resources:
       limits:
         cpu: 500m
