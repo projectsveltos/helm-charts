@@ -1,3 +1,4 @@
+{{- if not (lookup "lib.projectsveltos.io/v1beta1" "Classifier" "" "default-classifier") }}
 apiVersion: lib.projectsveltos.io/v1beta1
 kind: Classifier
 metadata:
@@ -12,3 +13,4 @@ spec:
   classifierLabels:
   - key: sveltos-agent
     value: present
+{{- end }}
