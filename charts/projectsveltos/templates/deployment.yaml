@@ -26,6 +26,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: controller
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.addonController.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -124,6 +128,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.accessManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -201,6 +209,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.scManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -278,6 +290,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.hcManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -355,6 +371,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.eventManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -432,6 +452,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.classifierManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -535,6 +559,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }} 
       {{- with .Values.shardController.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -616,6 +644,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: sveltos-webhook
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       containers:
       - command:
         - /conversion-webhook

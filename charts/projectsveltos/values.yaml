@@ -1,3 +1,6 @@
+global:  
+  imagePullSecrets: []
+ #   - name: my-registry-secret
 accessManager:
   manager:
     args:
