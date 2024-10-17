@@ -8,6 +8,10 @@ spec:
   backoffLimit: {{ .Values.registerMgmtClusterJob.backoffLimit }}
   template:
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}    
       containers:
       - args: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.args
           | nindent 8 }}
