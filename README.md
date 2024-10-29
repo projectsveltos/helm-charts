@@ -26,7 +26,9 @@ Additionally you can set more parameters that are defined in the [values.yaml](.
 
 The helm upgrade command won't automatically update Sveltos's Custom Resource Definitions (CRDs). To ensure CRDs are updated, run this command before upgrading Sveltos.
 
+```
 kubectl apply -f https://raw.githubusercontent.com/projectsveltos/sveltos/v0.41.0/manifest/crds/sveltos_crds.yaml
+```
 
 To uninstall the chart:
 
