@@ -236,6 +236,8 @@ prometheus:
   enabled: false
 agent:
   managementCluster: false
+telemetry:
+  disabled: false
 webhookService:
   ports:
   - port: 443

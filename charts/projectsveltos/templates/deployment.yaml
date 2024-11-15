@@ -40,6 +40,9 @@ spec:
 {{ else }}
       - args: {{- toYaml .Values.addonController.controller.args | nindent 8 }}
 {{ end }}
+{{- if .Values.telemetry.disabled }}
+    {{"-  --disable-telemetry=true" | nindent 8 }}
+{{- end }}
         command:
         - /manager
         env:
