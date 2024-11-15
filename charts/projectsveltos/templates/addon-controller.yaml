@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: addon-controller
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.addonController.type }}
+  selector:
+    control-plane: addon-controller
+  {{- include "projectsveltos.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.addonController.ports | toYaml | nindent 2 -}}
+{{ if .Values.prometheus.enabled }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: addon-controller
+  labels:
+    control-plane: addon-controller
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    path: /metrics
+    port: metrics
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+  selector:
+    matchLabels:
+      control-plane: addon-controller
+{{ end }}
