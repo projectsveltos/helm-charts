@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sc-manager
+  labels:
+    control-plane: sc-manager
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.scManager.type }}
+  selector:
+    control-plane: sc-manager
+  {{- include "projectsveltos.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.scManager.ports | toYaml | nindent 2 -}}
+{{ if .Values.prometheus.enabled }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sc-manager
+  labels:
+    release: prometheus-operator
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    path: /metrics
+    port: metrics
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: true
+  namespaceSelector:
+    matchNames:
+    - projectsveltos
+  selector:
+    matchLabels:
+      control-plane: sc-manager
+{{ end }}
