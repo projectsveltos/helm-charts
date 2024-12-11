@@ -251,3 +251,5 @@ webhookService:
     protocol: TCP
     targetPort: 9443
   type: ClusterIP
+webhook:
+  conversion: false
