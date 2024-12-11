@@ -597,6 +597,7 @@ metadata:
   name: register-mgmt-cluster
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
+{{ if .Values.webhook.conversion }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -668,4 +669,4 @@ spec:
         secret:
           defaultMode: 420
           secretName: webhook-server-cert
-
+{{ end }}
