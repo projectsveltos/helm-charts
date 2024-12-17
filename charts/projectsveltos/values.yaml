@@ -6,6 +6,7 @@ accessManager:
     args:
     - --diagnostics-address=:8443
     - --v=5
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -39,6 +40,7 @@ addonController:
     - --shard-key=
     - --v=5
     - --version=v0.44.0
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -52,6 +54,7 @@ addonController:
     resources:
       requests:
         memory: 256Mi
+    extraEnv: []
   ports:
   - name: metrics
     port: 80
@@ -76,6 +79,7 @@ classifierManager:
     - --shard-key=
     - --v=5
     - --version=v0.44.0
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -122,6 +126,7 @@ eventManager:
     - --shard-key=
     - --v=5
     - --version=v0.44.0
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -147,6 +152,7 @@ hcManager:
     - --shard-key=
     - --v=5
     - --version=v0.44.0
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -171,6 +177,7 @@ registerMgmtClusterJob:
   registerMgmtCluster:
     args:
     - --labels=
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -189,6 +196,7 @@ scManager:
     - --diagnostics-address=:8443
     - --shard-key=
     - --v=5
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -224,6 +232,7 @@ shardController:
     - --report-mode=0
     - --agent-in-mgmt-cluster
     - --v=5
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -254,3 +263,5 @@ webhookService:
     protocol: TCP
     targetPort: 9443
   type: ClusterIP
+webhook:
+  conversion: false

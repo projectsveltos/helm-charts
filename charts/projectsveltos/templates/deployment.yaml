@@ -62,6 +62,11 @@ spec:
               resource: limits.cpu
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.addonController.controller.extraEnv }}
+        {{- with .Values.addonController.controller.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.addonController.controller.image.repository }}:{{ .Values.addonController.controller.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -150,6 +155,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.accessManager.manager.extraEnv }}
+        {{- with .Values.accessManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.accessManager.manager.image.repository }}:{{ .Values.accessManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -231,6 +241,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.scManager.manager.extraEnv }}
+        {{- with .Values.scManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.scManager.manager.image.repository }}:{{ .Values.scManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -312,6 +327,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.hcManager.manager.extraEnv }}
+        {{- with .Values.hcManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.hcManager.manager.image.repository }}:{{ .Values.hcManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -393,6 +413,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.eventManager.manager.extraEnv }}
+        {{- with .Values.eventManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.eventManager.manager.image.repository }}:{{ .Values.eventManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -478,6 +503,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.classifierManager.manager.extraEnv }}
+        {{- with .Values.classifierManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.classifierManager.manager.image.repository }}:{{ .Values.classifierManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -585,6 +615,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.shardController.manager.extraEnv }}
+        {{- with .Values.shardController.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.shardController.manager.image.repository }}:{{ .Values.shardController.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -658,6 +693,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.conversionWebhook.extraEnv }}
+        {{- with .Values.shardController.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.conversionWebhook.sveltosWebhook.image.repository }}:{{ .Values.conversionWebhook.sveltosWebhook.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:

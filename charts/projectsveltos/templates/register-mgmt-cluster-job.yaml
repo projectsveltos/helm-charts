@@ -18,6 +18,11 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- if .Values.registerMgmtClusterJob.registerMgmtCluster.extraEnv }}
+        {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.repository
           }}:{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.tag | default
           .Chart.AppVersion }}
