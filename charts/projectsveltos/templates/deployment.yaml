@@ -26,6 +26,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: controller
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.addonController.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -58,6 +62,9 @@ spec:
               resource: limits.cpu
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.addonController.controller.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.addonController.controller.image.repository }}:{{ .Values.addonController.controller.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -127,6 +134,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.accessManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -142,6 +153,9 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.accessManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.accessManager.manager.image.repository }}:{{ .Values.accessManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -204,6 +218,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.scManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -219,6 +237,9 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.scManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.scManager.manager.image.repository }}:{{ .Values.scManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -281,6 +302,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.hcManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -296,6 +321,9 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.hcManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.hcManager.manager.image.repository }}:{{ .Values.hcManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -358,6 +386,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.eventManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -373,6 +405,9 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.eventManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.eventManager.manager.image.repository }}:{{ .Values.eventManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -435,6 +470,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       {{- with .Values.classifierManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -454,6 +493,9 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.classifierManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.classifierManager.manager.image.repository }}:{{ .Values.classifierManager.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -538,6 +580,10 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: manager
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }} 
       {{- with .Values.shardController.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -557,6 +603,9 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.shardController.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.shardController.manager.image.repository }}:{{ .Values.shardController.manager.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:
@@ -620,12 +669,19 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: sveltos-webhook
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
       containers:
       - command:
         - /conversion-webhook
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.shardController.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.conversionWebhook.sveltosWebhook.image.repository }}:{{ .Values.conversionWebhook.sveltosWebhook.image.tag
           | default .Chart.AppVersion }}
         livenessProbe:

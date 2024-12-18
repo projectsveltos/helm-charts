@@ -8,12 +8,19 @@ spec:
   backoffLimit: {{ .Values.registerMgmtClusterJob.backoffLimit }}
   template:
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}    
       containers:
       - args: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.args
           | nindent 8 }}
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.repository
           }}:{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.tag | default
           .Chart.AppVersion }}
