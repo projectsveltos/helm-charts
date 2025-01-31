@@ -1,10 +1,3 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: addon-controller
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -98,20 +91,12 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.addonController.podSecurityContext | nindent 8 }}
       serviceAccountName: addon-controller
       terminationGracePeriodSeconds: 10
       volumes:
       - emptyDir: {}
         name: tmp
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: access-manager
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -185,17 +170,9 @@ spec:
         resources: {{- toYaml .Values.accessManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.accessManager.manager.containerSecurityContext
           | nindent 10 }}
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.accessManager.podSecurityContext | nindent 8 }}
       serviceAccountName: access-manager
       terminationGracePeriodSeconds: 10
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: sc-manager
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -269,17 +246,9 @@ spec:
         resources: {{- toYaml .Values.scManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.scManager.manager.containerSecurityContext
           | nindent 10 }}
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.scManager.podSecurityContext | nindent 8 }}
       serviceAccountName: sc-manager
       terminationGracePeriodSeconds: 10
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: hc-manager
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -353,17 +322,9 @@ spec:
         resources: {{- toYaml .Values.hcManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.hcManager.manager.containerSecurityContext
           | nindent 10 }}
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.hcManager.podSecurityContext | nindent 8 }}
       serviceAccountName: hc-manager
       terminationGracePeriodSeconds: 10
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: event-manager
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -442,13 +403,6 @@ spec:
       serviceAccountName: event-manager
       terminationGracePeriodSeconds: 10
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: classifier-manager
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -526,38 +480,9 @@ spec:
           }}
         securityContext: {{- toYaml .Values.classifierManager.manager.containerSecurityContext
           | nindent 10 }}
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.classifierManager.podSecurityContext | nindent 8 }}
       serviceAccountName: classifier-manager
       terminationGracePeriodSeconds: 10
----
-{{ if .Values.agent.managementCluster }}
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: sveltos-agent-manager
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
-{{ end }}
----
-{{ if .Values.agent.managementCluster }}
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: drift-detection-manager
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
-{{ end }}
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: shard-controller
-  labels:
-    app.kubernetes.io/component: rbac
-    app.kubernetes.io/created-by: shard-controller
-    app.kubernetes.io/part-of: shard-controller
-  {{- include "projectsveltos.labels" . | nindent 4 }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -635,17 +560,9 @@ spec:
         resources: {{- toYaml .Values.shardController.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.shardController.manager.containerSecurityContext
           | nindent 10 }}
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
       serviceAccountName: shard-controller
       terminationGracePeriodSeconds: 10
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: register-mgmt-cluster
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
 {{ if .Values.webhook.conversion }}
 ---
 apiVersion: apps/v1
@@ -716,8 +633,7 @@ spec:
         - mountPath: /tmp/k8s-webhook-server/serving-certs
           name: cert
           readOnly: true
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.conversionWebhook.podSecurityContext | nindent 8 }}
       serviceAccountName: default
       terminationGracePeriodSeconds: 10
       volumes:

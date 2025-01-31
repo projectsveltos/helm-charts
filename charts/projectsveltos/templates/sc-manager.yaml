@@ -9,9 +9,9 @@ spec:
   type: {{ .Values.scManager.type }}
   selector:
     control-plane: sc-manager
-  {{- include "projectsveltos.selectorLabels" . | nindent 4 }}
+    {{- include "projectsveltos.selectorLabels" . | nindent 4 }}
   ports:
-	{{- .Values.scManager.ports | toYaml | nindent 2 -}}
+  {{- .Values.scManager.ports | toYaml | nindent 2 }}
 {{ if .Values.prometheus.enabled }}
 ---
 apiVersion: monitoring.coreos.com/v1
