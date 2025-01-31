@@ -2,9 +2,9 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: projectsveltos-mutating-webhook-configuration
+  name: sveltos-mutating-webhook-configuration
   annotations:
-    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/projectsveltos-serving-cert
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/sveltos-serving-cert
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
 webhooks:

@@ -14,7 +14,7 @@ accessManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/access-manager
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       limits:
         cpu: 500m
@@ -23,8 +23,12 @@ accessManager:
         cpu: 10m
         memory: 128Mi
   nodeSelector: {}
+  podSecurityContext:
+    runAsNonRoot: true
   replicas: 1
   tolerations: []
+  serviceAccount:
+    annotations: {}
 addonController:
   controller:
     args:
@@ -32,14 +36,14 @@ addonController:
     - --report-mode=0
     - --shard-key=
     - --v=5
-    - --version=v0.45.0
+    - --version=v0.46.0
     argsAgentMgmtCluster:
     - --diagnostics-address=:8443
     - --report-mode=0
     - --agent-in-mgmt-cluster
     - --shard-key=
     - --v=5
-    - --version=v0.45.0
+    - --version=v0.46.0
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -50,11 +54,13 @@ addonController:
         type: RuntimeDefault
     image:
       repository: docker.io/projectsveltos/addon-controller
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       requests:
         memory: 256Mi
     extraEnv: []
+  podSecurityContext:
+    runAsNonRoot: true
   ports:
   - name: metrics
     port: 80
@@ -63,6 +69,8 @@ addonController:
   nodeSelector: {}
   replicas: 1
   tolerations: []
+  serviceAccount:
+    annotations: {}
   type: ClusterIP
 classifierManager:
   manager:
@@ -71,14 +79,14 @@ classifierManager:
     - --report-mode=0
     - --shard-key=
     - --v=5
-    - --version=v0.45.0
+    - --version=v0.46.0
     argsAgentMgmtCluster:
     - --diagnostics-address=:8443
     - --report-mode=0
     - --agent-in-mgmt-cluster
     - --shard-key=
     - --v=5
-    - --version=v0.45.0
+    - --version=v0.46.0
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -87,7 +95,7 @@ classifierManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/classifier
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       limits:
         cpu: 500m
@@ -96,9 +104,15 @@ classifierManager:
         cpu: 100m
         memory: 128Mi
   nodeSelector: {}
+  podSecurityContext:
+    runAsNonRoot: true
   replicas: 1
   tolerations: []
+  serviceAccount:
+    annotations: {}
 conversionWebhook:
+  podSecurityContext:
+    runAsNonRoot: true
   replicas: 1
   sveltosWebhook:
     containerSecurityContext:
@@ -108,7 +122,7 @@ conversionWebhook:
         - ALL
     image:
       repository: docker.io/projectsveltos/webhook-conversion
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       limits:
         cpu: 500m
@@ -119,13 +133,16 @@ conversionWebhook:
   nodeSelector: {}
   replicas: 1
   tolerations: []
+driftDetectionManager:
+  serviceAccount:
+    annotations: {}
 eventManager:
   manager:
     args:
     - --diagnostics-address=:8443
     - --shard-key=
     - --v=5
-    - --version=v0.45.0
+    - --version=v0.46.0
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -134,7 +151,7 @@ eventManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/event-manager
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       limits:
         cpu: 500m
@@ -143,15 +160,19 @@ eventManager:
         cpu: 10m
         memory: 128Mi
   nodeSelector: {}
+  podSecurityContext:
+    runAsNonRoot: true
   replicas: 1
   tolerations: []
+  serviceAccount:
+    annotations: {}
 hcManager:
   manager:
     args:
     - --diagnostics-address=:8443
     - --shard-key=
     - --v=5
-    - --version=v0.45.0
+    - --version=v0.46.0
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -160,7 +181,7 @@ hcManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/healthcheck-manager
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       limits:
         cpu: 500m
@@ -169,14 +190,22 @@ hcManager:
         cpu: 10m
         memory: 128Mi
   nodeSelector: {}
+  podSecurityContext:
+    runAsNonRoot: true
   replicas: 1
   tolerations: []
+  serviceAccount:
+    annotations: {}
 kubernetesClusterDomain: cluster.local
+registerMgmtCluster:
+  serviceAccount:
+    annotations: {}
 registerMgmtClusterJob:
   backoffLimit: 4
   registerMgmtCluster:
     args:
     - --labels=
+    - --service-account-token=false
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -185,7 +214,7 @@ registerMgmtClusterJob:
         - ALL
     image:
       repository: docker.io/projectsveltos/register-mgmt-cluster
-      tag: v0.45.0
+      tag: v0.46.0
     imagePullPolicy: IfNotPresent
     resources:
       requests:
@@ -204,7 +233,7 @@ scManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/sveltoscluster-manager
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       limits:
         cpu: 500m
@@ -213,6 +242,8 @@ scManager:
         cpu: 10m
         memory: 128Mi
   nodeSelector: {}
+  podSecurityContext:
+    runAsNonRoot: true
   ports:
   - name: metrics
     port: 80
@@ -220,6 +251,8 @@ scManager:
     targetPort: 8443
   replicas: 1
   tolerations: []
+  serviceAccount:
+    annotations: {}
   type: ClusterIP
 shardController:
   manager:
@@ -240,7 +273,7 @@ shardController:
         - ALL
     image:
       repository: docker.io/projectsveltos/shard-controller
-      tag: v0.45.0
+      tag: v0.46.0
     resources:
       limits:
         cpu: 500m
@@ -249,8 +282,15 @@ shardController:
         cpu: 10m
         memory: 128Mi
   nodeSelector: {}
+  podSecurityContext:
+    runAsNonRoot: true
   replicas: 1
   tolerations: []
+  serviceAccount:
+    annotations: {}
+sveltosAgentManager:
+  serviceAccount:
+    annotations: {}
 prometheus:
   enabled: false
 agent:
