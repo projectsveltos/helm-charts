@@ -32,11 +32,14 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-{{ if .Values.agent.managementCluster }}      
-      - args: {{- toYaml .Values.addonController.controller.argsAgentMgmtCluster | nindent 8 }}
+{{- if .Values.agent.managementCluster }}      
+      - args: {{- toYaml .Values.addonController.controller.argsAgentMgmtCluster | nindent 8 -}}
 {{ else }}
-      - args: {{- toYaml .Values.addonController.controller.args | nindent 8 }}
-{{ end }}
+      - args: {{- toYaml .Values.addonController.controller.args | nindent 8 -}}
+{{- end }}
+{{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+        - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
+{{- end }}
 {{- if .Values.telemetry.disabled }}
     {{"-  --disable-telemetry=true" | nindent 8 }}
 {{- end }}
@@ -437,11 +440,14 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-{{ if .Values.agent.managementCluster }}      
-      - args: {{- toYaml .Values.classifierManager.manager.argsAgentMgmtCluster | nindent 8 }}
+{{- if .Values.agent.managementCluster }}      
+      - args: {{- toYaml .Values.classifierManager.manager.argsAgentMgmtCluster | nindent 8 -}}
 {{ else }}
-      - args: {{- toYaml .Values.classifierManager.manager.args | nindent 8 }}
-{{ end }}
+      - args: {{- toYaml .Values.classifierManager.manager.args | nindent 8 -}}
+{{- end }}
+{{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
+        - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
+{{- end }}
         command:
         - /manager
         env:
@@ -518,11 +524,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-{{ if .Values.agent.managementCluster }}
+{{- if .Values.agent.managementCluster }}
       - args: {{- toYaml .Values.shardController.manager.argsAgentMgmtCluster | nindent 8 }}
-{{ else }}
+{{- else -}}
       - args: {{- toYaml .Values.shardController.manager.args | nindent 8 }}
-{{ end }}
+{{- end }}
         command:
         - /manager
         env:
