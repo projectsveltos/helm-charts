@@ -1,4 +1,5 @@
-global:  
+global:
+  useDigest: false
   imagePullSecrets: []
  #   - name: my-registry-secret
 accessManager:
@@ -15,6 +16,7 @@ accessManager:
     image:
       repository: docker.io/projectsveltos/access-manager
       tag: v0.46.1
+      digest: sha256:c7794284849869f58c8bbb4df0effa89b7a7ede4944ee13b59dcd1693f19b168
     resources:
       limits:
         cpu: 500m
@@ -55,6 +57,7 @@ addonController:
     image:
       repository: docker.io/projectsveltos/addon-controller
       tag: v0.46.1
+      digest: sha256:ddaeb145b380227c9d71124c8240413660a8d18ce6aafb33acaf30459574947f 
     resources:
       requests:
         memory: 256Mi
@@ -96,6 +99,7 @@ classifierManager:
     image:
       repository: docker.io/projectsveltos/classifier
       tag: v0.46.1
+      digest: sha256:15cfc305c1aa8b85d0301130216e4e65a1eefc24ea7fc94c8d8568aaabb8c16e
     resources:
       limits:
         cpu: 500m
@@ -123,6 +127,7 @@ conversionWebhook:
     image:
       repository: docker.io/projectsveltos/webhook-conversion
       tag: v0.46.1
+      digest: sha256:37950f0a06661558ede2d58216d232d3dee5361be36ac29bde13cb1c34089cb6
     resources:
       limits:
         cpu: 500m
@@ -152,6 +157,7 @@ eventManager:
     image:
       repository: docker.io/projectsveltos/event-manager
       tag: v0.46.1
+      digest: sha256:e78ad8c5c20edf2f5ae68851c8b5ceac7ca0452bd98ae182f5e210e822b49fb3
     resources:
       limits:
         cpu: 500m
@@ -181,7 +187,8 @@ hcManager:
         - ALL
     image:
       repository: docker.io/projectsveltos/healthcheck-manager
-      tag: v0.46.1
+      tag: v0.46.1 
+      digest: sha256:9a6442be8d7be2de4ef0b0e7f3d9a050b4516e8bf12d10c6491115349312ade1
     resources:
       limits:
         cpu: 500m
@@ -215,6 +222,7 @@ registerMgmtClusterJob:
     image:
       repository: docker.io/projectsveltos/register-mgmt-cluster
       tag: v0.46.1
+      digest: sha256:a426b6915389bc5ed137e03c5bad55f24727fa22ad897cd1fec81fbd5b36d1e7 
     imagePullPolicy: IfNotPresent
     resources:
       requests:
@@ -234,6 +242,7 @@ scManager:
     image:
       repository: docker.io/projectsveltos/sveltoscluster-manager
       tag: v0.46.1
+      digest: sha256:1cb2b903628a90aae74a7fecfd4a17fee21c60674160e8917dc875d24d4b0786 
     resources:
       limits:
         cpu: 500m
@@ -274,6 +283,7 @@ shardController:
     image:
       repository: docker.io/projectsveltos/shard-controller
       tag: v0.46.1
+      digest: sha256:9206fbf14bec49414c8bc3a1aa92ab9bc85528a745b94fb1b8451df2665da368 
     resources:
       limits:
         cpu: 500m
