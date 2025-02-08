@@ -1,0 +1,32 @@
+accessManager:
+  manager:
+    extraArgs: { "accessManager": "value1", "manager": "value2", "empty": "" }
+addonController:
+  controller:
+    extraArgs: { "addonController": "value1", "controller": "value2" }
+    extraArgsAgentMgmtCluster:
+      { "argsAgentMgmtCluster": "value1", "argsAgentMgmtCluster2": "value2" }
+classifierManager:
+  manager:
+    extraArgs: { "classifierManager": "value1", "manager": "value2" }
+    extraArgsAgentMgmtCluster:
+      { "argsAgentMgmtCluster": "value1", "argsAgentMgmtCluster2": "value2" }
+eventManager:
+  manager:
+    extraArgs: { "eventManager": "value1", "manager": "value2" }
+hcManager:
+  manager:
+    extraArgs: { "hcManager": "value1", "manager": "value2" }
+registerMgmtClusterJob:
+  extraArgs:
+    { "registerMgmtCluster": "value1", "registerMgmtCluster2": "value2" }
+scManager:
+  manager:
+    extraArgs: { "scManager": "value1", "manager": "value2" }
+shardController:
+  manager:
+    extraArgs: { "shardController": "value1", "manager": "value2" }
+    extraArgsAgentMgmtCluster:
+      { "argsAgentMgmtCluster": "value1", "argsAgentMgmtCluster2": "value2" }
+agent:
+  managementCluster: true

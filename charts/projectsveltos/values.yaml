@@ -1,18 +1,19 @@
 global:
   useDigest: false
   imagePullSecrets: []
- #   - name: my-registry-secret
+    # - name: my-registry-secret
 accessManager:
   manager:
     args:
-    - --diagnostics-address=:8443
-    - --v=5
+      - --diagnostics-address=:8443
+      - --v=5
+    extraArgs: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/access-manager
       tag: v0.46.1
@@ -34,43 +35,42 @@ accessManager:
 addonController:
   controller:
     args:
-    - --diagnostics-address=:8443
-    - --report-mode=0
-    - --shard-key=
-    - --v=5
-    - --version=v0.46.1
+      - --diagnostics-address=:8443
+      - --report-mode=0
+      - --shard-key=
+      - --v=5
+      - --version=v0.46.1
+    extraArgs: {}
     argsAgentMgmtCluster:
-    - --diagnostics-address=:8443
-    - --report-mode=0
-    - --agent-in-mgmt-cluster
-    - --shard-key=
-    - --v=5
-    - --version=v0.46.1
+      - --diagnostics-address=:8443
+      - --report-mode=0
+      - --agent-in-mgmt-cluster
+      - --shard-key=
+      - --v=5
+      - --version=v0.46.1
+    extraArgsAgentMgmtCluster: {}
+    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
       seccompProfile:
         type: RuntimeDefault
     image:
       repository: docker.io/projectsveltos/addon-controller
       tag: v0.46.1
-      digest: sha256:ddaeb145b380227c9d71124c8240413660a8d18ce6aafb33acaf30459574947f 
+      digest: sha256:ddaeb145b380227c9d71124c8240413660a8d18ce6aafb33acaf30459574947f
     resources:
       requests:
         memory: 256Mi
-    extraEnv: []
-  driftDetectionManagerPatchConfigMap:
-    name: drift-detection-config
-    data: {}
   podSecurityContext:
     runAsNonRoot: true
   ports:
-  - name: metrics
-    port: 80
-    protocol: TCP
-    targetPort: 8443
+    - name: metrics
+      port: 80
+      protocol: TCP
+      targetPort: 8443
   nodeSelector: {}
   replicas: 1
   tolerations: []
@@ -83,24 +83,26 @@ classifierManager:
     data: {}
   manager:
     args:
-    - --diagnostics-address=:8443
-    - --report-mode=0
-    - --shard-key=
-    - --v=5
-    - --version=v0.46.1
+      - --diagnostics-address=:8443
+      - --report-mode=0
+      - --shard-key=
+      - --v=5
+      - --version=v0.46.1
+    extraArgs: {}
     argsAgentMgmtCluster:
-    - --diagnostics-address=:8443
-    - --report-mode=0
-    - --agent-in-mgmt-cluster
-    - --shard-key=
-    - --v=5
-    - --version=v0.46.1
+      - --diagnostics-address=:8443
+      - --report-mode=0
+      - --agent-in-mgmt-cluster
+      - --shard-key=
+      - --v=5
+      - --version=v0.46.1
+    extraArgsAgentMgmtCluster: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/classifier
       tag: v0.46.1
@@ -129,7 +131,7 @@ conversionWebhook:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/webhook-conversion
       tag: v0.46.1
@@ -141,6 +143,7 @@ conversionWebhook:
       requests:
         cpu: 10m
         memory: 64Mi
+  nodeSelector: {}
   tolerations: []
 driftDetectionManager:
   serviceAccount:
@@ -148,16 +151,17 @@ driftDetectionManager:
 eventManager:
   manager:
     args:
-    - --diagnostics-address=:8443
-    - --shard-key=
-    - --v=5
-    - --version=v0.46.1
+      - --diagnostics-address=:8443
+      - --shard-key=
+      - --v=5
+      - --version=v0.46.1
+    extraArgs: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/event-manager
       tag: v0.46.1
@@ -179,19 +183,20 @@ eventManager:
 hcManager:
   manager:
     args:
-    - --diagnostics-address=:8443
-    - --shard-key=
-    - --v=5
-    - --version=v0.46.1
+      - --diagnostics-address=:8443
+      - --shard-key=
+      - --v=5
+      - --version=v0.46.1
+    extraArgs: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/healthcheck-manager
-      tag: v0.46.1 
+      tag: v0.46.1
       digest: sha256:9a6442be8d7be2de4ef0b0e7f3d9a050b4516e8bf12d10c6491115349312ade1
     resources:
       limits:
@@ -215,18 +220,19 @@ registerMgmtClusterJob:
   backoffLimit: 4
   registerMgmtCluster:
     args:
-    - --labels=
-    - --service-account-token=false
+      - --labels=
+      - --service-account-token=false
+    extraArgs: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/register-mgmt-cluster
       tag: v0.46.1
-      digest: sha256:a426b6915389bc5ed137e03c5bad55f24727fa22ad897cd1fec81fbd5b36d1e7 
+      digest: sha256:a426b6915389bc5ed137e03c5bad55f24727fa22ad897cd1fec81fbd5b36d1e7
     imagePullPolicy: IfNotPresent
     resources:
       requests:
@@ -234,19 +240,20 @@ registerMgmtClusterJob:
 scManager:
   manager:
     args:
-    - --diagnostics-address=:8443
-    - --shard-key=
-    - --v=5
+      - --diagnostics-address=:8443
+      - --shard-key=
+      - --v=5
+    extraArgs: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/sveltoscluster-manager
       tag: v0.46.1
-      digest: sha256:1cb2b903628a90aae74a7fecfd4a17fee21c60674160e8917dc875d24d4b0786 
+      digest: sha256:1cb2b903628a90aae74a7fecfd4a17fee21c60674160e8917dc875d24d4b0786
     resources:
       limits:
         cpu: 500m
@@ -258,36 +265,39 @@ scManager:
   podSecurityContext:
     runAsNonRoot: true
   ports:
-  - name: metrics
-    port: 80
-    protocol: TCP
-    targetPort: 8443
+    - name: metrics
+      port: 80
+      protocol: TCP
+      targetPort: 8443
   replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
   type: ClusterIP
 shardController:
+  extraEnv: []
   manager:
     args:
-    - --diagnostics-address=:8443
-    - --v=5
-    - --report-mode=0
+      - --diagnostics-address=:8443
+      - --v=5
+      - --report-mode=0
+    extraArgs: {}
     argsAgentMgmtCluster:
-    - --diagnostics-address=:8443
-    - --report-mode=0
-    - --agent-in-mgmt-cluster
-    - --v=5
+      - --diagnostics-address=:8443
+      - --report-mode=0
+      - --agent-in-mgmt-cluster
+      - --v=5
+    extraArgsAgentMgmtCluster: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: docker.io/projectsveltos/shard-controller
       tag: v0.46.1
-      digest: sha256:9206fbf14bec49414c8bc3a1aa92ab9bc85528a745b94fb1b8451df2665da368 
+      digest: sha256:9206fbf14bec49414c8bc3a1aa92ab9bc85528a745b94fb1b8451df2665da368
     resources:
       limits:
         cpu: 500m
@@ -313,9 +323,9 @@ telemetry:
   disabled: false
 webhookService:
   ports:
-  - port: 443
-    protocol: TCP
-    targetPort: 9443
+    - port: 443
+      protocol: TCP
+      targetPort: 9443
   type: ClusterIP
 webhook:
   conversion: false
