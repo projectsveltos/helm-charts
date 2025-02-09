@@ -520,7 +520,7 @@ spec:
       containers:
 {{- if .Values.agent.managementCluster }}
       - args: {{- toYaml .Values.shardController.manager.argsAgentMgmtCluster | nindent 8 }}
-{{- else -}}
+{{- else }}
       - args: {{- toYaml .Values.shardController.manager.args | nindent 8 }}
 {{- end }}
         command:
