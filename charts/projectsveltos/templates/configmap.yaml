@@ -1,0 +1,28 @@
+{{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
+  labels:
+    {{- include "projectsveltos.labels" . | nindent 4 }}
+data:
+  {{- range $key, $value := .Values.addonController.driftDetectionManagerPatchConfigMap.data }}
+  {{ $key }}: |-
+    {{- $value | toString | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.classifierManager.agentPatchConfigMap.name }}
+  labels:
+    {{- include "projectsveltos.labels" . | nindent 4 }}
+data:
+  {{- range $key, $value := .Values.classifierManager.agentPatchConfigMap.data }}
+  {{ $key }}: |-
+    {{- $value | toString | nindent 4 }}
+  {{- end }}
+{{- end }}

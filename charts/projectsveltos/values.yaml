@@ -46,7 +46,6 @@ addonController:
     - --shard-key=
     - --v=5
     - --version=v0.46.1
-    extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -62,6 +61,9 @@ addonController:
       requests:
         memory: 256Mi
     extraEnv: []
+  driftDetectionManagerPatchConfigMap:
+    name: drift-detection-config
+    data: {}
   podSecurityContext:
     runAsNonRoot: true
   ports:
@@ -76,6 +78,9 @@ addonController:
     annotations: {}
   type: ClusterIP
 classifierManager:
+  agentPatchConfigMap:
+    name: sveltos-agent-config
+    data: {}
   manager:
     args:
     - --diagnostics-address=:8443
@@ -115,6 +120,7 @@ classifierManager:
   serviceAccount:
     annotations: {}
 conversionWebhook:
+  nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
   replicas: 1
@@ -135,8 +141,6 @@ conversionWebhook:
       requests:
         cpu: 10m
         memory: 64Mi
-  nodeSelector: {}
-  replicas: 1
   tolerations: []
 driftDetectionManager:
   serviceAccount:
