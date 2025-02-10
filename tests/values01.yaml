@@ -6,11 +6,15 @@ addonController:
     extraArgs: { "addonController": "value1", "controller": "value2" }
     extraArgsAgentMgmtCluster:
       { "argsAgentMgmtCluster": "value1", "argsAgentMgmtCluster2": "value2" }
+  driftDetectionManagerPatchConfigMap:
+    data: { "key1": "value1" }
 classifierManager:
   manager:
     extraArgs: { "classifierManager": "value1", "manager": "value2" }
     extraArgsAgentMgmtCluster:
       { "argsAgentMgmtCluster": "value1", "argsAgentMgmtCluster2": "value2" }
+  agentPatchConfigMap:
+    data: { "key2": value2" }
 eventManager:
   manager:
     extraArgs: { "eventManager": "value1", "manager": "value2" }

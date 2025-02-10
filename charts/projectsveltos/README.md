@@ -49,6 +49,8 @@ Projectsveltos helm chart for Kubernetes
 | addonController.controller.image.tag | string | `"v0.46.1"` |  |
 | addonController.controller.image.digest | string | `"sha256:ddaeb145b380227c9d71124c8240413660a8d18ce6aafb33acaf30459574947f"` |  |
 | addonController.controller.resources.requests.memory | string | `"256Mi"` |  |
+| addonController.driftDetectionManagerPatchConfigMap.name | string | `"drift-detection-config"` |  |
+| addonController.driftDetectionManagerPatchConfigMap.data | object | `{}` |  |
 | addonController.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | addonController.ports[0].name | string | `"metrics"` |  |
 | addonController.ports[0].port | int | `80` |  |
@@ -59,6 +61,8 @@ Projectsveltos helm chart for Kubernetes
 | addonController.tolerations | list | `[]` |  |
 | addonController.serviceAccount.annotations | object | `{}` |  |
 | addonController.type | string | `"ClusterIP"` |  |
+| classifierManager.agentPatchConfigMap.name | string | `"sveltos-agent-config"` |  |
+| classifierManager.agentPatchConfigMap.data | object | `{}` |  |
 | classifierManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | classifierManager.manager.args[1] | string | `"--report-mode=0"` |  |
 | classifierManager.manager.args[2] | string | `"--shard-key="` |  |
