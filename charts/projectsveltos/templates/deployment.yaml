@@ -32,17 +32,37 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-{{- if .Values.agent.managementCluster }}      
-      - args: {{- toYaml .Values.addonController.controller.argsAgentMgmtCluster | nindent 8 -}}
-{{ else }}
-      - args: {{- toYaml .Values.addonController.controller.args | nindent 8 -}}
-{{- end }}
-{{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+  {{- if .Values.agent.managementCluster }}
+      - args:
+      {{- range .Values.addonController.controller.argsAgentMgmtCluster }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.addonController.controller.extraArgsAgentMgmtCluster }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+  {{- else }}
+      - args:
+      {{- range .Values.addonController.controller.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.addonController.controller.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+  {{- end }}
+  {{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
         - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
-{{- end }}
-{{- if .Values.telemetry.disabled }}
+  {{- end }}
+  {{- if .Values.telemetry.disabled }}
     {{"-  --disable-telemetry=true" | nindent 8 }}
-{{- end }}
+  {{- end }}
         command:
         - /manager
         env:
@@ -124,7 +144,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}     
+      {{- end }}
       {{- with .Values.accessManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -134,7 +154,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - args: {{- toYaml .Values.accessManager.manager.args | nindent 8 }}
+      - args:
+      {{- range .Values.accessManager.manager.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.accessManager.manager.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
         command:
         - /manager
         env:
@@ -199,7 +229,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}     
+      {{- end }}
       {{- with .Values.scManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -209,7 +239,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - args: {{- toYaml .Values.scManager.manager.args | nindent 8 }}
+      - args:
+      {{- range .Values.scManager.manager.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.scManager.manager.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
         command:
         - /manager
         env:
@@ -274,7 +314,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}     
+      {{- end }}
       {{- with .Values.hcManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -284,7 +324,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - args: {{- toYaml .Values.hcManager.manager.args | nindent 8 }}
+      - args:
+      {{- range .Values.hcManager.manager.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.hcManager.manager.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
         command:
         - /manager
         env:
@@ -349,7 +399,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}     
+      {{- end }}
       {{- with .Values.eventManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -359,7 +409,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - args: {{- toYaml .Values.eventManager.manager.args | nindent 8 }}
+      - args:
+      {{- range .Values.eventManager.manager.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.eventManager.manager.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
         command:
         - /manager
         env:
@@ -425,7 +485,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}     
+      {{- end }}
       {{- with .Values.classifierManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -435,14 +495,34 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-{{- if .Values.agent.managementCluster }}      
-      - args: {{- toYaml .Values.classifierManager.manager.argsAgentMgmtCluster | nindent 8 -}}
-{{ else }}
-      - args: {{- toYaml .Values.classifierManager.manager.args | nindent 8 -}}
-{{- end }}
-{{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
+    {{- if .Values.agent.managementCluster }}
+      - args:
+      {{- range .Values.classifierManager.manager.argsAgentMgmtCluster }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.classifierManager.manager.extraArgsAgentMgmtCluster }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+    {{- else }}
+      - args:
+      {{- range .Values.classifierManager.manager.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.classifierManager.manager.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+    {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
         - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
-{{- end }}
+    {{- end }}
         command:
         - /manager
         env:
@@ -508,7 +588,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }} 
+      {{- end }}
       {{- with .Values.shardController.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -518,11 +598,31 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-{{- if .Values.agent.managementCluster }}
-      - args: {{- toYaml .Values.shardController.manager.argsAgentMgmtCluster | nindent 8 }}
-{{- else }}
-      - args: {{- toYaml .Values.shardController.manager.args | nindent 8 }}
-{{- end }}
+  {{- if .Values.agent.managementCluster }}
+      - args:
+      {{- range .Values.shardController.manager.argsAgentMgmtCluster }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.shardController.manager.extraArgsAgentMgmtCluster }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+  {{- else }}
+      - args:
+      {{- range .Values.shardController.manager.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.shardController.manager.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+  {{- end }}
         command:
         - /manager
         env:
@@ -562,7 +662,7 @@ spec:
       securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
       serviceAccountName: shard-controller
       terminationGracePeriodSeconds: 10
-{{ if .Values.webhook.conversion }}
+{{- if .Values.webhook.conversion }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -588,7 +688,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}     
+      {{- end }}
       containers:
       - command:
         - /conversion-webhook
@@ -639,4 +739,4 @@ spec:
         secret:
           defaultMode: 420
           secretName: webhook-server-cert
-{{ end }}
+{{- end }}
