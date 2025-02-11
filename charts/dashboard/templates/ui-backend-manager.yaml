@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-backend-manager
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.uiBackendManager.type }}
+  selector:
+    control-plane: ui-backend
+  {{- include "projectsveltos.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.uiBackendManager.ports | toYaml | nindent 2 -}}

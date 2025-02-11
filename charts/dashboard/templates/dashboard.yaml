@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.dashboard.type }}
+  selector:
+    app: dashboard
+  {{- include "projectsveltos.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.dashboard.ports | toYaml | nindent 2 -}}

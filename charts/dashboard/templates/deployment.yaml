@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ui-backend-manager
+  labels:
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: ui-backend
+    app.kubernetes.io/part-of: ui-backend
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-backend-manager
+  labels:
+    app.kubernetes.io/component: manager
+    app.kubernetes.io/created-by: ui-backend
+    app.kubernetes.io/part-of: ui-backend
+    control-plane: ui-backend
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.uiBackendManager.replicas }}
+  selector:
+    matchLabels:
+      control-plane: ui-backend
+    {{- include "projectsveltos.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        control-plane: ui-backend
+      {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+    spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}    
+      containers:
+      - args: {{- toYaml .Values.uiBackendManager.manager.args | nindent 8 }}
+        command:
+        - /manager
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.uiBackendManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.uiBackendManager.manager.image.digest }}{{- else }}:{{ .Values.uiBackendManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: healthz
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        ports:
+        - containerPort: 8443
+          name: metrics
+          protocol: TCP
+        - containerPort: 9440
+          name: healthz
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: healthz
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources: {{- toYaml .Values.uiBackendManager.manager.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.uiBackendManager.manager.containerSecurityContext
+          | nindent 10 }}
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: ui-backend-manager
+      terminationGracePeriodSeconds: 10
+      nodeSelector: {{- toYaml .Values.uiBackendManager.nodeSelector | nindent 8 }}
+      affinity: {{- toYaml .Values.uiBackendManager.affinity | nindent 8 }}
+      tolerations: {{- toYaml .Values.uiBackendManager.tolerations | nindent 8 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.dashboard.replicas }}
+  selector:
+    matchLabels:
+      app: dashboard
+    {{- include "projectsveltos.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: dashboard
+      {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}    
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.dashboard.dashboard.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.dashboard.dashboard.image.digest }}{{- else }}:{{ .Values.dashboard.dashboard.image.tag | default .Chart.AppVersion }}{{- end }}
+        name: dashboard
+        ports:
+        - containerPort: 5173
+        resources: {}
+      nodeSelector: {{- toYaml .Values.dashboard.nodeSelector | nindent 8 }}
+      affinity: {{- toYaml .Values.dashboard.affinity | nindent 8 }}
+      tolerations: {{- toYaml .Values.dashboard.tolerations | nindent 8 }}

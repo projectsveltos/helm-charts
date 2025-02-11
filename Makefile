@@ -5,3 +5,4 @@ generate-templates:
 
 generate-docs:
 	@docker run --rm --volume "$$(pwd)/charts/projectsveltos:/helm-docs" -u $$(id -u) jnorwood/helm-docs:latest --sort-values-order file
+	@docker run --rm --volume "$$(pwd)/charts/dashboard:/helm-docs" -u $$(id -u) jnorwood/helm-docs:latest --sort-values-order file
