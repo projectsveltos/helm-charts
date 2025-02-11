@@ -1,0 +1,64 @@
+global:
+  useDigest: false
+  imagePullSecrets: []
+dashboard:
+  dashboard:
+    image:
+      repository: docker.io/projectsveltos/dashboard
+      tag: v0.47.0
+      digest: sha256:03986aa04e6e980a96e30b3394103a3db2d1c8ad7a7d794c133708b8ddc7ca80
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 5173
+  replicas: 1
+  type: ClusterIP
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+    hosts:
+      - host: dashboard.cluster.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - dashboard.cluster.local
+  tolerations: []
+  nodeSelector:
+    kubernetes.io/os: linux
+  affinity: {}
+kubernetesClusterDomain: cluster.local
+uiBackendManager:
+  manager:
+    args:
+    - --diagnostics-address=:8443
+    - --v=5
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+    image:
+      repository: projectsveltos/ui-backend
+      tag: v0.47.0
+      digest: sha256:996278591b0ab004bac19716de174a63ce9497b3d62317c4efe5cec058ed11bd
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  replicas: 1
+  type: ClusterIP
+  tolerations: []
+  nodeSelector:
+    kubernetes.io/os: linux
+  affinity: {}
