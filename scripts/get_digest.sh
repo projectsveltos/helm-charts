@@ -3,7 +3,7 @@
 # Function to get the image digest
 get_image_digest() {
   base_name="$1"  # e.g., addon-controller
-  tag="$2"
+  tag="$2" # e.g., v0.47.0
 
   # Check if both arguments are provided
   if [ -z "$base_name" ] || [ -z "$tag" ]; then

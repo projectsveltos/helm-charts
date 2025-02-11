@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: projectsveltos/projectsveltos-serving-cert
-    controller-gen.kubebuilder.io/version: v0.17.0
+    controller-gen.kubebuilder.io/version: v0.17.2
   name: eventtriggers.lib.projectsveltos.io
 spec:
   conversion:
@@ -1648,6 +1648,9 @@ spec:
                   resource (OneForEvent = false) or one per resource (OneForEvent = true)
                   needs to be creted.
                 type: boolean
+                x-kubernetes-validations:
+                - message: Value is immutable
+                  rule: self == oldSelf
               patches:
                 description: |-
                   Define additional Kustomize inline Patches applied for all resources on this profile
