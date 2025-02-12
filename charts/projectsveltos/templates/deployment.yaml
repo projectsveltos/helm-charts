@@ -17,6 +17,7 @@ spec:
         control-plane: addon-controller
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         kubectl.kubernetes.io/default-container: controller
     spec:
       {{- with .Values.global.imagePullSecrets }}
