@@ -43,6 +43,8 @@ declare -a base_names=(
   "sveltoscluster-manager"
   "access-manager"
   "classifier"
+  "dashboard"
+  "ui-backend"
 )
 
 # Loop through the base names
