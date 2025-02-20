@@ -5,8 +5,8 @@ dashboard:
   dashboard:
     image:
       repository: docker.io/projectsveltos/dashboard
-      tag: v0.48.0
-      digest: sha256:4628b2dd01f0c3aaada6d2ca70a7864ba735776290043711804def4145723b00
+      tag: v0.48.1
+      digest: sha256:82ee4c47f09818adee837ddc679f5ef5b9088f7cbd8c6a54720f704431e134cc
   ports:
   - port: 80
     protocol: TCP
@@ -43,8 +43,8 @@ uiBackendManager:
         - ALL
     image:
       repository: projectsveltos/ui-backend
-      tag: v0.48.0
-      digest: sha256:200afddab22ef9c80654aeece582f1355342414a7ce65c8703a765f6dce22332
+      tag: v0.48.1
+      digest: sha256:2f3b89796bd7f43e9883ca460916a93e9c8b0fe043db9f839f599c1cdba389fb
     resources:
       limits:
         cpu: 500m
