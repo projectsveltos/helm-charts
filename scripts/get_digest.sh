@@ -36,7 +36,6 @@ tag="$1"
 declare -a base_names=(
   "addon-controller"
   "event-manager"
-  "webhook-conversion"
   "register-mgmt-cluster"
   "shard-controller"
   "healthcheck-manager"

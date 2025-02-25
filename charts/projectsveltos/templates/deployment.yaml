@@ -64,6 +64,7 @@ spec:
   {{- if .Values.telemetry.disabled }}
     {{"-  --disable-telemetry=true" | nindent 8 }}
   {{- end }}
+        - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
         env:
@@ -166,6 +167,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+        - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
         env:
@@ -336,6 +338,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+        - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
         env:
@@ -421,6 +424,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+        - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
         env:
@@ -525,6 +529,7 @@ spec:
     {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
         - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
     {{- end }}
+        - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
         env:
@@ -664,81 +669,3 @@ spec:
       securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
       serviceAccountName: shard-controller
       terminationGracePeriodSeconds: 10
-{{- if .Values.webhook.conversion }}
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: conversion-webhook
-  labels:
-    app: sveltos-webhook
-  {{- include "projectsveltos.labels" . | nindent 4 }}
-spec:
-  replicas: {{ .Values.conversionWebhook.replicas }}
-  selector:
-    matchLabels:
-      app: sveltos-webhook
-    {{- include "projectsveltos.selectorLabels" . | nindent 6 }}
-  template:
-    metadata:
-      labels:
-        app: sveltos-webhook
-      {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        kubectl.kubernetes.io/default-container: sveltos-webhook
-    spec:
-      {{- with .Values.global.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      containers:
-      - command:
-        - /conversion-webhook
-        env:
-        - name: KUBERNETES_CLUSTER_DOMAIN
-          value: {{ quote .Values.kubernetesClusterDomain }}
-        {{- with .Values.shardController.extraEnv }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
-        image: {{ .Values.conversionWebhook.sveltosWebhook.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.conversionWebhook.sveltosWebhook.image.digest }}{{- else }}:{{ .Values.conversionWebhook.sveltosWebhook.image.tag | default .Chart.AppVersion }}{{- end }}
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /healthz
-            port: healthz
-            scheme: HTTP
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        name: sveltos-webhook
-        ports:
-        - containerPort: 9443
-          name: webhook-server
-          protocol: TCP
-        - containerPort: 9440
-          name: healthz
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /readyz
-            port: healthz
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        resources: {{- toYaml .Values.conversionWebhook.sveltosWebhook.resources | nindent
-          10 }}
-        securityContext: {{- toYaml .Values.conversionWebhook.sveltosWebhook.containerSecurityContext
-          | nindent 10 }}
-        volumeMounts:
-        - mountPath: /tmp/k8s-webhook-server/serving-certs
-          name: cert
-          readOnly: true
-      securityContext: {{- toYaml .Values.conversionWebhook.podSecurityContext | nindent 8 }}
-      serviceAccountName: default
-      terminationGracePeriodSeconds: 10
-      volumes:
-      - name: cert
-        secret:
-          defaultMode: 420
-          secretName: webhook-server-cert
-{{- end }}

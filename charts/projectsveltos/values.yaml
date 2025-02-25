@@ -1,5 +1,6 @@
 global:
   useDigest: false
+  capiOnboardAnnotation: ""
   imagePullSecrets: []
     # - name: my-registry-secret
 accessManager:
@@ -16,8 +17,8 @@ accessManager:
           - ALL
     image:
       repository: docker.io/projectsveltos/access-manager
-      tag: v0.48.1
-      digest: sha256:2c8b91721ec2169ef3bad0b70e45d51813b10c7ad1610ab4e07989d2aa8e169e
+      tag: v0.49.0
+      digest: sha256:1e96dbf30896ab2eb033e148fcaf01adb9d0ccefff5de1cb947c73939d5e7cf9
     resources:
       limits:
         cpu: 500m
@@ -39,7 +40,7 @@ addonController:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v0.48.1
+      - --version=v0.49.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
@@ -47,7 +48,7 @@ addonController:
       - --agent-in-mgmt-cluster
       - --shard-key=
       - --v=5
-      - --version=v0.48.1
+      - --version=v0.49.0
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
     containerSecurityContext:
@@ -59,8 +60,8 @@ addonController:
         type: RuntimeDefault
     image:
       repository: docker.io/projectsveltos/addon-controller
-      tag: v0.48.1
-      digest: sha256:82905f2be0dd0140c590dc2444cf0b911fd9c10a2e0b8308ba75d647c730e59f
+      tag: v0.49.0
+      digest: sha256:1b65773d03eb864dd08a6f7c53b4f96333c49b420b3dea8446e5ecfb4878c7ca
     resources:
       requests:
         memory: 512Mi
@@ -90,7 +91,7 @@ classifierManager:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v0.48.1
+      - --version=v0.49.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
@@ -98,7 +99,7 @@ classifierManager:
       - --agent-in-mgmt-cluster
       - --shard-key=
       - --v=5
-      - --version=v0.48.1
+      - --version=v0.49.0
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
     containerSecurityContext:
@@ -108,8 +109,8 @@ classifierManager:
           - ALL
     image:
       repository: docker.io/projectsveltos/classifier
-      tag: v0.48.1
-      digest: sha256:4513157bb4712131c158a215d555d6dec1da47f28842027669d6736e4457a5d9
+      tag: v0.49.0
+      digest: sha256:1009c617a5b33965ff97ec830b427b836e5a1ea13dd9df91228d12ed818ab61c
     resources:
       limits:
         cpu: 500m
@@ -124,29 +125,6 @@ classifierManager:
   tolerations: []
   serviceAccount:
     annotations: {}
-conversionWebhook:
-  podSecurityContext:
-    runAsNonRoot: true
-  replicas: 1
-  sveltosWebhook:
-    containerSecurityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
-    image:
-      repository: docker.io/projectsveltos/webhook-conversion
-      tag: v0.48.1
-      digest: sha256:15944be7175f90a610a4f8e32bb56b1596c9360a964cd189c469613d546ca771
-    resources:
-      limits:
-        cpu: 500m
-        memory: 512Mi
-      requests:
-        cpu: 10m
-        memory: 128Mi
-  nodeSelector: {}
-  tolerations: []
 driftDetectionManager:
   serviceAccount:
     annotations: {}
@@ -156,7 +134,7 @@ eventManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v0.48.1
+      - --version=v0.49.0
     extraArgs: {}
     extraEnv: []
     containerSecurityContext:
@@ -166,8 +144,8 @@ eventManager:
           - ALL
     image:
       repository: docker.io/projectsveltos/event-manager
-      tag: v0.48.1
-      digest: sha256:2dfacdcf28fbdf9bb2a452144b0ac85b8d5301b817356c2db69599e8a30b8b01
+      tag: v0.49.0
+      digest: sha256:2a04eb744d78b6b1c15ecc90613558c4b553ced12d27ea1d2b829611f9d04939
     resources:
       limits:
         cpu: 500m
@@ -188,7 +166,7 @@ hcManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v0.48.1
+      - --version=v0.49.0
     extraArgs: {}
     extraEnv: []
     containerSecurityContext:
@@ -198,8 +176,8 @@ hcManager:
           - ALL
     image:
       repository: docker.io/projectsveltos/healthcheck-manager
-      tag: v0.48.1
-      digest: sha256:9960203dce71effafe8ecb4efacd11dc59c1f576d2581b7021e8cd64080adda0
+      tag: v0.49.0
+      digest: sha256:94dce3b79405dac357430de39cfb1f596b4f148afb4d6f5dfcf2b6d4905931f6
     resources:
       limits:
         cpu: 500m
@@ -233,8 +211,8 @@ registerMgmtClusterJob:
           - ALL
     image:
       repository: docker.io/projectsveltos/register-mgmt-cluster
-      tag: v0.48.1
-      digest: sha256:9c6012ff39e707d97fc7a3ae12fcc3522e9c5ed5311b5770b7290d800d02eb85
+      tag: v0.49.0
+      digest: sha256:80056d75f1e4d63f40fa6c461e05e9361fb8dad2627e52bb2ac43d94ffdf332c
     imagePullPolicy: IfNotPresent
     resources:
       requests:
@@ -254,8 +232,8 @@ scManager:
           - ALL
     image:
       repository: docker.io/projectsveltos/sveltoscluster-manager
-      tag: v0.48.1
-      digest: sha256:a6252b4bdbe436eb91c7e13f03b7ab4be4aca1a7671ca40b3b990f8d46a4ba2e
+      tag: v0.49.0
+      digest: sha256:e486834d42ec6b98fa4772936d46c73edd54b954718757f0554b4332cb6993b4
     resources:
       limits:
         cpu: 500m
@@ -298,8 +276,8 @@ shardController:
           - ALL
     image:
       repository: docker.io/projectsveltos/shard-controller
-      tag: v0.48.1
-      digest: sha256:372b42228c665585dd65d37e798e7737df6e7c41ac5c7daaaa15798bc4f32619
+      tag: v0.49.0
+      digest: sha256:08797d8e786c51794dad98141f42a796d827bfae2e7db6d97fb7e9aa4f1c1f4d
     resources:
       limits:
         cpu: 500m
@@ -323,11 +301,3 @@ agent:
   managementCluster: false
 telemetry:
   disabled: false
-webhookService:
-  ports:
-    - port: 443
-      protocol: TCP
-      targetPort: 9443
-  type: ClusterIP
-webhook:
-  conversion: false
