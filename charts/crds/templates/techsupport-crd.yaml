@@ -1,9 +1,11 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
+  name: techsupports.lib.projectsveltos.io
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.2
-  name: techsupports.lib.projectsveltos.io
+  labels:
+  {{- include "sveltos-crds.labels" . | nindent 4 }}
 spec:
   group: lib.projectsveltos.io
   names:
@@ -86,8 +88,8 @@ spec:
                     description: ClusterRefs identifies clusters to collect techsupport
                       from.
                     items:
-                      description: ObjectReference contains enough information to
-                        let you inspect or modify the referred object.
+                      description: ObjectReference contains enough information to let
+                        you inspect or modify the referred object.
                       properties:
                         apiVersion:
                           description: API version of the referent.
@@ -135,16 +137,16 @@ spec:
                       from.
                     properties:
                       matchExpressions:
-                        description: matchExpressions is a list of label selector
-                          requirements. The requirements are ANDed.
+                        description: matchExpressions is a list of label selector requirements.
+                          The requirements are ANDed.
                         items:
                           description: |-
                             A label selector requirement is a selector that contains values, a key, and an operator that
                             relates the key and values.
                           properties:
                             key:
-                              description: key is the label key that the selector
-                                applies to.
+                              description: key is the label key that the selector applies
+                                to.
                               type: string
                             operator:
                               description: |-
@@ -201,8 +203,8 @@ spec:
                       description: LogFilter allows to select which logs to collect
                       properties:
                         labelFilters:
-                          description: LabelFilters allows to filter pods based on
-                            current labels.
+                          description: LabelFilters allows to filter pods based on current
+                            labels.
                           items:
                             properties:
                               key:
@@ -331,8 +333,8 @@ spec:
                       description: LogFilter allows to select which logs to collect
                       properties:
                         labelFilters:
-                          description: LabelFilters allows to filter pods based on
-                            current labels.
+                          description: LabelFilters allows to filter pods based on current
+                            labels.
                           items:
                             properties:
                               key:
@@ -478,8 +480,8 @@ spec:
                 - Failed
                 type: string
               lastRunTime:
-                description: Information when was the last time a techsupport was
-                  successfully scheduled.
+                description: Information when was the last time a techsupport was successfully
+                  scheduled.
                 format: date-time
                 type: string
               nextScheduleTime:
@@ -492,3 +494,9 @@ spec:
     storage: true
     subresources:
       status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
