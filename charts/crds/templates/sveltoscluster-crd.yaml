@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.2
   labels:
-  {{- include "sveltos-crds.labels" . | nindent 4 }}
+  {{- include "crds.labels" . | nindent 4 }}
 spec:
   group: lib.projectsveltos.io
   names:
