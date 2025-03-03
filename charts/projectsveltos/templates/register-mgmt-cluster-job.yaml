@@ -11,7 +11,7 @@ spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}    
+      {{- end }}
       containers:
       - args: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.args
           | nindent 8 }}
@@ -21,7 +21,7 @@ spec:
         {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.repository 
+        image: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.repository
            }}{{- if .Values.global.useDigest }}@{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.digest }}{{- else }}:{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.tag | default .Chart.AppVersion }}{{- end }}
         imagePullPolicy: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy
           }}

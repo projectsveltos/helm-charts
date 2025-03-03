@@ -11,7 +11,7 @@ get_image_digest() {
     return 1
   fi
 
-  image_name="docker.io/projectsveltos/$base_name:$tag"
+  image_name="mirror.gcr.io/projectsveltos/$base_name:$tag"
 
   digest=$(skopeo inspect --format '{{.Digest}}' "docker://$image_name" --override-os="linux" --override-arch="amd64" --override-variant="v8" 2>/dev/null)
 

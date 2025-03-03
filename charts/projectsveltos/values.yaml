@@ -16,7 +16,7 @@ accessManager:
         drop:
           - ALL
     image:
-      repository: docker.io/projectsveltos/access-manager
+      repository: mirror.gcr.io/projectsveltos/access-manager
       tag: v0.49.0
       digest: sha256:1e96dbf30896ab2eb033e148fcaf01adb9d0ccefff5de1cb947c73939d5e7cf9
     resources:
@@ -59,7 +59,7 @@ addonController:
       seccompProfile:
         type: RuntimeDefault
     image:
-      repository: docker.io/projectsveltos/addon-controller
+      repository: mirror.gcr.io/projectsveltos/addon-controller
       tag: v0.49.0
       digest: sha256:1b65773d03eb864dd08a6f7c53b4f96333c49b420b3dea8446e5ecfb4878c7ca
     resources:
@@ -108,7 +108,7 @@ classifierManager:
         drop:
           - ALL
     image:
-      repository: docker.io/projectsveltos/classifier
+      repository: mirror.gcr.io/projectsveltos/classifier
       tag: v0.49.0
       digest: sha256:1009c617a5b33965ff97ec830b427b836e5a1ea13dd9df91228d12ed818ab61c
     resources:
@@ -143,7 +143,7 @@ eventManager:
         drop:
           - ALL
     image:
-      repository: docker.io/projectsveltos/event-manager
+      repository: mirror.gcr.io/projectsveltos/event-manager
       tag: v0.49.0
       digest: sha256:2a04eb744d78b6b1c15ecc90613558c4b553ced12d27ea1d2b829611f9d04939
     resources:
@@ -175,7 +175,7 @@ hcManager:
         drop:
           - ALL
     image:
-      repository: docker.io/projectsveltos/healthcheck-manager
+      repository: mirror.gcr.io/projectsveltos/healthcheck-manager
       tag: v0.49.0
       digest: sha256:94dce3b79405dac357430de39cfb1f596b4f148afb4d6f5dfcf2b6d4905931f6
     resources:
@@ -210,7 +210,7 @@ registerMgmtClusterJob:
         drop:
           - ALL
     image:
-      repository: docker.io/projectsveltos/register-mgmt-cluster
+      repository: mirror.gcr.io/projectsveltos/register-mgmt-cluster
       tag: v0.49.0
       digest: sha256:80056d75f1e4d63f40fa6c461e05e9361fb8dad2627e52bb2ac43d94ffdf332c
     imagePullPolicy: IfNotPresent
@@ -231,7 +231,7 @@ scManager:
         drop:
           - ALL
     image:
-      repository: docker.io/projectsveltos/sveltoscluster-manager
+      repository: mirror.gcr.io/projectsveltos/sveltoscluster-manager
       tag: v0.49.0
       digest: sha256:e486834d42ec6b98fa4772936d46c73edd54b954718757f0554b4332cb6993b4
     resources:
@@ -275,7 +275,7 @@ shardController:
         drop:
           - ALL
     image:
-      repository: docker.io/projectsveltos/shard-controller
+      repository: mirror.gcr.io/projectsveltos/shard-controller
       tag: v0.49.0
       digest: sha256:08797d8e786c51794dad98141f42a796d827bfae2e7db6d97fb7e9aa4f1c1f4d
     resources:

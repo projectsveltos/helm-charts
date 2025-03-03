@@ -10,7 +10,7 @@ A Helm chart for Sveltos dashboard
 |-----|------|---------|-------------|
 | global.useDigest | bool | `false` |  |
 | global.imagePullSecrets | list | `[]` |  |
-| dashboard.dashboard.image.repository | string | `"docker.io/projectsveltos/dashboard"` |  |
+| dashboard.dashboard.image.repository | string | `"mirror.gcr.io/projectsveltos/dashboard"` |  |
 | dashboard.dashboard.image.tag | string | `"v0.49.0"` |  |
 | dashboard.dashboard.image.digest | string | `"sha256:7bdc2bbf54097f62d66a392643b632f265292672c30603cf88d57966b8413e6f"` |  |
 | dashboard.ports[0].port | int | `80` |  |
