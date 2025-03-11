@@ -1,0 +1,72 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: techsupport-role
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - debuggingconfigurations
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - techsupports
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - techsupports/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - techsupports/status
+  verbs:
+  - get
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: techsupport-rolebinding
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'techsupport-role'
+subjects:
+- kind: ServiceAccount
+  name: 'techsupport-controller'
+  namespace: '{{ .Release.Namespace }}'
