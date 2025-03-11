@@ -44,6 +44,7 @@ declare -a base_names=(
   "classifier"
   "dashboard"
   "ui-backend"
+  "techsupport"
 )
 
 # Loop through the base names
