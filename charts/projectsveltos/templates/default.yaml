@@ -5,6 +5,10 @@ metadata:
   name: default
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "post-install,post-upgrade"
+    "helm.sh/hook-weight": "5"
+    "helm.sh/hook-delete-policy": "hook-failed"
 spec:
   configuration:
   - component: AccessManager
