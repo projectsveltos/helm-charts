@@ -1,10 +1,11 @@
 global:
+  registry: docker.io
   useDigest: false
   imagePullSecrets: []
 dashboard:
   dashboard:
     image:
-      repository: docker.io/projectsveltos/dashboard
+      repository: projectsveltos/dashboard
       tag: v0.50.0
       digest: sha256:7bdc2bbf54097f62d66a392643b632f265292672c30603cf88d57966b8413e6f
   ports:

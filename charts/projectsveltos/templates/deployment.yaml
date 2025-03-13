@@ -45,6 +45,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+        - --registry={{ .Values.global.registry }}
   {{- else }}
       - args:
       {{- range .Values.addonController.controller.args }}
@@ -57,6 +58,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+        - --registry={{ .Values.global.registry }}
   {{- end }}
   {{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
         - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
@@ -83,7 +85,7 @@ spec:
         {{- with .Values.addonController.controller.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.addonController.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.addonController.controller.image.digest }}{{- else }}:{{ .Values.addonController.controller.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.addonController.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.addonController.controller.image.digest }}{{- else }}:{{ .Values.addonController.controller.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -176,7 +178,7 @@ spec:
         {{- with .Values.accessManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.accessManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.accessManager.manager.image.digest }}{{- else }}:{{ .Values.accessManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.accessManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.accessManager.manager.image.digest }}{{- else }}:{{ .Values.accessManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -261,7 +263,7 @@ spec:
         {{- with .Values.scManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.scManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.scManager.manager.image.digest }}{{- else }}:{{ .Values.scManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.scManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.scManager.manager.image.digest }}{{- else }}:{{ .Values.scManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -347,7 +349,7 @@ spec:
         {{- with .Values.hcManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.hcManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.hcManager.manager.image.digest }}{{- else }}:{{ .Values.hcManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.hcManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.hcManager.manager.image.digest }}{{- else }}:{{ .Values.hcManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -433,7 +435,7 @@ spec:
         {{- with .Values.eventManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.eventManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.eventManager.manager.image.digest }}{{- else }}:{{ .Values.eventManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.eventManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.eventManager.manager.image.digest }}{{- else }}:{{ .Values.eventManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -513,6 +515,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+        - --registry={{ .Values.global.registry }}
     {{- else }}
       - args:
       {{- range .Values.classifierManager.manager.args }}
@@ -525,6 +528,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+        - --registry={{ .Values.global.registry }}
     {{- end }}
     {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
         - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
@@ -538,7 +542,7 @@ spec:
         {{- with .Values.classifierManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.classifierManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.classifierManager.manager.image.digest }}{{- else }}:{{ .Values.classifierManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.classifierManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.classifierManager.manager.image.digest }}{{- else }}:{{ .Values.classifierManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -638,7 +642,7 @@ spec:
         {{- with .Values.shardController.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.shardController.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.shardController.manager.image.digest }}{{- else }}:{{ .Values.shardController.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.shardController.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.shardController.manager.image.digest }}{{- else }}:{{ .Values.shardController.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -723,7 +727,7 @@ spec:
         {{- with .Values.techsupportController.controller.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.techsupportController.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.techsupportController.controller.image.digest }}{{- else }}:{{ .Values.techsupportController.controller.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.techsupportController.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.techsupportController.controller.image.digest }}{{- else }}:{{ .Values.techsupportController.controller.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           httpGet:
             path: /healthz

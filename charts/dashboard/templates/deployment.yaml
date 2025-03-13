@@ -43,7 +43,7 @@ spec:
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.uiBackendManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.uiBackendManager.manager.image.digest }}{{- else }}:{{ .Values.uiBackendManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.uiBackendManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.uiBackendManager.manager.image.digest }}{{- else }}:{{ .Values.uiBackendManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -105,7 +105,7 @@ spec:
       - env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.dashboard.dashboard.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.dashboard.dashboard.image.digest }}{{- else }}:{{ .Values.dashboard.dashboard.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.dashboard.dashboard.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.dashboard.dashboard.image.digest }}{{- else }}:{{ .Values.dashboard.dashboard.image.tag | default .Chart.AppVersion }}{{- end }}
         name: dashboard
         ports:
         - containerPort: 5173
