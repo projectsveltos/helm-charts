@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: addon-controller
   labels:
+    control-plane: addon-controller
   {{- include "projectsveltos.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.addonController.type }}
@@ -27,8 +28,10 @@ spec:
     port: metrics
     scheme: https
     tlsConfig:
-      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       insecureSkipVerify: true
+  namespaceSelector:
+    matchNames:
+    - projectsveltos
   selector:
     matchLabels:
       control-plane: addon-controller
