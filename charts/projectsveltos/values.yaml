@@ -215,6 +215,8 @@ registerMgmtClusterJob:
       tag: v0.51.1
       digest: sha256:5115ba1715c8614058d23ff1551bda33fb28d92f41f00c9aca0fdb372393bb89
     imagePullPolicy: IfNotPresent
+    nodeSelector: {}
+    tolerations: []
     resources:
       requests:
         memory: 128Mi
