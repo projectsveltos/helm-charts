@@ -148,6 +148,8 @@ Projectsveltos helm chart for Kubernetes
 | registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:5115ba1715c8614058d23ff1551bda33fb28d92f41f00c9aca0fdb372393bb89"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy | string | `"IfNotPresent"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.resources.requests.memory | string | `"128Mi"` |  |
+| registerMgmtClusterJob.registerMgmtCluster.nodeSelector | object | `{}` |  |
+| registerMgmtClusterJob.registerMgmtCluster.tolerations | list | `[]` |  |
 | scManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | scManager.manager.args[1] | string | `"--shard-key="` |  |
 | scManager.manager.args[2] | string | `"--v=5"` |  |
