@@ -1,6 +1,6 @@
 ## Usage
 
-[Helm](https://helm.sh) must be installed to use the charts.  Please refer to
+[Helm](https://helm.sh) must be installed to use the charts. Please refer to
 Helm's [documentation](https://helm.sh/docs) to get started.
 
 Once Helm has been set up correctly, add the repo as follows:
@@ -10,7 +10,7 @@ helm repo add projectsveltos https://projectsveltos.github.io/helm-charts
 ```
 
 If you had already added this repo earlier, run `helm repo update` to retrieve
-the latest versions of the packages.  You can then run `helm search repo
+the latest versions of the packages. You can then run `helm search repo
 projectsveltos` to see the charts.
 
 To install the projectsveltos chart:
@@ -27,7 +27,7 @@ Additionally you can set more parameters that are defined in the [values.yaml](.
 The helm upgrade command won't automatically update Sveltos's Custom Resource Definitions (CRDs). To ensure CRDs are updated, run this command before upgrading Sveltos.
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/projectsveltos/sveltos/v0.41.0/manifest/crds/sveltos_crds.yaml
+kubectl apply -f https://raw.githubusercontent.com/projectsveltos/sveltos/v0.51.1/manifest/crds/sveltos_crds.yaml
 ```
 
 To uninstall the chart:
@@ -37,6 +37,7 @@ helm delete projectsveltos -n projectsveltos
 ```
 
 # What is the Projectsveltos?
+
 Sveltos is a Kubernetes add-on controller that simplifies the deployment and management of add-ons and applications across multiple clusters. It runs in the management cluster and can programmatically deploy and manage add-ons and applications on any cluster in the fleet, including the management cluster itself. Sveltos supports a variety of add-on formats, including Helm charts, raw YAML, Kustomize, Carvel ytt, and Jsonnet.
 
 <p align="center">
@@ -63,17 +64,20 @@ Projectsveltos offers two powerful tools for managing cluster configurations: **
 ## Addon deployment: how it works
 
 The idea is simple:
+
 1. from the management cluster, selects one or more `clusters` with a Kubernetes [label selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors);
 2. lists which `addons` need to be deployed on such clusters.
 
 where term:
+
 1. `clusters` represents both [CAPI cluster](https://github.com/kubernetes-sigs/cluster-api/blob/main/api/v1beta1/cluster_types.go) or any other Kubernetes cluster registered with Sveltos;
 2. `addons` represents either an [helm release](https://helm.sh), Kubernetes resource YAMLs or [kustomize](https://github.com/kubernetes-sigs/kustomize) resources.
 
-Here is an example of how to require that any CAPI Cluster with label *env: prod* has following features deployed:
+Here is an example of how to require that any CAPI Cluster with label _env: prod_ has following features deployed:
+
 1. Kyverno helm chart (version v3.0.1)
-2. kubernetes resource(s) contained in the referenced Secret: *default/storage-class*
-3. kubernetes resource(s) contained in the referenced ConfigMap: *default/contour*.
+2. kubernetes resource(s) contained in the referenced Secret: _default/storage-class_
+3. kubernetes resource(s) contained in the referenced ConfigMap: _default/contour_.
 
 ```yaml
 apiVersion: config.projectsveltos.io/v1alpha1
@@ -84,23 +88,23 @@ spec:
   clusterSelector: env=prod
   syncMode: Continuous
   helmCharts:
-  - repositoryURL:    https://kyverno.github.io/kyverno/
-    repositoryName:   kyverno
-    chartName:        kyverno/kyverno
-    chartVersion:     v3.0.1
-    releaseName:      kyverno-latest
-    releaseNamespace: kyverno
-    helmChartAction:  Install
-    values: |
-      admissionController:
-        replicas: 3
+    - repositoryURL: https://kyverno.github.io/kyverno/
+      repositoryName: kyverno
+      chartName: kyverno/kyverno
+      chartVersion: v3.0.1
+      releaseName: kyverno-latest
+      releaseNamespace: kyverno
+      helmChartAction: Install
+      values: |
+        admissionController:
+          replicas: 3
   policyRefs:
-  - name: storage-class
-    namespace: default
-    kind: Secret
-  - name: contour-gateway
-    namespace: default
-    kind: ConfigMap
+    - name: storage-class
+      namespace: default
+      kind: Secret
+    - name: contour-gateway
+      namespace: default
+      kind: ConfigMap
 ```
 
 As soon as a cluster is a match for above ClusterProfile instance, all referenced features are automatically deployed in such cluster.
@@ -118,11 +122,11 @@ spec:
   clusterSelector: env=fv
   syncMode: Continuous
   kustomizationRefs:
-  - namespace: flux-system
-    name: flux-system
-    kind: GitRepository
-    path: ./helloWorld/
-    targetNamespace: eng
+    - namespace: flux-system
+      name: flux-system
+      kind: GitRepository
+      path: ./helloWorld/
+      targetNamespace: eng
 ```
 
 where GitRepository synced with Flux contains following resources:
@@ -138,14 +142,14 @@ Refer to [examples](./examples/) for more complex examples.
 
 ## Different SyncMode
 
-- *OneTime*: This mode is designed for bootstrapping critical components during the initial cluster setup. Think of it as a one-shot configuration injection:
-    1. Deploying essential infrastructure components like CNI plugins, cloud controllers, or the workload cluster's package manager itself;
-    2. Simplifies initial cluster setup;
-    3. Hands over management to the workload cluster's own tools, promoting modularity and potentially simplifying ongoing maintenance. 
-- *Continuous*: This mode continuously monitors ClusterProfiles or Profiles for changes and automatically applies them to matching clusters. It ensures ongoing consistency between your desired configuration and the actual cluster state: 
-    1. Centralized control over deployments across multiple clusters for consistency and compliance;
-    2. Simplifies management of configurations across multiple clusters.
-- *ContinuousWithDriftDetection*: Detects and automatically corrects configuration drifts in managed clusters, ensuring they remain aligned with the desired state defined in the management cluster.
+- _OneTime_: This mode is designed for bootstrapping critical components during the initial cluster setup. Think of it as a one-shot configuration injection:
+  1. Deploying essential infrastructure components like CNI plugins, cloud controllers, or the workload cluster's package manager itself;
+  2. Simplifies initial cluster setup;
+  3. Hands over management to the workload cluster's own tools, promoting modularity and potentially simplifying ongoing maintenance.
+- _Continuous_: This mode continuously monitors ClusterProfiles or Profiles for changes and automatically applies them to matching clusters. It ensures ongoing consistency between your desired configuration and the actual cluster state:
+  1. Centralized control over deployments across multiple clusters for consistency and compliance;
+  2. Simplifies management of configurations across multiple clusters.
+- _ContinuousWithDriftDetection_: Detects and automatically corrects configuration drifts in managed clusters, ensuring they remain aligned with the desired state defined in the management cluster.
 
 ## Configuration Drift Detection
 
@@ -167,7 +171,7 @@ If you want to try projectsveltos with a test cluster:
 
 will create a management cluster using Kind, deploy clusterAPI and projectsveltos, create a workload cluster powered by clusterAPI.
 
-## Contributing 
+## Contributing
 
 ❤️ Your contributions are always welcome! If you want to contribute, have questions, noticed any bug or want to get the latest project news, you can connect with us in the following ways:
 

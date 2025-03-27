@@ -299,14 +299,14 @@ techsupportController:
   extraEnv: []
   controller:
     args:
-    - --v=5
+      - --v=5
     extraArgs: {}
     extraEnv: []
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: projectsveltos/techsupport
       tag: v0.51.1
@@ -323,8 +323,6 @@ techsupportController:
     runAsNonRoot: true
     seccompProfile:
       type: RuntimeDefault
-  podSecurityContext:
-    runAsNonRoot: true
   replicas: 1
   tolerations: []
   serviceAccount:

@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 0.51.1](https://img.shields.io/badge/Version-0.51.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.51.1](https://img.shields.io/badge/AppVersion-0.51.1-informational?style=flat-square)
+![Version: 0.51.3](https://img.shields.io/badge/Version-0.51.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.51.1](https://img.shields.io/badge/AppVersion-0.51.1-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -147,9 +147,9 @@ Projectsveltos helm chart for Kubernetes
 | registerMgmtClusterJob.registerMgmtCluster.image.tag | string | `"v0.51.1"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:5115ba1715c8614058d23ff1551bda33fb28d92f41f00c9aca0fdb372393bb89"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy | string | `"IfNotPresent"` |  |
-| registerMgmtClusterJob.registerMgmtCluster.resources.requests.memory | string | `"128Mi"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.nodeSelector | object | `{}` |  |
 | registerMgmtClusterJob.registerMgmtCluster.tolerations | list | `[]` |  |
+| registerMgmtClusterJob.registerMgmtCluster.resources.requests.memory | string | `"128Mi"` |  |
 | scManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | scManager.manager.args[1] | string | `"--shard-key="` |  |
 | scManager.manager.args[2] | string | `"--v=5"` |  |
@@ -215,7 +215,6 @@ Projectsveltos helm chart for Kubernetes
 | techsupportController.nodeSelector | object | `{}` |  |
 | techsupportController.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | techsupportController.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| techsupportController.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | techsupportController.replicas | int | `1` |  |
 | techsupportController.tolerations | list | `[]` |  |
 | techsupportController.serviceAccount.annotations | object | `{}` |  |
