@@ -329,6 +329,19 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
+  {{- if .Values.agent.managementCluster }}
+      - args:
+      {{- range .Values.hcManager.manager.argsAgentMgmtCluster }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.hcManager.manager.extraArgsAgentMgmtCluster }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+  {{- else }}
       - args:
       {{- range .Values.hcManager.manager.args }}
         - {{ . }}
@@ -340,6 +353,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+  {{- end }}
         - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
@@ -415,6 +429,19 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
+  {{- if .Values.agent.managementCluster }}
+      - args:
+      {{- range .Values.eventManager.manager.argsAgentMgmtCluster }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.eventManager.manager.extraArgsAgentMgmtCluster }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+  {{- else }}
       - args:
       {{- range .Values.eventManager.manager.args }}
         - {{ . }}
@@ -426,6 +453,7 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+  {{- end }}
         - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
@@ -718,7 +746,7 @@ spec:
         {{- else }}
         - --{{ $key }}
         {{- end }}
-      {{- end }} 
+      {{- end }}
         command:
         - /manager
         env:

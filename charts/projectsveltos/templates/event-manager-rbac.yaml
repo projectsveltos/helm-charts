@@ -81,6 +81,14 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
+  - eventreports/status
+  verbs:
+  - get
+  - list
+  - update
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
   - eventtriggers
   verbs:
   - create

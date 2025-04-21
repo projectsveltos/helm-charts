@@ -32,7 +32,7 @@ spec:
     {{- end }}
   {{- if .Values.dashboard.ingress.tls }}
   tls:
-    {{- range .Values.dashboard.dashboard.ingress.tls }}
+    {{- range .Values.dashboard.ingress.tls }}
     - secretName: {{ .secretName }}
       hosts:
         {{- range .hosts }}
