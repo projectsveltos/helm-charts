@@ -4,7 +4,10 @@ global:
   capiOnboardAnnotation: ""
   imagePullSecrets: []
     # - name: my-registry-secret
+  additionalLabels: {}
 accessManager:
+  annotations: {}
+  labels: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -19,7 +22,7 @@ accessManager:
     image:
       repository: projectsveltos/access-manager
       tag: v0.53.0
-      digest: sha256:5d96342408d9607a41ed07112827206f91b6dfb46dbd8bb936631538171c22d7 
+      digest: sha256:5d96342408d9607a41ed07112827206f91b6dfb46dbd8bb936631538171c22d7
     resources:
       limits:
         cpu: 500m
@@ -30,11 +33,12 @@ accessManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
 addonController:
+  annotations: {}
+  labels: {}
   controller:
     args:
       - --diagnostics-address=:8443
@@ -62,7 +66,7 @@ addonController:
     image:
       repository: projectsveltos/addon-controller
       tag: v0.53.0
-      digest: sha256:cdecdc7ffe7be6a4fc148e5f1f4b00d2df474ad96b85270199b1b1b2b9a6a564 
+      digest: sha256:cdecdc7ffe7be6a4fc148e5f1f4b00d2df474ad96b85270199b1b1b2b9a6a564
     resources:
       requests:
         memory: 512Mi
@@ -77,12 +81,13 @@ addonController:
       protocol: TCP
       targetPort: 8443
   nodeSelector: {}
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
   type: ClusterIP
 classifierManager:
+  annotations: {}
+  labels: {}
   agentPatchConfigMap:
     name: sveltos-agent-config
     data: {}
@@ -122,7 +127,6 @@ classifierManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
@@ -130,6 +134,8 @@ driftDetectionManager:
   serviceAccount:
     annotations: {}
 eventManager:
+  annotations: {}
+  labels: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -153,7 +159,7 @@ eventManager:
     image:
       repository: projectsveltos/event-manager
       tag: v0.53.0
-      digest: sha256:17d97e83f673d7cfd1722cf752d603fc6202d21057f4706d6b812b5ec61d5d44 
+      digest: sha256:17d97e83f673d7cfd1722cf752d603fc6202d21057f4706d6b812b5ec61d5d44
     resources:
       limits:
         cpu: 500m
@@ -164,11 +170,12 @@ eventManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
 hcManager:
+  annotations: {}
+  labels: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -192,7 +199,7 @@ hcManager:
     image:
       repository: projectsveltos/healthcheck-manager
       tag: v0.53.0
-      digest: sha256:db96e56bf809d374cced8dd950388525f8bf8a513a43e86ed7b6c4e0d33bdcec 
+      digest: sha256:db96e56bf809d374cced8dd950388525f8bf8a513a43e86ed7b6c4e0d33bdcec
     resources:
       limits:
         cpu: 500m
@@ -203,7 +210,6 @@ hcManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
@@ -227,7 +233,7 @@ registerMgmtClusterJob:
     image:
       repository: projectsveltos/register-mgmt-cluster
       tag: v0.53.0
-      digest: sha256:e7c1481458ced6a105c39e0222fb39e972864f79395ff5fd49435977a49bc077 
+      digest: sha256:e7c1481458ced6a105c39e0222fb39e972864f79395ff5fd49435977a49bc077
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -235,6 +241,8 @@ registerMgmtClusterJob:
       requests:
         memory: 128Mi
 scManager:
+  annotations: {}
+  labels: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -266,12 +274,13 @@ scManager:
       port: 80
       protocol: TCP
       targetPort: 8443
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
   type: ClusterIP
 shardController:
+  annotations: {}
+  labels: {}
   extraEnv: []
   manager:
     args:
@@ -294,7 +303,7 @@ shardController:
     image:
       repository: projectsveltos/shard-controller
       tag: v0.53.0
-      digest: sha256:fa02395a6ddcf57ba66ee919dc674657f56f20a8c784cee389ca8812dccc6747 
+      digest: sha256:fa02395a6ddcf57ba66ee919dc674657f56f20a8c784cee389ca8812dccc6747
     resources:
       limits:
         cpu: 500m
@@ -305,11 +314,12 @@ shardController:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}
 techsupportController:
+  annotations: {}
+  labels: {}
   extraEnv: []
   controller:
     args:
@@ -337,7 +347,6 @@ techsupportController:
     runAsNonRoot: true
     seccompProfile:
       type: RuntimeDefault
-  replicas: 1
   tolerations: []
   serviceAccount:
     annotations: {}

@@ -1,7 +1,18 @@
+global:
+  additionalLabels:
+    label: all
 accessManager:
+  annotations:
+    annotation1: value1
+  labels:
+    label1: value1
   manager:
     extraArgs: { "accessManager": "value1", "manager": "value2", "empty": "" }
 addonController:
+  annotations:
+    annotation2: value2
+  labels:
+    label2: value2
   controller:
     extraArgs: { "addonController": "value1", "controller": "value2" }
     extraArgsAgentMgmtCluster:
@@ -9,6 +20,10 @@ addonController:
   driftDetectionManagerPatchConfigMap:
     data: { "key1": "value1" }
 classifierManager:
+  annotations:
+    annotation3: value3
+  labels:
+    label3: value3
   manager:
     extraArgs: { "classifierManager": "value1", "manager": "value2" }
     extraArgsAgentMgmtCluster:
@@ -16,18 +31,34 @@ classifierManager:
   agentPatchConfigMap:
     data: { "key2": value2" }
 eventManager:
+  annotations:
+    annotation4: value4
+  labels:
+    label4: value4
   manager:
     extraArgs: { "eventManager": "value1", "manager": "value2" }
 hcManager:
+  annotations:
+    annotation5: value5
+  labels:
+    label5: value5
   manager:
     extraArgs: { "hcManager": "value1", "manager": "value2" }
 registerMgmtClusterJob:
   extraArgs:
     { "registerMgmtCluster": "value1", "registerMgmtCluster2": "value2" }
 scManager:
+  annotations:
+    annotation6: value6
+  labels:
+    label6: value6
   manager:
     extraArgs: { "scManager": "value1", "manager": "value2" }
 shardController:
+  annotations:
+    annotation7: value7
+  labels:
+    label7: value7
   manager:
     extraArgs: { "shardController": "value1", "manager": "value2" }
     extraArgsAgentMgmtCluster:

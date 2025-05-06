@@ -5,8 +5,20 @@ metadata:
   labels:
     control-plane: addon-controller
   {{- include "projectsveltos.labels" . | nindent 4 }}
+    {{- with .Values.addonController.labels }}
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+    {{- end }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    {{- with .Values.addonController.annotations }}
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+    {{- end }}
 spec:
-  replicas: {{ .Values.addonController.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: addon-controller
@@ -16,9 +28,6 @@ spec:
       labels:
         control-plane: addon-controller
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        kubectl.kubernetes.io/default-container: controller
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -128,11 +137,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: access-manager
+  {{- with .Values.accessManager.manager.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
   labels:
     control-plane: access-manager
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  {{- with .Values.accessManager.labels }}
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
 spec:
-  replicas: {{ .Values.accessManager.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: access-manager
@@ -142,8 +162,6 @@ spec:
       labels:
         control-plane: access-manager
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        kubectl.kubernetes.io/default-container: manager
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -214,11 +232,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sc-manager
+  {{- with .Values.accessManager.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
   labels:
     control-plane: sc-manager
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  {{- with .Values.scManager.labels }}
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
 spec:
-  replicas: {{ .Values.scManager.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: sc-manager
@@ -228,8 +257,6 @@ spec:
       labels:
         control-plane: sc-manager
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        kubectl.kubernetes.io/default-container: manager
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -299,11 +326,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hc-manager
+  {{- with .Values.hcManager.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
   labels:
     control-plane: hc-manager
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  {{- with .Values.hcManager.labels }}
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
 spec:
-  replicas: {{ .Values.hcManager.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: hc-manager
@@ -313,8 +351,6 @@ spec:
       labels:
         control-plane: hc-manager
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        kubectl.kubernetes.io/default-container: manager
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -399,11 +435,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: event-manager
+  {{- with .Values.eventManager.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
   labels:
     control-plane: event-manager
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  {{- with .Values.eventManager.labels }}
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
 spec:
-  replicas: {{ .Values.eventManager.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: event-manager
@@ -413,8 +460,6 @@ spec:
       labels:
         control-plane: event-manager
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        kubectl.kubernetes.io/default-container: manager
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -500,11 +545,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: classifier-manager
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    {{- with .Values.classifierManager.annotations }}
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+    {{- end }}
   labels:
     control-plane: classifier
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  {{- with .Values.classifierManager.labels }}
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
 spec:
-  replicas: {{ .Values.classifierManager.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: classifier
@@ -514,9 +571,6 @@ spec:
       labels:
         control-plane: classifier
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        kubectl.kubernetes.io/default-container: manager
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -607,11 +661,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shard-controller
+  {{- with .Values.shardController.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
   labels:
     control-plane: shard-controller
   {{- include "projectsveltos.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.shardController.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: shard-controller
@@ -621,8 +681,11 @@ spec:
       labels:
         control-plane: shard-controller
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        kubectl.kubernetes.io/default-container: manager
+      {{- with .Values.shardController.labels }}
+      {{- range $key, $value := . }}
+        {{ $key }}: {{ $value | quote }}
+      {{- end }}
+      {{- end }}
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -706,11 +769,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: techsupport-controller
+  {{- with .Values.techsupportController.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
   labels:
     control-plane: techsupport
   {{- include "projectsveltos.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.techsupportController.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       control-plane: techsupport
@@ -719,9 +788,12 @@ spec:
     metadata:
       labels:
         control-plane: techsupport
+        {{- with .Values.techsupportController.labels }}
+        {{- range $key, $value := . }}
+          {{ $key }}: {{ $value | quote }}
+        {{- end }}
+        {{- end }}
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
-      annotations:
-        kubectl.kubernetes.io/default-container: controller
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
