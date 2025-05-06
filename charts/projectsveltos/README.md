@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 0.53.0](https://img.shields.io/badge/Version-0.53.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.53.0](https://img.shields.io/badge/AppVersion-0.53.0-informational?style=flat-square)
+![Version: 0.53.1](https://img.shields.io/badge/Version-0.53.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.53.0](https://img.shields.io/badge/AppVersion-0.53.0-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -12,6 +12,9 @@ Projectsveltos helm chart for Kubernetes
 | global.useDigest | bool | `false` |  |
 | global.capiOnboardAnnotation | string | `""` |  |
 | global.imagePullSecrets | list | `[]` |  |
+| global.additionalLabels | object | `{}` |  |
+| accessManager.annotations | object | `{}` |  |
+| accessManager.labels | object | `{}` |  |
 | accessManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | accessManager.manager.args[1] | string | `"--v=5"` |  |
 | accessManager.manager.extraArgs | object | `{}` |  |
@@ -27,9 +30,10 @@ Projectsveltos helm chart for Kubernetes
 | accessManager.manager.resources.requests.memory | string | `"128Mi"` |  |
 | accessManager.nodeSelector | object | `{}` |  |
 | accessManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
-| accessManager.replicas | int | `1` |  |
 | accessManager.tolerations | list | `[]` |  |
 | accessManager.serviceAccount.annotations | object | `{}` |  |
+| addonController.annotations | object | `{}` |  |
+| addonController.labels | object | `{}` |  |
 | addonController.controller.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | addonController.controller.args[1] | string | `"--report-mode=0"` |  |
 | addonController.controller.args[2] | string | `"--shard-key="` |  |
@@ -59,10 +63,11 @@ Projectsveltos helm chart for Kubernetes
 | addonController.ports[0].protocol | string | `"TCP"` |  |
 | addonController.ports[0].targetPort | int | `8443` |  |
 | addonController.nodeSelector | object | `{}` |  |
-| addonController.replicas | int | `1` |  |
 | addonController.tolerations | list | `[]` |  |
 | addonController.serviceAccount.annotations | object | `{}` |  |
 | addonController.type | string | `"ClusterIP"` |  |
+| classifierManager.annotations | object | `{}` |  |
+| classifierManager.labels | object | `{}` |  |
 | classifierManager.agentPatchConfigMap.name | string | `"sveltos-agent-config"` |  |
 | classifierManager.agentPatchConfigMap.data | object | `{}` |  |
 | classifierManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
@@ -90,10 +95,11 @@ Projectsveltos helm chart for Kubernetes
 | classifierManager.manager.resources.requests.memory | string | `"128Mi"` |  |
 | classifierManager.nodeSelector | object | `{}` |  |
 | classifierManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
-| classifierManager.replicas | int | `1` |  |
 | classifierManager.tolerations | list | `[]` |  |
 | classifierManager.serviceAccount.annotations | object | `{}` |  |
 | driftDetectionManager.serviceAccount.annotations | object | `{}` |  |
+| eventManager.annotations | object | `{}` |  |
+| eventManager.labels | object | `{}` |  |
 | eventManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | eventManager.manager.args[1] | string | `"--shard-key="` |  |
 | eventManager.manager.args[2] | string | `"--v=5"` |  |
@@ -117,9 +123,10 @@ Projectsveltos helm chart for Kubernetes
 | eventManager.manager.resources.requests.memory | string | `"128Mi"` |  |
 | eventManager.nodeSelector | object | `{}` |  |
 | eventManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
-| eventManager.replicas | int | `1` |  |
 | eventManager.tolerations | list | `[]` |  |
 | eventManager.serviceAccount.annotations | object | `{}` |  |
+| hcManager.annotations | object | `{}` |  |
+| hcManager.labels | object | `{}` |  |
 | hcManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | hcManager.manager.args[1] | string | `"--shard-key="` |  |
 | hcManager.manager.args[2] | string | `"--v=5"` |  |
@@ -143,7 +150,6 @@ Projectsveltos helm chart for Kubernetes
 | hcManager.manager.resources.requests.memory | string | `"128Mi"` |  |
 | hcManager.nodeSelector | object | `{}` |  |
 | hcManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
-| hcManager.replicas | int | `1` |  |
 | hcManager.tolerations | list | `[]` |  |
 | hcManager.serviceAccount.annotations | object | `{}` |  |
 | kubernetesClusterDomain | string | `"cluster.local"` |  |
@@ -162,6 +168,8 @@ Projectsveltos helm chart for Kubernetes
 | registerMgmtClusterJob.registerMgmtCluster.nodeSelector | object | `{}` |  |
 | registerMgmtClusterJob.registerMgmtCluster.tolerations | list | `[]` |  |
 | registerMgmtClusterJob.registerMgmtCluster.resources.requests.memory | string | `"128Mi"` |  |
+| scManager.annotations | object | `{}` |  |
+| scManager.labels | object | `{}` |  |
 | scManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | scManager.manager.args[1] | string | `"--shard-key="` |  |
 | scManager.manager.args[2] | string | `"--v=5"` |  |
@@ -182,10 +190,11 @@ Projectsveltos helm chart for Kubernetes
 | scManager.ports[0].port | int | `80` |  |
 | scManager.ports[0].protocol | string | `"TCP"` |  |
 | scManager.ports[0].targetPort | int | `8443` |  |
-| scManager.replicas | int | `1` |  |
 | scManager.tolerations | list | `[]` |  |
 | scManager.serviceAccount.annotations | object | `{}` |  |
 | scManager.type | string | `"ClusterIP"` |  |
+| shardController.annotations | object | `{}` |  |
+| shardController.labels | object | `{}` |  |
 | shardController.extraEnv | list | `[]` |  |
 | shardController.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | shardController.manager.args[1] | string | `"--v=5"` |  |
@@ -208,9 +217,10 @@ Projectsveltos helm chart for Kubernetes
 | shardController.manager.resources.requests.memory | string | `"128Mi"` |  |
 | shardController.nodeSelector | object | `{}` |  |
 | shardController.podSecurityContext.runAsNonRoot | bool | `true` |  |
-| shardController.replicas | int | `1` |  |
 | shardController.tolerations | list | `[]` |  |
 | shardController.serviceAccount.annotations | object | `{}` |  |
+| techsupportController.annotations | object | `{}` |  |
+| techsupportController.labels | object | `{}` |  |
 | techsupportController.extraEnv | list | `[]` |  |
 | techsupportController.controller.args[0] | string | `"--v=5"` |  |
 | techsupportController.controller.extraArgs | object | `{}` |  |
@@ -227,7 +237,6 @@ Projectsveltos helm chart for Kubernetes
 | techsupportController.nodeSelector | object | `{}` |  |
 | techsupportController.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | techsupportController.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| techsupportController.replicas | int | `1` |  |
 | techsupportController.tolerations | list | `[]` |  |
 | techsupportController.serviceAccount.annotations | object | `{}` |  |
 | sveltosAgentManager.serviceAccount.annotations | object | `{}` |  |

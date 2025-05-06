@@ -4,6 +4,9 @@ metadata:
   name: register-mgmt-cluster-job
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   backoffLimit: {{ .Values.registerMgmtClusterJob.backoffLimit }}
   template:

@@ -40,6 +40,9 @@ helm.sh/chart: {{ include "projectsveltos.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- with .Values.global.additionalLabels }}
+{{ toYaml . | indent 0 }}
+{{- end }}
 {{- end }}
 
 {{/*
