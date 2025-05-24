@@ -8,6 +8,13 @@ dashboard:
       repository: projectsveltos/dashboard
       tag: v0.54.0
       digest: sha256:25b7a4d15e9fa35033e43499f3b4dc338853d7f5f02d0209c00c2f977ea8cf4b
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
   ports:
   - port: 80
     protocol: TCP
