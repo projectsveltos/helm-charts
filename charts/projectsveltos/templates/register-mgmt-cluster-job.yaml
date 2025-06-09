@@ -16,23 +16,18 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - args: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.args
-          | nindent 8 }}
+      - args: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.args | nindent 8 }}
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.repository
-           }}{{- if .Values.global.useDigest }}@{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.digest }}{{- else }}:{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.tag | default .Chart.AppVersion }}{{- end }}
-        imagePullPolicy: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy
-          }}
+        image: {{ .Values.global.registry }}/{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.digest }}{{- else }}:{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.tag | default .Chart.AppVersion }}{{- end }}
+        imagePullPolicy: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy }}
         name: register-mgmt-cluster
-        resources: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.resources
-          | nindent 10 }}
-        securityContext: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext
-          | nindent 10 }}
+        resources: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext | nindent 10 }}
       {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
