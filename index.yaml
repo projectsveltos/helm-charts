@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   projectsveltos:
   - apiVersion: v2
+    appVersion: 0.57.2
+    created: "2025-06-10T11:35:50.35080517Z"
+    description: Projectsveltos helm chart for Kubernetes
+    digest: b13bd69d8b82795d8c0f8a9f2e5664b5a6be63fd1ccf582066d8f952c87863a5
+    icon: https://github.com/projectsveltos/sveltos/raw/main/docs/assets/logo.png
+    name: projectsveltos
+    type: application
+    urls:
+    - https://github.com/projectsveltos/helm-charts/releases/download/projectsveltos-0.57.2/projectsveltos-0.57.2.tgz
+    version: 0.57.2
+  - apiVersion: v2
     appVersion: 0.57.1
     created: "2025-06-09T11:18:29.761709029Z"
     description: Projectsveltos helm chart for Kubernetes
@@ -1103,6 +1114,17 @@ entries:
     version: 0.4.0
   sveltos-crds:
   - apiVersion: v2
+    appVersion: 0.57.2
+    created: "2025-06-10T11:35:50.473308864Z"
+    description: A Helm chart for Projectsveltos CustomResourceDefinitions
+    digest: 8d6e951d848228b2f9cc96a7b58926dc1e247ed21bc92d1d5172239cc65bf218
+    icon: https://github.com/projectsveltos/sveltos/raw/main/docs/assets/logo.png
+    name: sveltos-crds
+    type: application
+    urls:
+    - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-crds-0.57.2/sveltos-crds-0.57.2.tgz
+    version: 0.57.2
+  - apiVersion: v2
     appVersion: 0.57.1
     created: "2025-06-09T11:18:29.963183872Z"
     description: A Helm chart for Projectsveltos CustomResourceDefinitions
@@ -1224,6 +1246,17 @@ entries:
     - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-crds-0.48.1/sveltos-crds-0.48.1.tgz
     version: 0.48.1
   sveltos-dashboard:
+  - apiVersion: v2
+    appVersion: 0.57.2
+    created: "2025-06-10T11:35:50.588592892Z"
+    description: A Helm chart for Sveltos dashboard
+    digest: 937072be1ae96a96ee19de5bcfb9565ba0c8148499d06d61451379991f2d8425
+    icon: https://github.com/projectsveltos/sveltos/raw/main/docs/assets/logo.png
+    name: sveltos-dashboard
+    type: application
+    urls:
+    - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-dashboard-0.57.2/sveltos-dashboard-0.57.2.tgz
+    version: 0.57.2
   - apiVersion: v2
     appVersion: 0.57.1
     created: "2025-06-09T11:18:30.145326814Z"
@@ -1378,4 +1411,4 @@ entries:
     urls:
     - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-dashboard-0.47.0/sveltos-dashboard-0.47.0.tgz
     version: 0.47.0
-generated: "2025-06-09T11:18:30.145984981Z"
+generated: "2025-06-10T11:35:50.589460805Z"
