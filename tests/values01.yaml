@@ -65,3 +65,13 @@ shardController:
       { "argsAgentMgmtCluster": "value1", "argsAgentMgmtCluster2": "value2" }
 agent:
   managementCluster: true
+defaultClassifier:
+  annotations:
+    annotation8: value8
+  labels:
+    label8: value8
+defaultDebuggingConfiguration:
+  annotations:
+    annotation9: value9
+  labels:
+    label9: value9

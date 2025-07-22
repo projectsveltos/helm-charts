@@ -359,3 +359,9 @@ agent:
   managementCluster: false
 telemetry:
   disabled: false
+defaultClassifier:
+  annotations: {}
+  labels: {}
+defaultDebuggingConfiguration:
+  annotations: {}
+  labels: {}
