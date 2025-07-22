@@ -1,48 +1,144 @@
-{{- if not (lookup "lib.projectsveltos.io/v1beta1" "DebuggingConfiguration" "" "default") }}
-apiVersion: lib.projectsveltos.io/v1beta1
-kind: DebuggingConfiguration
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: default
-  labels:
-  {{- include "projectsveltos.labels" . | nindent 4 }}
-  {{- with .Values.defaultDebuggingConfiguration.labels }}
-    {{- range $key, $value := . }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
-  {{- end }}
+  name: deploy-sveltos-resources
+  namespace: projectsveltos
   annotations:
-    "helm.sh/hook": "post-install,post-upgrade"
-    "helm.sh/hook-weight": "5"
-    "helm.sh/hook-delete-policy": "hook-failed"
-  {{- with .Values.defaultDebuggingConfiguration.annotations }}
-    {{- range $key, $value := . }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
-  {{- end }}
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "5"
+    helm.sh/hook-delete-policy: hook-succeeded
 spec:
-  configuration:
-  - component: AccessManager
-    logLevel: LogLevelInfo
-  - component: AddonManager
-    logLevel: LogLevelInfo
-  - component: Classifier
-    logLevel: LogLevelInfo
-  - component: DriftDetectionManager
-    logLevel: LogLevelInfo
-  - component: EventManager
-    logLevel: LogLevelInfo
-  - component: HealthCheckManager
-    logLevel: LogLevelInfo
-  - component: SveltosClusterManager
-    logLevel: LogLevelInfo
-  - component: UIBackend
-    logLevel: LogLevelInfo
-  - component: SveltosAgent
-    logLevel: LogLevelInfo
-  - component: ShardController
-    logLevel: LogLevelInfo
-  - component: ConversionWebhook
-    logLevel: LogLevelInfo
-  - component: Techsupport
-    logLevel: LogLevelInfo
-{{- end }}
+  template:
+    spec:
+      serviceAccountName: sveltos-deployer
+      restartPolicy: Never
+      containers:
+      - name: kubectl-deployer
+        image: bitnami/kubectl:1.33.3
+        command:
+        - /bin/sh
+        - -c
+        - |
+          # Check if Classifier exists
+          if ! kubectl get classifier default-classifier 2>/dev/null; then
+            echo "Creating Classifier..."
+            kubectl apply -f - <<EOF
+          apiVersion: lib.projectsveltos.io/v1beta1
+          kind: Classifier
+          metadata:
+            name: default-classifier
+          spec:
+            classifierLabels:
+            - key: sveltos-agent
+              value: present
+          EOF
+          else
+            echo "Classifier already exists, skipping..."
+          fi
+
+          # Check if DebuggingConfiguration exists
+          if ! kubectl get debuggingconfiguration default 2>/dev/null; then
+            echo "Creating DebuggingConfiguration..."
+            kubectl apply -f - <<EOF
+          apiVersion: lib.projectsveltos.io/v1beta1
+          kind: DebuggingConfiguration
+          metadata:
+            name: default
+          spec:
+            configuration:
+            - component: AccessManager
+              logLevel: LogLevelInfo
+            - component: AddonManager
+              logLevel: LogLevelInfo
+            - component: Classifier
+              logLevel: LogLevelInfo
+            - component: DriftDetectionManager
+              logLevel: LogLevelInfo
+            - component: EventManager
+              logLevel: LogLevelInfo
+            - component: HealthCheckManager
+              logLevel: LogLevelInfo
+            - component: SveltosClusterManager
+              logLevel: LogLevelInfo
+            - component: UIBackend
+              logLevel: LogLevelInfo
+            - component: SveltosAgent
+              logLevel: LogLevelInfo
+            - component: ShardController
+              logLevel: LogLevelInfo
+            - component: ConversionWebhook
+              logLevel: LogLevelInfo
+            - component: Techsupport
+              logLevel: LogLevelInfo
+          EOF
+          else
+            echo "DebuggingConfiguration already exists, skipping..."
+          fi
+
+          echo "Resource deployment completed"
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: delete-sveltos-resources
+  annotations:
+    helm.sh/hook: pre-delete
+    helm.sh/hook-weight: "5"
+    helm.sh/hook-delete-policy: hook-succeeded
+spec:
+  template:
+    spec:
+      serviceAccountName: sveltos-deployer
+      restartPolicy: Never
+      containers:
+      - name: kubectl-deleter
+        image: bitnami/kubectl:1.33.3
+        command:
+        - /bin/sh
+        - -c
+        - |
+          # Delete Classifier if exists
+          if kubectl get classifier default-classifier 2>/dev/null; then
+            echo "Deleting Classifier..."
+            kubectl delete classifier default-classifier
+          else
+            echo "Classifier not found, skipping..."
+          fi
+
+          # Delete DebuggingConfiguration if exists
+          if kubectl get debuggingconfiguration default 2>/dev/null; then
+            echo "Deleting DebuggingConfiguration..."
+            kubectl delete debuggingconfiguration default
+          else
+            echo "DebuggingConfiguration not found, skipping..."
+          fi
+
+          echo "Resource deletion completed"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sveltos-deployer
+  namespace: projectsveltos
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sveltos-deployer
+rules:
+- apiGroups: ["lib.projectsveltos.io"]
+  resources: ["classifiers", "debuggingconfigurations"]
+  verbs: ["get", "create", "apply", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sveltos-deployer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sveltos-deployer
+subjects:
+- kind: ServiceAccount
+  name: sveltos-deployer
+  namespace: projectsveltos

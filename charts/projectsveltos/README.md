@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 0.57.5](https://img.shields.io/badge/Version-0.57.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.57.2](https://img.shields.io/badge/AppVersion-0.57.2-informational?style=flat-square)
+![Version: 0.57.6](https://img.shields.io/badge/Version-0.57.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.57.2](https://img.shields.io/badge/AppVersion-0.57.2-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
