@@ -20,6 +20,7 @@ rules:
   - events
   verbs:
   - create
+  - patch
   - update
 - apiGroups:
   - '*'
@@ -152,7 +153,22 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
+  - clusterhealthchecks
+  - configurationgroups/status
+  - debuggingconfigurations
+  - eventtriggers
+  - sveltosclusters
+  - sveltosclusters/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
   - clustersets
+  - configurationbundles
+  - configurationgroups
   - reloaders
   - resourcesummaries
   - sets
@@ -183,12 +199,11 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
-  - debuggingconfigurations
-  - sveltosclusters
-  - sveltosclusters/status
+  - configurationbundles/status
   verbs:
   - get
   - list
+  - update
   - watch
 - apiGroups:
   - lib.projectsveltos.io

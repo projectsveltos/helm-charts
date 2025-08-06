@@ -116,10 +116,16 @@ spec:
                       description: |-
                         IgnoreForConfigurationDrift indicates to not track resource
                         for configuration drift detection.
+                        This field has a meaning only when mode is ContinuousWithDriftDetection
                       type: boolean
                     kind:
                       description: Kind of the resource deployed in the Cluster.
                       minLength: 1
+                      type: string
+                    lastAppliedTime:
+                      description: LastAppliedTime identifies when this resource was
+                        last applied to the cluster.
+                      format: date-time
                       type: string
                     name:
                       description: Name of the resource deployed in the Cluster.
@@ -132,10 +138,10 @@ spec:
                       type: string
                     version:
                       description: Version of the resource deployed in the Cluster.
+                      minLength: 1
                       type: string
                   required:
                   - group
-                  - ignoreForConfigurationDrift
                   - kind
                   - name
                   - version
@@ -217,10 +223,16 @@ spec:
                       description: |-
                         IgnoreForConfigurationDrift indicates to not track resource
                         for configuration drift detection.
+                        This field has a meaning only when mode is ContinuousWithDriftDetection
                       type: boolean
                     kind:
                       description: Kind of the resource deployed in the Cluster.
                       minLength: 1
+                      type: string
+                    lastAppliedTime:
+                      description: LastAppliedTime identifies when this resource was
+                        last applied to the cluster.
+                      format: date-time
                       type: string
                     name:
                       description: Name of the resource deployed in the Cluster.
@@ -233,10 +245,10 @@ spec:
                       type: string
                     version:
                       description: Version of the resource deployed in the Cluster.
+                      minLength: 1
                       type: string
                   required:
                   - group
-                  - ignoreForConfigurationDrift
                   - kind
                   - name
                   - version
@@ -261,10 +273,16 @@ spec:
                       description: |-
                         IgnoreForConfigurationDrift indicates to not track resource
                         for configuration drift detection.
+                        This field has a meaning only when mode is ContinuousWithDriftDetection
                       type: boolean
                     kind:
                       description: Kind of the resource deployed in the Cluster.
                       minLength: 1
+                      type: string
+                    lastAppliedTime:
+                      description: LastAppliedTime identifies when this resource was
+                        last applied to the cluster.
+                      format: date-time
                       type: string
                     name:
                       description: Name of the resource deployed in the Cluster.
@@ -277,10 +295,10 @@ spec:
                       type: string
                     version:
                       description: Version of the resource deployed in the Cluster.
+                      minLength: 1
                       type: string
                   required:
                   - group
-                  - ignoreForConfigurationDrift
                   - kind
                   - name
                   - version
@@ -305,10 +323,16 @@ spec:
                       description: |-
                         IgnoreForConfigurationDrift indicates to not track resource
                         for configuration drift detection.
+                        This field has a meaning only when mode is ContinuousWithDriftDetection
                       type: boolean
                     kind:
                       description: Kind of the resource deployed in the Cluster.
                       minLength: 1
+                      type: string
+                    lastAppliedTime:
+                      description: LastAppliedTime identifies when this resource was
+                        last applied to the cluster.
+                      format: date-time
                       type: string
                     name:
                       description: Name of the resource deployed in the Cluster.
@@ -321,10 +345,10 @@ spec:
                       type: string
                     version:
                       description: Version of the resource deployed in the Cluster.
+                      minLength: 1
                       type: string
                   required:
                   - group
-                  - ignoreForConfigurationDrift
                   - kind
                   - name
                   - version
@@ -348,10 +372,16 @@ spec:
                       description: |-
                         IgnoreForConfigurationDrift indicates to not track resource
                         for configuration drift detection.
+                        This field has a meaning only when mode is ContinuousWithDriftDetection
                       type: boolean
                     kind:
                       description: Kind of the resource deployed in the Cluster.
                       minLength: 1
+                      type: string
+                    lastAppliedTime:
+                      description: LastAppliedTime identifies when this resource was
+                        last applied to the cluster.
+                      format: date-time
                       type: string
                     name:
                       description: Name of the resource deployed in the Cluster.
@@ -364,10 +394,10 @@ spec:
                       type: string
                     version:
                       description: Version of the resource deployed in the Cluster.
+                      minLength: 1
                       type: string
                   required:
                   - group
-                  - ignoreForConfigurationDrift
                   - kind
                   - name
                   - version
