@@ -26,3 +26,17 @@ data:
     {{- $value | toString | nindent 4 }}
   {{- end }}
 {{- end }}
+{{- if ne (len .Values.classifierManager.agentPatchSveltosApplierConfigMap.data) 0 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.classifierManager.agentPatchSveltosApplierConfigMap.name }}
+  labels:
+    {{- include "projectsveltos.labels" . | nindent 4 }}
+data:
+  {{- range $key, $value := .Values.classifierManager.agentPatchSveltosApplierConfigMap.data }}
+  {{ $key }}: |-
+    {{- $value | toString | nindent 4 }}
+  {{- end }}
+{{- end }}
