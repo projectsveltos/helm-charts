@@ -615,6 +615,9 @@ spec:
     {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
         - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
     {{- end }}
+    {{- if ne (len .Values.classifierManager.agentPatchSveltosApplierConfigMap.data) 0 }}
+        - --sveltos-applier-config={{ .Values.classifierManager.agentPatchSveltosApplierConfigMap.name }}
+    {{- end }}
         - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
