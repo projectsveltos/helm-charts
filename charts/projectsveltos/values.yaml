@@ -216,6 +216,29 @@ hcManager:
   tolerations: []
   serviceAccount:
     annotations: {}
+crdManager:
+  serviceAccount:
+    annotations:
+      helm.sh/hook: pre-upgrade,pre-rollback
+      helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
+crdManagerJob:
+  backoffLimit: 4
+  crdManager:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+    image:
+      repository: projectsveltos/crd-manager
+      tag: v1.0.1
+      digest: sha256:55da26503fe138204585050ecf1bb20dc7878d17c2c86eb7837f4730333531c4 
+    imagePullPolicy: IfNotPresent
+    nodeSelector: {}
+    tolerations: []
+    resources:
+      requests:
+        memory: 128Mi
 kubernetesClusterDomain: cluster.local
 registerMgmtCluster:
   serviceAccount:
