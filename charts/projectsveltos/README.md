@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -154,6 +154,18 @@ Projectsveltos helm chart for Kubernetes
 | hcManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | hcManager.tolerations | list | `[]` |  |
 | hcManager.serviceAccount.annotations | object | `{}` |  |
+| crdManager.serviceAccount.annotations."helm.sh/hook" | string | `"pre-upgrade,pre-rollback"` |  |
+| crdManager.serviceAccount.annotations."helm.sh/hook-delete-policy" | string | `"hook-succeeded,before-hook-creation"` |  |
+| crdManagerJob.backoffLimit | int | `4` |  |
+| crdManagerJob.crdManager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| crdManagerJob.crdManager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| crdManagerJob.crdManager.image.repository | string | `"projectsveltos/crd-manager"` |  |
+| crdManagerJob.crdManager.image.tag | string | `"v1.0.1"` |  |
+| crdManagerJob.crdManager.image.digest | string | `"sha256:55da26503fe138204585050ecf1bb20dc7878d17c2c86eb7837f4730333531c4"` |  |
+| crdManagerJob.crdManager.imagePullPolicy | string | `"IfNotPresent"` |  |
+| crdManagerJob.crdManager.nodeSelector | object | `{}` |  |
+| crdManagerJob.crdManager.tolerations | list | `[]` |  |
+| crdManagerJob.crdManager.resources.requests.memory | string | `"128Mi"` |  |
 | kubernetesClusterDomain | string | `"cluster.local"` |  |
 | registerMgmtCluster.serviceAccount.annotations | object | `{}` |  |
 | registerMgmtClusterJob.backoffLimit | int | `4` |  |

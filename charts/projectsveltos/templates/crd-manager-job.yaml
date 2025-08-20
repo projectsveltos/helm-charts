@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: crd-manager-job
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: pre-upgrade,pre-rollback
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
+spec:
+  backoffLimit: {{ .Values.crdManagerJob.backoffLimit }}
+  template:
+    spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.crdManagerJob.crdManager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.crdManagerJob.crdManager.image.repository
+           }}{{- if .Values.global.useDigest }}@{{ .Values.crdManagerJob.crdManager.image.digest }}{{- else }}:{{ .Values.crdManagerJob.crdManager.image.tag | default .Chart.AppVersion }}{{- end }}
+        imagePullPolicy: {{ .Values.crdManagerJob.crdManager.imagePullPolicy
+          }}
+        name: crd-manager
+        resources: {{- toYaml .Values.crdManagerJob.crdManager.resources
+          | nindent 10 }}
+        securityContext: {{- toYaml .Values.crdManagerJob.crdManager.containerSecurityContext
+          | nindent 10 }}
+      {{- with .Values.crdManagerJob.crdManager.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.crdManagerJob.crdManager.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      restartPolicy: OnFailure
+      serviceAccountName: crd-manager
+  ttlSecondsAfterFinished: 240
