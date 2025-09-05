@@ -16,8 +16,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - args: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.args
-          | nindent 8 }}
+      - args:
+      {{- range .Values.registerMgmtClusterJob.registerMgmtCluster.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.registerMgmtClusterJob.registerMgmtCluster.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
         env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
