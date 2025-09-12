@@ -31,7 +31,7 @@ spec:
       insecureSkipVerify: true
   namespaceSelector:
     matchNames:
-    - projectsveltos
+    - '{{ .Release.Namespace }}'
   selector:
     matchLabels:
       control-plane: addon-controller
