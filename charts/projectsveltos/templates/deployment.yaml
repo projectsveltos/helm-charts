@@ -850,3 +850,113 @@ spec:
       securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
       serviceAccountName: techsupport-controller
       terminationGracePeriodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  {{- with .Values.mcpServer.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+  name: mcp-server
+  labels:
+    control-plane: mcp-server
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: mcp-server
+    {{- include "projectsveltos.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        control-plane: mcp-server
+        {{- with .Values.mcpServer.labels }}
+        {{- range $key, $value := . }}
+          {{ $key }}: {{ $value | quote }}
+        {{- end }}
+        {{- end }}
+      {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
+      annotations:
+        kubectl.kubernetes.io/default-container: controller
+    spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mcpServer.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mcpServer.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - args:
+      {{- range .Values.mcpServer.controller.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.mcpServer.controller.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+        command:
+        - /manager
+        env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.mcpServer.controller.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        image: {{ .Values.global.registry }}/{{ .Values.mcpServer.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.mcpServer.controller.image.digest }}{{- else }}:{{ .Values.mcpServer.controller.image.tag | default .Chart.AppVersion }}{{- end }}
+        imagePullPolicy: {{ .Values.mcpServer.controller.imagePullPolicy }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: mcp
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: controller
+        ports:
+        - containerPort: 8080
+          name: mcp
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: mcp
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources: {{- toYaml .Values.mcpServer.controller.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.mcpServer.controller.containerSecurityContext
+          | nindent 10 }}
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+      securityContext: {{- toYaml .Values.mcpServer.podSecurityContext | nindent 8 }}
+      serviceAccountName: mcp-server
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - emptyDir: {}
+        name: tmp
