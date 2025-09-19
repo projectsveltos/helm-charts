@@ -60,6 +60,9 @@ spec:
         - containerPort: 9440
           name: healthz
           protocol: TCP
+        - containerPort: 8080
+          name: gin
+          protocol: TCP
         readinessProbe:
           failureThreshold: 3
           httpGet:
@@ -71,8 +74,8 @@ spec:
         resources: {{- toYaml .Values.uiBackendManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.uiBackendManager.manager.containerSecurityContext
           | nindent 10 }}
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.uiBackendManager.podSecurityContext | nindent
+        8 }}
       serviceAccountName: ui-backend-manager
       terminationGracePeriodSeconds: 10
       nodeSelector: {{- toYaml .Values.uiBackendManager.nodeSelector | nindent 8 }}

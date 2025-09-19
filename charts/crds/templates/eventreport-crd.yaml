@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   name: eventreports.lib.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.19.0
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
