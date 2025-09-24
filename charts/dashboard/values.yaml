@@ -52,7 +52,7 @@ uiBackendManager:
     image:
       repository: projectsveltos/ui-backend
       tag: v1.1.1
-      digest: sha256:0e4d178985825df2c3b694dee877950632c5290537fbf2122bf7fd53afb27181
+      digest: sha256:1a4ab5b461f4db0ed8b6a4f1150954b2a467bee163c36f1fa3c6ebce6a1ffe32
     resources:
       limits:
         cpu: 500m

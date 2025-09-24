@@ -259,7 +259,7 @@ registerMgmtClusterJob:
     image:
       repository: projectsveltos/register-mgmt-cluster
       tag: v1.1.1
-      digest: sha256:b643b3922aed3184e6790326da3ae0c3373b2874f62decfebe874a86f1a49165
+      digest: sha256:f8956acaae65f3ad2fd829296fc39998253690c42947264507aa8c0cbed28427
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
