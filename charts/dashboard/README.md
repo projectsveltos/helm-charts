@@ -1,6 +1,6 @@
 # sveltos-dashboard
 
-![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.1](https://img.shields.io/badge/AppVersion-1.1.1-informational?style=flat-square)
+![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.1](https://img.shields.io/badge/AppVersion-1.1.1-informational?style=flat-square)
 
 A Helm chart for Sveltos dashboard
 
@@ -40,7 +40,7 @@ A Helm chart for Sveltos dashboard
 | uiBackendManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | uiBackendManager.manager.image.repository | string | `"projectsveltos/ui-backend"` |  |
 | uiBackendManager.manager.image.tag | string | `"v1.1.1"` |  |
-| uiBackendManager.manager.image.digest | string | `"sha256:0e4d178985825df2c3b694dee877950632c5290537fbf2122bf7fd53afb27181"` |  |
+| uiBackendManager.manager.image.digest | string | `"sha256:1a4ab5b461f4db0ed8b6a4f1150954b2a467bee163c36f1fa3c6ebce6a1ffe32"` |  |
 | uiBackendManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | uiBackendManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | uiBackendManager.manager.resources.requests.cpu | string | `"10m"` |  |

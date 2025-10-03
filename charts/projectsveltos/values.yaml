@@ -85,6 +85,19 @@ addonController:
   serviceAccount:
     annotations: {}
   type: ClusterIP
+  roleExtra:
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - configmaps
+        verbs:
+          - get
+          - list
+          - create
+          - update
+  clusterRoleExtra:
+    rules: null
 classifierManager:
   annotations: {}
   labels: {}

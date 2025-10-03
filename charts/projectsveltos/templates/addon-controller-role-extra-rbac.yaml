@@ -4,16 +4,12 @@ metadata:
   name: addon-controller-role-extra
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
+{{- if .Values.addonController.roleExtra.rules }}
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  verbs:
-  - get
-  - list
-  - create
-  - update
+{{- toYaml .Values.addonController.roleExtra.rules | nindent 0 }}
+{{- else }}
+rules: null
+{{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -21,4 +17,9 @@ metadata:
   name: addon-controller-role-extra
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
+{{- if .Values.addonController.clusterRoleExtra.rules }}
+rules:
+{{- toYaml .Values.addonController.clusterRoleExtra.rules | nindent 0 }}
+{{- else }}
 rules: null
+{{- end }}
