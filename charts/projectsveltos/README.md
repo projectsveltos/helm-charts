@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.1](https://img.shields.io/badge/AppVersion-1.1.1-informational?style=flat-square)
+![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.1](https://img.shields.io/badge/AppVersion-1.1.1-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -66,6 +66,13 @@ Projectsveltos helm chart for Kubernetes
 | addonController.tolerations | list | `[]` |  |
 | addonController.serviceAccount.annotations | object | `{}` |  |
 | addonController.type | string | `"ClusterIP"` |  |
+| addonController.roleExtra.rules[0].apiGroups[0] | string | `""` |  |
+| addonController.roleExtra.rules[0].resources[0] | string | `"configmaps"` |  |
+| addonController.roleExtra.rules[0].verbs[0] | string | `"get"` |  |
+| addonController.roleExtra.rules[0].verbs[1] | string | `"list"` |  |
+| addonController.roleExtra.rules[0].verbs[2] | string | `"create"` |  |
+| addonController.roleExtra.rules[0].verbs[3] | string | `"update"` |  |
+| addonController.clusterRoleExtra.rules | string | `nil` |  |
 | classifierManager.annotations | object | `{}` |  |
 | classifierManager.labels | object | `{}` |  |
 | classifierManager.agentPatchConfigMap.name | string | `"sveltos-agent-config"` |  |
@@ -177,7 +184,7 @@ Projectsveltos helm chart for Kubernetes
 | registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.image.repository | string | `"projectsveltos/register-mgmt-cluster"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.image.tag | string | `"v1.1.1"` |  |
-| registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:b643b3922aed3184e6790326da3ae0c3373b2874f62decfebe874a86f1a49165"` |  |
+| registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:f8956acaae65f3ad2fd829296fc39998253690c42947264507aa8c0cbed28427"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy | string | `"IfNotPresent"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.nodeSelector | object | `{}` |  |
 | registerMgmtClusterJob.registerMgmtCluster.tolerations | list | `[]` |  |
@@ -272,7 +279,7 @@ Projectsveltos helm chart for Kubernetes
 | mcpServer.ports[0].name | string | `"metrics"` |  |
 | mcpServer.ports[0].port | int | `80` |  |
 | mcpServer.ports[0].protocol | string | `"TCP"` |  |
-| mcpServer.ports[0].targetPort | int | `8443` |  |
+| mcpServer.ports[0].targetPort | int | `8080` |  |
 | mcpServer.tolerations | list | `[]` |  |
 | mcpServer.serviceAccount.annotations | object | `{}` |  |
 | mcpServer.type | string | `"ClusterIP"` |  |
