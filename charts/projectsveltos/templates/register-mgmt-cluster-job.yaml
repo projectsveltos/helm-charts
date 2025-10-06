@@ -13,7 +13,9 @@ spec:
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+        {{- range . }}
+        - name: {{ . }}
+        {{- end }}
       {{- end }}
       containers:
       - args:

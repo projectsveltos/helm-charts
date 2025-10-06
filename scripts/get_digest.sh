@@ -47,6 +47,7 @@ declare -a base_names=(
   "techsupport"
   "crd-manager"
   "mcp-server"
+  "sveltos-applier"
 )
 
 # Loop through the base names
