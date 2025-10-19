@@ -21,8 +21,8 @@ accessManager:
           - ALL
     image:
       repository: projectsveltos/access-manager
-      tag: v1.1.1
-      digest: sha256:2c718cd418b779b0225c44ac8fb0957474306ab41ca6313176e81592b27023cd
+      tag: v1.2.0
+      digest: sha256:5286facd7bdbd098a25e314fb4a9e5e0a855b1f3db1d2086738be6a5cc4ff0b9
     resources:
       limits:
         cpu: 500m
@@ -45,14 +45,14 @@ addonController:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -65,8 +65,8 @@ addonController:
         type: RuntimeDefault
     image:
       repository: projectsveltos/addon-controller
-      tag: v1.1.1
-      digest: sha256:a2ae3b11ae10903b7c1d9968e269c413289639ecbff18aa3c4b02d54d090d19e
+      tag: v1.2.0
+      digest: sha256:9e40768b823c24df5db3e9b935e3dd655d6c7f694c4ab07de9869e16a85232ac
     resources:
       requests:
         memory: 512Mi
@@ -113,14 +113,14 @@ classifierManager:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -131,8 +131,8 @@ classifierManager:
           - ALL
     image:
       repository: projectsveltos/classifier
-      tag: v1.1.1
-      digest: sha256:f6cb42ad27130b5889698fb1cbb4995fcc28606779cc36608a9695bbc2385200
+      tag: v1.2.0
+      digest: sha256:8bff62e37c15e79b893d201965aedcb4ea7b2dd6d00bea25732b3d44d2c282c6
     resources:
       limits:
         cpu: 500m
@@ -157,13 +157,13 @@ eventManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -174,8 +174,8 @@ eventManager:
           - ALL
     image:
       repository: projectsveltos/event-manager
-      tag: v1.1.1
-      digest: sha256:576bd73b1ff0496059fcd8c1974d6fc96752fd418be93ba8c545b71984851ce3
+      tag: v1.2.0
+      digest: sha256:9dfd77cb4b944dcbac997fabe8f1862fb5a470a3fbe5234a8efdc843b521b2ba
     resources:
       limits:
         cpu: 500m
@@ -197,13 +197,13 @@ hcManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.1.1
+      - --version=v1.2.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -214,8 +214,8 @@ hcManager:
           - ALL
     image:
       repository: projectsveltos/healthcheck-manager
-      tag: v1.1.1
-      digest: sha256:2c9ed4c82ad061511ca223dc7593d56b858084c2e16505fd634317cdf035dbb2
+      tag: v1.2.0
+      digest: sha256:4fe9c95972a3ec8bf5346d77fe576e476738670c6858fd63d256a1af948f47db
     resources:
       limits:
         cpu: 500m
@@ -244,8 +244,8 @@ crdManagerJob:
         - ALL
     image:
       repository: projectsveltos/crd-manager
-      tag: v1.1.1
-      digest: sha256:d1fccfc4000cc277d94f0b12162d3df94c4f739c2d0da5fe1ed7280a9fbff6ac
+      tag: v1.2.0
+      digest: sha256:bbb6dbc61e3ca444d0a30dd494201adf9aa1aa8f84b368375724bdd5b9834ee1
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -271,8 +271,8 @@ registerMgmtClusterJob:
           - ALL
     image:
       repository: projectsveltos/register-mgmt-cluster
-      tag: v1.1.1
-      digest: sha256:f8956acaae65f3ad2fd829296fc39998253690c42947264507aa8c0cbed28427
+      tag: v1.2.0
+      digest: sha256:90fa644bd72de20609adfcbce3c8f2e24bfdb19235aeb514f9104c212478f889
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -296,8 +296,8 @@ scManager:
           - ALL
     image:
       repository: projectsveltos/sveltoscluster-manager
-      tag: v1.1.1
-      digest: sha256:324999d02bd2d4ef4655743d87466303c8158b8fc622f9fee76905c23dfaa243
+      tag: v1.2.0
+      digest: sha256:6af40f453c695010c3a03a4ca1c4273ccd8c68f4929a185b03138c3b4f24b000
     resources:
       limits:
         cpu: 500m
@@ -341,8 +341,8 @@ shardController:
           - ALL
     image:
       repository: projectsveltos/shard-controller
-      tag: v1.1.1
-      digest: sha256:3d405788855448da9bdabc85722e693ffacd777d9c10a970d06f8cf5ca959984
+      tag: v1.2.0
+      digest: sha256:f8e72be944de9e5cdd102ddae188dfa09aaa8b7c40f27e7c92d2e5072a9b2b85
     resources:
       limits:
         cpu: 500m
@@ -372,8 +372,8 @@ techsupportController:
           - ALL
     image:
       repository: projectsveltos/techsupport
-      tag: v1.1.1
-      digest: sha256:7b6fab6491239bdc5d176a1d9170e2aee5e6b248a109efc1c4c33a40181fd8b6
+      tag: v1.2.0
+      digest: sha256:9ee2d469ef66cfd649abedce36d1a3b9fbebc0930f8da0d97b4aed1d4a2d7ab8
     resources:
       limits:
         cpu: 500m
@@ -404,8 +404,8 @@ mcpServer:
           - ALL
     image:
       repository: projectsveltos/mcp-server
-      tag: v1.1.1
-      digest: sha256:d5da801ff67a93261da35b227b40f8ff2f52eab067e63206a50206f4b55e5fea
+      tag: v1.2.0
+      digest: sha256:ccda82ae474ceb41ac0f53059845619530bb84a1f11e9a6ae3f64017707dce71
     resources:
       limits:
         cpu: 500m

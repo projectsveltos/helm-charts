@@ -6,14 +6,14 @@ dashboard:
   dashboard:
     image:
       repository: projectsveltos/dashboard
-      tag: v1.1.1
-      digest: sha256:c3e576fe4099959049dff7554a208b32d49e8edc8cc7cea768040c84d3f81563
+      tag: v1.2.0
+      digest: sha256:958a6b9e74a89b32ba76d3a52dd0e2034bc32881ff1593d1dee1e6a53a81d507
     resources:
       limits:
         cpu: 500m
         memory: 512Mi
       requests:
-        cpu: 10m
+        cpu: 100m
         memory: 64Mi
   ports:
   - port: 80
@@ -51,14 +51,14 @@ uiBackendManager:
         - ALL
     image:
       repository: projectsveltos/ui-backend
-      tag: v1.1.1
-      digest: sha256:1a4ab5b461f4db0ed8b6a4f1150954b2a467bee163c36f1fa3c6ebce6a1ffe32
+      tag: v1.2.0
+      digest: sha256:7fc292c233bdb6944f189d63ab7bc19fd5992bd7fab06893da5ba5ce28bb54b1
     resources:
       limits:
         cpu: 500m
         memory: 512Mi
       requests:
-        cpu: 10m
+        cpu: 100m
         memory: 128Mi
   podSecurityContext:
     runAsNonRoot: true
