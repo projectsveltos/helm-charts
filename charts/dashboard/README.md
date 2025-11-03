@@ -1,6 +1,6 @@
 # sveltos-dashboard
 
-![Version: 1.1.4](https://img.shields.io/badge/Version-1.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.1](https://img.shields.io/badge/AppVersion-1.1.1-informational?style=flat-square)
+![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 A Helm chart for Sveltos dashboard
 
@@ -12,12 +12,12 @@ A Helm chart for Sveltos dashboard
 | global.useDigest | bool | `false` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | dashboard.dashboard.image.repository | string | `"projectsveltos/dashboard"` |  |
-| dashboard.dashboard.image.tag | string | `"v1.1.1"` |  |
-| dashboard.dashboard.image.digest | string | `"sha256:c3e576fe4099959049dff7554a208b32d49e8edc8cc7cea768040c84d3f81563"` |  |
+| dashboard.dashboard.image.tag | string | `"v1.2.1"` |  |
+| dashboard.dashboard.image.digest | string | `"sha256:afcf80934d19b56f7d4341f3ac1f6732024847bd1e16031c9db63a69ad41a3a9"` |  |
 | dashboard.dashboard.resources.limits.cpu | string | `"500m"` |  |
 | dashboard.dashboard.resources.limits.memory | string | `"512Mi"` |  |
-| dashboard.dashboard.resources.requests.cpu | string | `"10m"` |  |
-| dashboard.dashboard.resources.requests.memory | string | `"64Mi"` |  |
+| dashboard.dashboard.resources.requests.cpu | string | `"100m"` |  |
+| dashboard.dashboard.resources.requests.memory | string | `"128Mi"` |  |
 | dashboard.ports[0].port | int | `80` |  |
 | dashboard.ports[0].protocol | string | `"TCP"` |  |
 | dashboard.ports[0].targetPort | int | `5173` |  |
@@ -39,11 +39,11 @@ A Helm chart for Sveltos dashboard
 | uiBackendManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | uiBackendManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | uiBackendManager.manager.image.repository | string | `"projectsveltos/ui-backend"` |  |
-| uiBackendManager.manager.image.tag | string | `"v1.1.1"` |  |
-| uiBackendManager.manager.image.digest | string | `"sha256:1a4ab5b461f4db0ed8b6a4f1150954b2a467bee163c36f1fa3c6ebce6a1ffe32"` |  |
+| uiBackendManager.manager.image.tag | string | `"v1.2.1"` |  |
+| uiBackendManager.manager.image.digest | string | `"sha256:cfb5998a75d9a26298fa2e575ffd78c6a547baac5f5a355dd7ee1cd68d6aa6d4"` |  |
 | uiBackendManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | uiBackendManager.manager.resources.limits.memory | string | `"512Mi"` |  |
-| uiBackendManager.manager.resources.requests.cpu | string | `"10m"` |  |
+| uiBackendManager.manager.resources.requests.cpu | string | `"100m"` |  |
 | uiBackendManager.manager.resources.requests.memory | string | `"128Mi"` |  |
 | uiBackendManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | uiBackendManager.ports[0].port | int | `80` |  |
