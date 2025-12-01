@@ -16,9 +16,9 @@ dashboard:
         cpu: 100m
         memory: 128Mi
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 5173
+    - port: 80
+      protocol: TCP
+      targetPort: 5173
   replicas: 1
   type: ClusterIP
   ingress:
@@ -34,6 +34,37 @@ dashboard:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - dashboard.cluster.local
+
+  # Gateway API HTTPRoute configuration
+  # NOTE: Gateway API support is in EXPERIMENTAL status
+  # Support depends on your Gateway controller implementation
+  # Some controllers may require additional configuration (e.g., BackendTLSPolicy for HTTPS backends)
+  # Refer to https://gateway-api.sigs.k8s.io/implementations/ for controller-specific details
+  httpRoute:
+    enabled: false
+    labels: {}
+    annotations: {}
+    # parentRefs defines the Gateway(s) that this HTTPRoute is attached to
+    parentRefs: []
+      # - name: gateway
+      # namespace: gateway-system
+      # sectionName: https
+      # port: 443
+    # hostnames defines the hostnames for routing
+    hostnames:
+      - dashboard.cluster.local
+    # rules defines routing rules
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        # filters:
+        #   - type: RequestHeaderModifier
+        #     requestHeaderModifier:
+        #       add:
+        #         - name: X-Custom-Header
+        #           value: custom-value
   tolerations: []
   nodeSelector:
     kubernetes.io/os: linux
@@ -42,13 +73,13 @@ kubernetesClusterDomain: cluster.local
 uiBackendManager:
   manager:
     args:
-    - --diagnostics-address=:8443
-    - --v=5
+      - --diagnostics-address=:8443
+      - --v=5
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop:
-        - ALL
+          - ALL
     image:
       repository: projectsveltos/ui-backend
       tag: v1.2.1
@@ -63,9 +94,9 @@ uiBackendManager:
   podSecurityContext:
     runAsNonRoot: true
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 8080
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
   replicas: 1
   type: ClusterIP
   tolerations: []
