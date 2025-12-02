@@ -1,6 +1,6 @@
 # sveltos-dashboard
 
-![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
+![Version: 1.2.2](https://img.shields.io/badge/Version-1.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 A Helm chart for Sveltos dashboard
 
@@ -8,52 +8,59 @@ A Helm chart for Sveltos dashboard
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.registry | string | `"docker.io"` |  |
-| global.useDigest | bool | `false` |  |
-| global.imagePullSecrets | list | `[]` |  |
+| dashboard.affinity | object | `{}` |  |
+| dashboard.dashboard.image.digest | string | `"sha256:afcf80934d19b56f7d4341f3ac1f6732024847bd1e16031c9db63a69ad41a3a9"` |  |
 | dashboard.dashboard.image.repository | string | `"projectsveltos/dashboard"` |  |
 | dashboard.dashboard.image.tag | string | `"v1.2.1"` |  |
-| dashboard.dashboard.image.digest | string | `"sha256:afcf80934d19b56f7d4341f3ac1f6732024847bd1e16031c9db63a69ad41a3a9"` |  |
 | dashboard.dashboard.resources.limits.cpu | string | `"500m"` |  |
 | dashboard.dashboard.resources.limits.memory | string | `"512Mi"` |  |
 | dashboard.dashboard.resources.requests.cpu | string | `"100m"` |  |
 | dashboard.dashboard.resources.requests.memory | string | `"128Mi"` |  |
-| dashboard.ports[0].port | int | `80` |  |
-| dashboard.ports[0].protocol | string | `"TCP"` |  |
-| dashboard.ports[0].targetPort | int | `5173` |  |
-| dashboard.replicas | int | `1` |  |
-| dashboard.type | string | `"ClusterIP"` |  |
-| dashboard.ingress.enabled | bool | `false` |  |
-| dashboard.ingress.className | string | `""` |  |
+| dashboard.httpRoute.annotations | object | `{}` |  |
+| dashboard.httpRoute.enabled | bool | `false` |  |
+| dashboard.httpRoute.hostnames[0] | string | `"dashboard.cluster.local"` |  |
+| dashboard.httpRoute.labels | object | `{}` |  |
+| dashboard.httpRoute.parentRefs | list | `[]` |  |
+| dashboard.httpRoute.rules[0].matches[0].path.type | string | `"PathPrefix"` |  |
+| dashboard.httpRoute.rules[0].matches[0].path.value | string | `"/"` |  |
 | dashboard.ingress.annotations | object | `{}` |  |
+| dashboard.ingress.className | string | `""` |  |
+| dashboard.ingress.enabled | bool | `false` |  |
 | dashboard.ingress.hosts[0].host | string | `"dashboard.cluster.local"` |  |
 | dashboard.ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | dashboard.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | dashboard.ingress.tls | list | `[]` |  |
-| dashboard.tolerations | list | `[]` |  |
 | dashboard.nodeSelector."kubernetes.io/os" | string | `"linux"` |  |
-| dashboard.affinity | object | `{}` |  |
+| dashboard.ports[0].port | int | `80` |  |
+| dashboard.ports[0].protocol | string | `"TCP"` |  |
+| dashboard.ports[0].targetPort | int | `5173` |  |
+| dashboard.replicas | int | `1` |  |
+| dashboard.tolerations | list | `[]` |  |
+| dashboard.type | string | `"ClusterIP"` |  |
+| global.imagePullSecrets | list | `[]` |  |
+| global.registry | string | `"docker.io"` |  |
+| global.useDigest | bool | `false` |  |
 | kubernetesClusterDomain | string | `"cluster.local"` |  |
+| uiBackendManager.affinity | object | `{}` |  |
 | uiBackendManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | uiBackendManager.manager.args[1] | string | `"--v=5"` |  |
 | uiBackendManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | uiBackendManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| uiBackendManager.manager.image.digest | string | `"sha256:cfb5998a75d9a26298fa2e575ffd78c6a547baac5f5a355dd7ee1cd68d6aa6d4"` |  |
 | uiBackendManager.manager.image.repository | string | `"projectsveltos/ui-backend"` |  |
 | uiBackendManager.manager.image.tag | string | `"v1.2.1"` |  |
-| uiBackendManager.manager.image.digest | string | `"sha256:cfb5998a75d9a26298fa2e575ffd78c6a547baac5f5a355dd7ee1cd68d6aa6d4"` |  |
 | uiBackendManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | uiBackendManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | uiBackendManager.manager.resources.requests.cpu | string | `"100m"` |  |
 | uiBackendManager.manager.resources.requests.memory | string | `"128Mi"` |  |
+| uiBackendManager.nodeSelector."kubernetes.io/os" | string | `"linux"` |  |
 | uiBackendManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | uiBackendManager.ports[0].port | int | `80` |  |
 | uiBackendManager.ports[0].protocol | string | `"TCP"` |  |
 | uiBackendManager.ports[0].targetPort | int | `8080` |  |
 | uiBackendManager.replicas | int | `1` |  |
-| uiBackendManager.type | string | `"ClusterIP"` |  |
 | uiBackendManager.tolerations | list | `[]` |  |
-| uiBackendManager.nodeSelector."kubernetes.io/os" | string | `"linux"` |  |
-| uiBackendManager.affinity | object | `{}` |  |
+| uiBackendManager.type | string | `"ClusterIP"` |  |
 
 ----------------------------------------------
 Autogenerated from chart metadata using [helm-docs v1.14.2](https://github.com/norwoodj/helm-docs/releases/v1.14.2)
