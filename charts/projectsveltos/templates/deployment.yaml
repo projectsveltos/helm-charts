@@ -132,6 +132,7 @@ spec:
       volumes:
       - emptyDir: {}
         name: tmp
+{{ if .Values.accessManager.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -227,6 +228,7 @@ spec:
       securityContext: {{- toYaml .Values.accessManager.podSecurityContext | nindent 8 }}
       serviceAccountName: access-manager
       terminationGracePeriodSeconds: 10
+{{ end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -659,6 +661,7 @@ spec:
       securityContext: {{- toYaml .Values.classifierManager.podSecurityContext | nindent 8 }}
       serviceAccountName: classifier-manager
       terminationGracePeriodSeconds: 10
+{{ if .Values.shardController.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -767,6 +770,7 @@ spec:
       securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
       serviceAccountName: shard-controller
       terminationGracePeriodSeconds: 10
+{{ end }}
 {{- if .Values.techsupportController.enabled }}
 ---
 apiVersion: apps/v1
