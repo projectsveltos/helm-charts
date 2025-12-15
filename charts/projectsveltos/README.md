@@ -240,6 +240,7 @@ Projectsveltos helm chart for Kubernetes
 | shardController.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | shardController.tolerations | list | `[]` |  |
 | shardController.serviceAccount.annotations | object | `{}` |  |
+| techsupportController.enabled | bool | `true` |  |
 | techsupportController.annotations | object | `{}` |  |
 | techsupportController.labels | object | `{}` |  |
 | techsupportController.extraEnv | list | `[]` |  |
@@ -260,6 +261,7 @@ Projectsveltos helm chart for Kubernetes
 | techsupportController.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | techsupportController.tolerations | list | `[]` |  |
 | techsupportController.serviceAccount.annotations | object | `{}` |  |
+| mcpServer.enabled | bool | `true` |  |
 | mcpServer.annotations | object | `{}` |  |
 | mcpServer.labels | object | `{}` |  |
 | mcpServer.controller.args[0] | string | `"--v=5"` |  |
