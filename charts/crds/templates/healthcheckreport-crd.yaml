@@ -151,3 +151,4 @@ spec:
     storage: true
     subresources:
       status: {}
+status: {}
