@@ -357,6 +357,7 @@ shardController:
   serviceAccount:
     annotations: {}
 techsupportController:
+  enabled: true
   annotations: {}
   labels: {}
   extraEnv: []
@@ -390,6 +391,7 @@ techsupportController:
   serviceAccount:
     annotations: {}
 mcpServer:
+  enabled: true
   annotations: {}
   labels: {}
   controller:

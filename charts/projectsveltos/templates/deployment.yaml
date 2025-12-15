@@ -767,6 +767,7 @@ spec:
       securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
       serviceAccountName: shard-controller
       terminationGracePeriodSeconds: 10
+{{- if .Values.techsupportController.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -850,6 +851,8 @@ spec:
       securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
       serviceAccountName: techsupport-controller
       terminationGracePeriodSeconds: 10
+{{- end }}
+{{- if .Values.mcpServer.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -960,3 +963,4 @@ spec:
       volumes:
       - emptyDir: {}
         name: tmp
+{{- end }}
