@@ -6,6 +6,7 @@ global:
     # - name: my-registry-secret
   additionalLabels: {}
 accessManager:
+  enabled: true
   annotations: {}
   labels: {}
   manager:
@@ -318,6 +319,7 @@ scManager:
     annotations: {}
   type: ClusterIP
 shardController:
+  enabled: true
   annotations: {}
   labels: {}
   extraEnv: []

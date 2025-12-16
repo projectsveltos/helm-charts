@@ -15,6 +15,7 @@ Projectsveltos helm chart for Kubernetes
 | global.additionalLabels | object | `{}` |  |
 | accessManager.annotations | object | `{}` |  |
 | accessManager.labels | object | `{}` |  |
+| accessManager.enabled | bool | `true` |  |
 | accessManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | accessManager.manager.args[1] | string | `"--v=5"` |  |
 | accessManager.manager.extraArgs | object | `{}` |  |
@@ -214,6 +215,7 @@ Projectsveltos helm chart for Kubernetes
 | scManager.tolerations | list | `[]` |  |
 | scManager.serviceAccount.annotations | object | `{}` |  |
 | scManager.type | string | `"ClusterIP"` |  |
+| shardController.enabled | bool | `true` |  |
 | shardController.annotations | object | `{}` |  |
 | shardController.labels | object | `{}` |  |
 | shardController.extraEnv | list | `[]` |  |
