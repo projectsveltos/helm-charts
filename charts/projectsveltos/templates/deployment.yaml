@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: addon-controller
+  namespace: {{ .Release.Namespace }}
   labels:
     control-plane: addon-controller
   {{- include "projectsveltos.labels" . | nindent 4 }}
@@ -207,6 +208,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: access-manager
+  namespace: {{ .Release.Namespace }}
   {{- with .Values.accessManager.manager.annotations }}
   annotations:
     {{- range $key, $value := . }}
@@ -324,6 +326,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sc-manager
+  namespace: {{ .Release.Namespace }}
   {{- with .Values.accessManager.annotations }}
   annotations:
     {{- range $key, $value := . }}
@@ -439,6 +442,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hc-manager
+  namespace: {{ .Release.Namespace }}
   {{- with .Values.hcManager.annotations }}
   annotations:
     {{- range $key, $value := . }}
@@ -569,6 +573,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: event-manager
+  namespace: {{ .Release.Namespace }}
   {{- with .Values.eventManager.annotations }}
   annotations:
     {{- range $key, $value := . }}
@@ -699,6 +704,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: classifier-manager
+  namespace: {{ .Release.Namespace }}
   annotations:
     checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     {{- with .Values.classifierManager.annotations }}
@@ -864,6 +870,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shard-controller
+  namespace: {{ .Release.Namespace }}
   {{- with .Values.shardController.annotations }}
   annotations:
     {{- range $key, $value := . }}
@@ -1019,6 +1026,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: techsupport-controller
+  namespace: {{ .Release.Namespace }}
   {{- with .Values.techsupportController.annotations }}
   annotations:
     {{- range $key, $value := . }}
@@ -1131,6 +1139,7 @@ metadata:
     {{- end }}
   {{- end }}
   name: mcp-server
+  namespace: {{ .Release.Namespace }}
   labels:
     control-plane: mcp-server
   {{- include "projectsveltos.labels" . | nindent 4 }}
