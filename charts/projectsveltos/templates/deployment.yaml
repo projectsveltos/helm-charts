@@ -538,8 +538,7 @@ spec:
         resources: {{- toYaml .Values.eventManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.eventManager.manager.containerSecurityContext
           | nindent 10 }}
-      securityContext:
-        runAsNonRoot: true
+      securityContext: {{- toYaml .Values.eventManager.podSecurityContext | nindent 8 }}
       serviceAccountName: event-manager
       terminationGracePeriodSeconds: 10
 ---
