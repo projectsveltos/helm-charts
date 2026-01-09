@@ -849,10 +849,10 @@ spec:
             port: 8081
           initialDelaySeconds: 5
           periodSeconds: 10
-        resources: {{- toYaml .Values.shardController.manager.resources | nindent 10 }}
+        resources: {{- toYaml .Values.techsupportController.controller.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.techsupportController.controller.containerSecurityContext
           | nindent 10 }}
-      securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
+      securityContext: {{- toYaml .Values.techsupportController.podSecurityContext | nindent 8 }}
       serviceAccountName: techsupport-controller
       terminationGracePeriodSeconds: 10
 {{- end }}
