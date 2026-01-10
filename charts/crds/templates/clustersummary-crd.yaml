@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   name: clustersummaries.config.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.19.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
@@ -1316,6 +1316,7 @@ spec:
                         DeployedGroupVersionKind contains all GroupVersionKinds deployed in either
                         the workload cluster or the management cluster because of this feature.
                         Each element has format kind.version.group
+
                         Deprecated: Replaced by FeatureDeploymentInfo field instead
                       items:
                         type: string
