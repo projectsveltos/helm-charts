@@ -52,6 +52,12 @@ rules:
   - lib.projectsveltos.io
   resources:
   - debuggingconfigurations
+  - eventreports
+  - eventreports/status
+  - eventsources
+  - eventsources/status
+  - eventtriggers
+  - eventtriggers/status
   - sveltosclusters
   - sveltosclusters/status
   verbs:

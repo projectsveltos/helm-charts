@@ -1,6 +1,6 @@
 # sveltos-dashboard
 
-![Version: 1.3.1](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
+![Version: 1.4.0](https://img.shields.io/badge/Version-1.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.0](https://img.shields.io/badge/AppVersion-1.4.0-informational?style=flat-square)
 
 A Helm chart for Sveltos dashboard
 
@@ -12,8 +12,8 @@ A Helm chart for Sveltos dashboard
 | global.useDigest | bool | `false` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | dashboard.dashboard.image.repository | string | `"projectsveltos/dashboard"` |  |
-| dashboard.dashboard.image.tag | string | `"v1.3.1"` |  |
-| dashboard.dashboard.image.digest | string | `"sha256:66f3faaccdfd666e97fa947944d47ef80782b9ea6979958d05402a4e803788fc"` |  |
+| dashboard.dashboard.image.tag | string | `"v1.4.0"` |  |
+| dashboard.dashboard.image.digest | string | `"sha256:b3d1b28e4212193ce9897f314dd97682aa3c80b6fc8e7853d5f001ed8d45c58c"` |  |
 | dashboard.dashboard.resources.limits.cpu | string | `"500m"` |  |
 | dashboard.dashboard.resources.limits.memory | string | `"512Mi"` |  |
 | dashboard.dashboard.resources.requests.cpu | string | `"100m"` |  |
@@ -46,8 +46,8 @@ A Helm chart for Sveltos dashboard
 | uiBackendManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | uiBackendManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | uiBackendManager.manager.image.repository | string | `"projectsveltos/ui-backend"` |  |
-| uiBackendManager.manager.image.tag | string | `"v1.3.1"` |  |
-| uiBackendManager.manager.image.digest | string | `"sha256:3021ed72cc6c1786c6888eded7127dd5adea3cbec4e16185d21530c5e3cb1c88"` |  |
+| uiBackendManager.manager.image.tag | string | `"v1.4.0"` |  |
+| uiBackendManager.manager.image.digest | string | `"sha256:2de4574061bcd67900326dd8dcc0b390c7caf14e98a97da69c082b36e921059c"` |  |
 | uiBackendManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | uiBackendManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | uiBackendManager.manager.resources.requests.cpu | string | `"100m"` |  |
