@@ -3,6 +3,7 @@ global:
   useDigest: false
   imagePullSecrets: []
 dashboard:
+  annotations: {}
   dashboard:
     image:
       repository: projectsveltos/dashboard
