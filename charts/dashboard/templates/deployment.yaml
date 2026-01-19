@@ -88,6 +88,12 @@ metadata:
   name: dashboard
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  {{- with .Values.dashboard.annotations }}
+  annotations:
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
 spec:
   replicas: {{ .Values.dashboard.replicas }}
   selector:
