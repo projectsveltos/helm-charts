@@ -1611,6 +1611,17 @@ entries:
   sveltos-dashboard:
   - apiVersion: v2
     appVersion: 1.4.0
+    created: "2026-01-19T12:31:11.410276893Z"
+    description: A Helm chart for Sveltos dashboard
+    digest: 70725fbfe21ee16cccedf416878b2d49b990c31b6a85ace8af7db524ec098ab7
+    icon: https://github.com/projectsveltos/sveltos/raw/main/docs/assets/logo.png
+    name: sveltos-dashboard
+    type: application
+    urls:
+    - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-dashboard-1.4.1/sveltos-dashboard-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v2
+    appVersion: 1.4.0
     created: "2026-01-10T17:52:15.281802834Z"
     description: A Helm chart for Sveltos dashboard
     digest: aa3fff95cdac6666cdc788ac4441557bbdf707e6f66d8650c7d344fc3d0817ba
@@ -1906,4 +1917,4 @@ entries:
     urls:
     - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-dashboard-0.47.0/sveltos-dashboard-0.47.0.tgz
     version: 0.47.0
-generated: "2026-01-10T17:52:15.28250482Z"
+generated: "2026-01-19T12:31:11.410878131Z"
