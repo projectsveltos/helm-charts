@@ -3,6 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: addon-controller-rolebinging-dtm-in-mgmt-cluster
+  namespace: {{ .Release.Namespace }}
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
 roleRef:
