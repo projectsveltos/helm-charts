@@ -22,13 +22,16 @@ helm install projectsveltos projectsveltos/projectsveltos \
 
 By default the chart will install in agent mode. To install in agentless mode, add the argument: `--set agent.managementCluster=true` to the above command.
 
-Additionally you can set more parameters that are defined in the [values.yaml](./charts/projectsveltos/values.yaml) file.
+All the available Helm chart values are located at the [values.yaml](./charts/projectsveltos/values.yaml) file.
 
-The helm upgrade command won't automatically update Sveltos's Custom Resource Definitions (CRDs). To ensure CRDs are updated, run this command before upgrading Sveltos.
+**Note Upgrade Information**
 
-```
-kubectl apply -f https://raw.githubusercontent.com/projectsveltos/sveltos/v0.57.2/manifest/crds/sveltos_crds.yaml
-```
+- **Sveltos v1.1.1 and later**
+    - **Manifest:** Simply apply the latest manifest available. The YAML directly updates CRDs and all components.
+    - **Helm Chart:** The Sveltos Helm chart automatically updates CRDs before other components using a built-in Job.
+- **Sveltos v1.1.0 and earlier**
+    - **Helm Chart:** Follow the standard [Helm chart upgrade process](https://helm.sh/docs/helm/helm_upgrade/).
+    - **Sveltos Helm Chart and CRDs Helm Chart:** If Sveltos was initially deployed using separate Helm charts for Sveltos and its CRDs, this approach must be maintained for all upgrades. Switching to the combined chart installation or upgrade is **not supported**. The Sveltos CRDs Helm chart should be upgraded first, followed by the main Sveltos chart.
 
 To uninstall the chart:
 
