@@ -55,8 +55,6 @@ rules:
   - cluster.x-k8s.io
   resources:
   - clusters/status
-  - machines
-  - machines/status
   verbs:
   - get
   - list

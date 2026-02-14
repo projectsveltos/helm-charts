@@ -7,8 +7,8 @@ dashboard:
   dashboard:
     image:
       repository: projectsveltos/dashboard
-      tag: v1.4.0
-      digest: sha256:b3d1b28e4212193ce9897f314dd97682aa3c80b6fc8e7853d5f001ed8d45c58c
+      tag: v1.5.1
+      digest: sha256:22326b8b9a758b581de9dc0c9ba9de9470754701091b61b09b681d8f64fa4edb
     resources:
       limits:
         cpu: 500m
@@ -83,8 +83,8 @@ uiBackendManager:
           - ALL
     image:
       repository: projectsveltos/ui-backend
-      tag: v1.4.0
-      digest: sha256:2de4574061bcd67900326dd8dcc0b390c7caf14e98a97da69c082b36e921059c
+      tag: v1.5.1
+      digest: sha256:1c9ad09cf959477bcfc41a07b944a4644074b0c97cdf9266e5c4bb19ced20808
     resources:
       limits:
         cpu: 500m
