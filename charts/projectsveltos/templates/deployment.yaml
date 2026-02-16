@@ -18,6 +18,8 @@ metadata:
     {{- end }}
     {{- end }}
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels:
@@ -127,6 +129,51 @@ spec:
         - mountPath: /tmp
           name: tmp
       securityContext: {{- toYaml .Values.addonController.podSecurityContext | nindent 8 }}
+      initContainers:
+  {{- if .Values.agent.managementCluster }}
+      - args:
+      {{- range .Values.addonController.controller.argsAgentMgmtCluster }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.addonController.controller.extraArgsAgentMgmtCluster }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+        - --registry={{ .Values.global.registry }}
+  {{- else }}
+      - args:
+      {{- range .Values.addonController.controller.args }}
+        - {{ . }}
+      {{- end }}
+      {{- range $key, $value := .Values.addonController.controller.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
+        - --registry={{ .Values.global.registry }}
+  {{- end }}
+  {{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+        - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
+  {{- end }}
+  {{- if .Values.telemetry.disabled }}
+    {{"-  --disable-telemetry=true" | nindent 8 }}
+  {{- end }}
+        - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
+        env:
+        - name: IS_INITIALIZATION
+          value: "true"
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.global.registry }}/{{ .Values.addonController.initialization.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.addonController.initialization.image.digest }}{{- else }}:{{ .Values.addonController.initialization.image.tag | default .Chart.AppVersion }}{{- end }}
+        name: initialization
+        resources: {}
+      securityContext: {{- toYaml .Values.addonController.podSecurityContext | nindent
+        8 }}
       serviceAccountName: addon-controller
       terminationGracePeriodSeconds: 10
       volumes:
