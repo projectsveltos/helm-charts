@@ -172,8 +172,6 @@ spec:
         image: {{ .Values.global.registry }}/{{ .Values.addonController.initialization.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.addonController.initialization.image.digest }}{{- else }}:{{ .Values.addonController.initialization.image.tag | default .Chart.AppVersion }}{{- end }}
         name: initialization
         resources: {}
-      securityContext: {{- toYaml .Values.addonController.podSecurityContext | nindent
-        8 }}
       serviceAccountName: addon-controller
       terminationGracePeriodSeconds: 10
       volumes:
