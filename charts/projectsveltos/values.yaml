@@ -45,6 +45,13 @@ addonController:
       repository: projectsveltos/addon-controller
       tag: v1.5.1
       digest: sha256:b63bef982f0a82a430a34f853a0707b5fde5c43adcbbcd5b5a1390875f99bfa5
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 128Mi
   controller:
     args:
       - --diagnostics-address=:8443
