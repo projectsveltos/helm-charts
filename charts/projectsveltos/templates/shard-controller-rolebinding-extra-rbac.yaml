@@ -3,6 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: shard-controller-rolebinding-extra
+  namespace: {{ .Release.Namespace }}
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
 roleRef:
