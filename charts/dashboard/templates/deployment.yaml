@@ -118,6 +118,9 @@ spec:
         name: dashboard
         ports:
         - containerPort: 5173
+        env:
+        - name: VITE_APP_VERSION
+          value: {{ .Values.dashboard.dashboard.image.tag }}
         resources: {{- toYaml .Values.dashboard.dashboard.resources | nindent 10 }}
       nodeSelector: {{- toYaml .Values.dashboard.nodeSelector | nindent 8 }}
       affinity: {{- toYaml .Values.dashboard.affinity | nindent 8 }}
