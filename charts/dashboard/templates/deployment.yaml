@@ -114,13 +114,12 @@ spec:
       - env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        - name: VITE_APP_VERSION
+          value: {{ .Values.dashboard.dashboard.image.tag }}
         image: {{ .Values.global.registry }}/{{ .Values.dashboard.dashboard.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.dashboard.dashboard.image.digest }}{{- else }}:{{ .Values.dashboard.dashboard.image.tag | default .Chart.AppVersion }}{{- end }}
         name: dashboard
         ports:
         - containerPort: 5173
-        env:
-        - name: VITE_APP_VERSION
-          value: {{ .Values.dashboard.dashboard.image.tag }}
         resources: {{- toYaml .Values.dashboard.dashboard.resources | nindent 10 }}
       nodeSelector: {{- toYaml .Values.dashboard.nodeSelector | nindent 8 }}
       affinity: {{- toYaml .Values.dashboard.affinity | nindent 8 }}
