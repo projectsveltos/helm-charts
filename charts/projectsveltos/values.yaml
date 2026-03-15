@@ -22,8 +22,8 @@ accessManager:
           - ALL
     image:
       repository: projectsveltos/access-manager
-      tag: v1.6.0
-      digest: sha256:006dda70aa7ba9b058a41cd0a94d99daf482cfaaa1e6633efe8d0cd1bbad48bc
+      tag: v1.6.1
+      digest: sha256:c5d4b5e6d301edc1c85e7ddaf5cdd53f79b0651b4873d78aac1e3fd0701e7971
     resources:
       limits:
         cpu: 500m
@@ -43,8 +43,8 @@ addonController:
   initialization:
     image:
       repository: projectsveltos/addon-controller
-      tag: v1.6.0
-      digest: sha256:70c85f85f2bcff1349d89ef12f9f725764139ec524620821cb85410597ff8e92
+      tag: v1.6.1
+      digest: sha256:a89b79151478ab61fe7d705502cde9d604cd260edca3199511073b56da3afcba
     resources:
       limits:
         cpu: 500m
@@ -58,14 +58,14 @@ addonController:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -78,8 +78,8 @@ addonController:
         type: RuntimeDefault
     image:
       repository: projectsveltos/addon-controller
-      tag: v1.6.0
-      digest: sha256:70c85f85f2bcff1349d89ef12f9f725764139ec524620821cb85410597ff8e92
+      tag: v1.6.1
+      digest: sha256:a89b79151478ab61fe7d705502cde9d604cd260edca3199511073b56da3afcba
     resources:
       requests:
         memory: 512Mi
@@ -126,14 +126,14 @@ classifierManager:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -144,8 +144,8 @@ classifierManager:
           - ALL
     image:
       repository: projectsveltos/classifier
-      tag: v1.6.0
-      digest: sha256:004ea02cf4868a1ab4ff5bacb88b265306e01343900421216a760f7688ce51ea
+      tag: v1.6.1
+      digest: sha256:bd80a343ffe1bf5b67c2b234beff45ebe9527e1291a145d4c608db65493fe849
     resources:
       limits:
         cpu: 500m
@@ -170,13 +170,13 @@ eventManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -187,8 +187,8 @@ eventManager:
           - ALL
     image:
       repository: projectsveltos/event-manager
-      tag: v1.6.0
-      digest: sha256:e2443f935e519329b70106668b0c82819b9c343f48199bacb96e267db164bfe8
+      tag: v1.6.1
+      digest: sha256:a50a3a522bd441d70efaec8a3742a0f8b0bcaa5b8886bc70faa35632ecf841ef
     resources:
       limits:
         cpu: 500m
@@ -210,13 +210,13 @@ hcManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.6.0
+      - --version=v1.6.1
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -227,8 +227,8 @@ hcManager:
           - ALL
     image:
       repository: projectsveltos/healthcheck-manager
-      tag: v1.6.0
-      digest: sha256:2bdb773bbe1282ce8fc551e118f9f65dbe9edef73414b2ba25af0747bfbb6c56
+      tag: v1.6.1
+      digest: sha256:f91e96b24cb867c5c1b5af85939466eb2150f6a402d6c9bfa355cbaef83b75d2
     resources:
       limits:
         cpu: 500m
@@ -257,8 +257,8 @@ crdManagerJob:
         - ALL
     image:
       repository: projectsveltos/crd-manager
-      tag: v1.6.0
-      digest: sha256:3ec515e46b17ba6df9c393072f94c07758e4fa6ca261058e905754dc172a379f
+      tag: v1.6.1
+      digest: sha256:848a6f45defcab8b1912f3c0e4ed4fd25d4b70cab395c6e230d268e2ef9e5a17
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -284,8 +284,8 @@ registerMgmtClusterJob:
           - ALL
     image:
       repository: projectsveltos/register-mgmt-cluster
-      tag: v1.6.0
-      digest: sha256:30600f61c90fa9115c07143f4adaddfff1c5411718480bff201fb449307e3721
+      tag: v1.6.1
+      digest: sha256:f3ba332cecb71ae5aee18cbfc1183cffa779a42a493cff21c92a6527516432db
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -309,8 +309,8 @@ scManager:
           - ALL
     image:
       repository: projectsveltos/sveltoscluster-manager
-      tag: v1.6.0
-      digest: sha256:39edd0b0e4715d53d00eefb8f50c906d81d9ea021ba198cdceea57c53132bc52
+      tag: v1.6.1
+      digest: sha256:c9a377ad580dee0c40b0cea3939bcc60255972bb5524dbadc29e523dc54d89f3
     resources:
       limits:
         cpu: 500m
@@ -355,8 +355,8 @@ shardController:
           - ALL
     image:
       repository: projectsveltos/shard-controller
-      tag: v1.6.0
-      digest: sha256:1403c80aa011311a411ca8d8448c4edca564a5d3ca230dd5b0d6cd067df9a024
+      tag: v1.6.1
+      digest: sha256:7b80e8a5fada8b2f989e50fb5d2c2eb420e7e82f2064337bab49d31a1aff1c4a
     resources:
       limits:
         cpu: 500m
@@ -387,8 +387,8 @@ techsupportController:
           - ALL
     image:
       repository: projectsveltos/techsupport
-      tag: v1.6.0
-      digest: sha256:bd95f1bd98875fc3f8ee700dac502d52e0ae751758854285aef3ae134b02fb5d
+      tag: v1.6.1
+      digest: sha256:563ca77120121d54b4bf176e120ce372f95b4afe316e0a650cee77221f7d6ac4
     resources:
       limits:
         cpu: 500m
@@ -420,8 +420,8 @@ mcpServer:
           - ALL
     image:
       repository: projectsveltos/mcp-server
-      tag: v1.6.0
-      digest: sha256:f879e682bf8f26a32ca785e3b1a0ec8f93fb7bcccc1f0e8c57c9781ce2d021ac
+      tag: v1.6.1
+      digest: sha256:a0dee8eac5d2d344c3bf56f24d6dfb6d231fdbc0b23433ecf8b633d46fd40f69
     resources:
       limits:
         cpu: 500m
