@@ -172,6 +172,8 @@ spec:
         image: {{ .Values.global.registry }}/{{ .Values.addonController.initialization.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.addonController.initialization.image.digest }}{{- else }}:{{ .Values.addonController.initialization.image.tag | default .Chart.AppVersion }}{{- end }}
         name: initialization
         resources: {{- toYaml .Values.addonController.initialization.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.addonController.initialization.containerSecurityContext
+          | nindent 10 }}
       serviceAccountName: addon-controller
       terminationGracePeriodSeconds: 10
       volumes:
@@ -663,6 +665,9 @@ spec:
     {{- end }}
     {{- if ne (len .Values.classifierManager.agentPatchSveltosApplierConfigMap.data) 0 }}
         - --sveltos-applier-config={{ .Values.classifierManager.agentPatchSveltosApplierConfigMap.name }}
+    {{- end }}
+    {{- if .Values.enableNatsWatcher }}
+        - --enable-nats-watcher=true
     {{- end }}
         - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:

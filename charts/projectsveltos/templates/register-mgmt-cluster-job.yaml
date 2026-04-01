@@ -11,6 +11,8 @@ spec:
   backoffLimit: {{ .Values.registerMgmtClusterJob.backoffLimit }}
   template:
     spec:
+      securityContext:
+        runAsNonRoot: true
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}

@@ -754,6 +754,9 @@
                 "capiOnboardAnnotation": {
                     "type": "string"
                 },
+                "enableNatsWatcher": {
+                    "type": "boolean"
+                },
                 "imagePullSecrets": {
                     "type": "array"
                 },
