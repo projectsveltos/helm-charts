@@ -128,6 +128,9 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp
+        {{- with .Values.addonController.controller.extraVolumes }}
+      {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.addonController.podSecurityContext | nindent 8 }}
       initContainers:
   {{- if .Values.agent.managementCluster }}
@@ -179,6 +182,9 @@ spec:
       volumes:
       - emptyDir: {}
         name: tmp
+      {{- with .Values.addonController.controller.extraVolumes }}
+    {{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
 {{ if .Values.accessManager.enabled }}
 ---
 apiVersion: apps/v1
@@ -272,7 +278,15 @@ spec:
         resources: {{- toYaml .Values.accessManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.accessManager.manager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.accessManager.manager.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.accessManager.podSecurityContext | nindent 8 }}
+      {{- with .Values.accessManager.manager.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
       serviceAccountName: access-manager
       terminationGracePeriodSeconds: 10
 {{ end }}
@@ -367,7 +381,15 @@ spec:
         resources: {{- toYaml .Values.scManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.scManager.manager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.scManager.manager.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.scManager.podSecurityContext | nindent 8 }}
+      {{- with .Values.scManager.manager.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
       serviceAccountName: sc-manager
       terminationGracePeriodSeconds: 10
 ---
@@ -476,7 +498,15 @@ spec:
         resources: {{- toYaml .Values.hcManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.hcManager.manager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.hcManager.manager.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.hcManager.podSecurityContext | nindent 8 }}
+      {{- with .Values.hcManager.manager.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
       serviceAccountName: hc-manager
       terminationGracePeriodSeconds: 10
 ---
@@ -585,7 +615,15 @@ spec:
         resources: {{- toYaml .Values.eventManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.eventManager.manager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.eventManager.manager.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.eventManager.podSecurityContext | nindent 8 }}
+      {{- with .Values.eventManager.manager.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
       serviceAccountName: event-manager
       terminationGracePeriodSeconds: 10
 ---
@@ -707,7 +745,15 @@ spec:
           }}
         securityContext: {{- toYaml .Values.classifierManager.manager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.classifierManager.manager.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.classifierManager.podSecurityContext | nindent 8 }}
+      {{- with .Values.classifierManager.manager.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
       serviceAccountName: classifier-manager
       terminationGracePeriodSeconds: 10
 {{ if .Values.shardController.enabled }}
@@ -816,7 +862,15 @@ spec:
         resources: {{- toYaml .Values.shardController.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.shardController.manager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.shardController.manager.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.shardController.podSecurityContext | nindent 8 }}
+      {{- with .Values.shardController.manager.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
       serviceAccountName: shard-controller
       terminationGracePeriodSeconds: 10
 {{ end }}
@@ -901,7 +955,15 @@ spec:
         resources: {{- toYaml .Values.techsupportController.controller.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.techsupportController.controller.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.techsupportController.controller.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.techsupportController.podSecurityContext | nindent 8 }}
+      {{- with .Values.techsupportController.controller.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
       serviceAccountName: techsupport-controller
       terminationGracePeriodSeconds: 10
 {{- end }}
@@ -1010,10 +1072,16 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp
+        {{- with .Values.mcpServer.controller.extraVolumes }}
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.mcpServer.podSecurityContext | nindent 8 }}
       serviceAccountName: mcp-server
       terminationGracePeriodSeconds: 10
       volumes:
       - emptyDir: {}
         name: tmp
+      {{- with .Values.mcpServer.controller.extraVolumes }}
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
 {{- end }}

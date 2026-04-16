@@ -48,6 +48,9 @@
                         "extraEnv": {
                             "type": "array"
                         },
+                        "extraVolumes": {
+                            "type": "array"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {
@@ -184,6 +187,9 @@
                             "type": "object"
                         },
                         "extraEnv": {
+                            "type": "array"
+                        },
+                        "extraVolumes": {
                             "type": "array"
                         },
                         "image": {
@@ -435,6 +441,9 @@
                         "extraEnv": {
                             "type": "array"
                         },
+                        "extraVolumes": {
+                            "type": "array"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {
@@ -550,6 +559,12 @@
                                     }
                                 }
                             }
+                        },
+                        "extraEnv": {
+                            "type": "array"
+                        },
+                        "extraVolumes": {
+                            "type": "array"
                         },
                         "image": {
                             "type": "object",
@@ -676,6 +691,9 @@
                             "type": "object"
                         },
                         "extraEnv": {
+                            "type": "array"
+                        },
+                        "extraVolumes": {
                             "type": "array"
                         },
                         "image": {
@@ -820,6 +838,9 @@
                         "extraEnv": {
                             "type": "array"
                         },
+                        "extraVolumes": {
+                            "type": "array"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {
@@ -928,6 +949,9 @@
                             "type": "object"
                         },
                         "extraEnv": {
+                            "type": "array"
+                        },
+                        "extraVolumes": {
                             "type": "array"
                         },
                         "image": {
@@ -1087,6 +1111,9 @@
                         "extraEnv": {
                             "type": "array"
                         },
+                        "extraVolumes": {
+                            "type": "array"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {
@@ -1168,6 +1195,9 @@
                             "type": "object"
                         },
                         "extraEnv": {
+                            "type": "array"
+                        },
+                        "extraVolumes": {
                             "type": "array"
                         },
                         "image": {
@@ -1272,6 +1302,9 @@
                 "extraEnv": {
                     "type": "array"
                 },
+                "extraVolumes": {
+                    "type": "array"
+                },
                 "labels": {
                     "type": "object"
                 },
@@ -1316,6 +1349,9 @@
                             "type": "object"
                         },
                         "extraEnv": {
+                            "type": "array"
+                        },
+                        "extraVolumes": {
                             "type": "array"
                         },
                         "image": {
@@ -1438,6 +1474,9 @@
                         "extraEnv": {
                             "type": "array"
                         },
+                        "extraVolumes": {
+                            "type": "array"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {
@@ -1485,6 +1524,9 @@
                     "type": "boolean"
                 },
                 "extraEnv": {
+                    "type": "array"
+                },
+                "extraVolumes": {
                     "type": "array"
                 },
                 "labels": {

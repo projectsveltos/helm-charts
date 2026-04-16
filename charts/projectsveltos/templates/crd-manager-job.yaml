@@ -33,6 +33,10 @@ spec:
           | nindent 10 }}
         securityContext: {{- toYaml .Values.crdManagerJob.crdManager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.crdManagerJob.crdManager.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       {{- with .Values.crdManagerJob.crdManager.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
@@ -40,6 +44,10 @@ spec:
       {{- with .Values.crdManagerJob.crdManager.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.crdManagerJob.crdManager.extraVolumes }}
+      volumes:
+    {{ include "projectsveltos.extraVolumes" . | nindent 6 }}
       {{- end }}
       restartPolicy: OnFailure
       serviceAccountName: crd-manager
