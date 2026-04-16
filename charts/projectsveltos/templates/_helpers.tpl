@@ -63,3 +63,36 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Render extra volume mounts from a list of extraVolumes entries.
+*/}}
+{{- define "projectsveltos.extraVolumeMounts" -}}
+{{- range . }}
+- name: {{ .name }}
+  mountPath: {{ .mountPath }}
+  {{- with .subPath }}
+  subPath: {{ . }}
+  {{- end }}
+  {{- with .readOnly }}
+  readOnly: {{ . }}
+  {{- end }}
+{{- end }}
+{{- end }}
+
+{{/*
+Render extra volumes from a list of extraVolumes entries.
+*/}}
+{{- define "projectsveltos.extraVolumes" -}}
+{{- range . }}
+- name: {{ .name }}
+  {{- with .configMap }}
+  configMap:
+{{ toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .secret }}
+  secret:
+{{ toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}

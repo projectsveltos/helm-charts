@@ -21,6 +21,7 @@ Projectsveltos helm chart for Kubernetes
 | accessManager.manager.args[1] | string | `"--v=5"` |  |
 | accessManager.manager.extraArgs | object | `{}` |  |
 | accessManager.manager.extraEnv | list | `[]` |  |
+| accessManager.manager.extraVolumes | list | `[]` |  |
 | accessManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | accessManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | accessManager.manager.image.repository | string | `"projectsveltos/access-manager"` |  |
@@ -57,6 +58,7 @@ Projectsveltos helm chart for Kubernetes
 | addonController.controller.argsAgentMgmtCluster[5] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | addonController.controller.extraArgsAgentMgmtCluster | object | `{}` |  |
 | addonController.controller.extraEnv | list | `[]` |  |
+| addonController.controller.extraVolumes | list | `[]` |  |
 | addonController.controller.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | addonController.controller.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | addonController.controller.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
@@ -102,6 +104,7 @@ Projectsveltos helm chart for Kubernetes
 | classifierManager.manager.argsAgentMgmtCluster[5] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | classifierManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | classifierManager.manager.extraEnv | list | `[]` |  |
+| classifierManager.manager.extraVolumes | list | `[]` |  |
 | classifierManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | classifierManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | classifierManager.manager.image.repository | string | `"projectsveltos/classifier"` |  |
@@ -130,6 +133,7 @@ Projectsveltos helm chart for Kubernetes
 | eventManager.manager.argsAgentMgmtCluster[4] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | eventManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | eventManager.manager.extraEnv | list | `[]` |  |
+| eventManager.manager.extraVolumes | list | `[]` |  |
 | eventManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | eventManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | eventManager.manager.image.repository | string | `"projectsveltos/event-manager"` |  |
@@ -157,6 +161,7 @@ Projectsveltos helm chart for Kubernetes
 | hcManager.manager.argsAgentMgmtCluster[4] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | hcManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | hcManager.manager.extraEnv | list | `[]` |  |
+| hcManager.manager.extraVolumes | list | `[]` |  |
 | hcManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | hcManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | hcManager.manager.image.repository | string | `"projectsveltos/healthcheck-manager"` |  |
@@ -173,6 +178,8 @@ Projectsveltos helm chart for Kubernetes
 | crdManager.serviceAccount.annotations."helm.sh/hook" | string | `"pre-upgrade,pre-rollback"` |  |
 | crdManager.serviceAccount.annotations."helm.sh/hook-delete-policy" | string | `"hook-succeeded,before-hook-creation"` |  |
 | crdManagerJob.backoffLimit | int | `4` |  |
+| crdManagerJob.crdManager.extraEnv | list | `[]` |  |
+| crdManagerJob.crdManager.extraVolumes | list | `[]` |  |
 | crdManagerJob.crdManager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | crdManagerJob.crdManager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | crdManagerJob.crdManager.image.repository | string | `"projectsveltos/crd-manager"` |  |
@@ -189,6 +196,7 @@ Projectsveltos helm chart for Kubernetes
 | registerMgmtClusterJob.registerMgmtCluster.args[1] | string | `"--service-account-token=false"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.extraArgs | object | `{}` |  |
 | registerMgmtClusterJob.registerMgmtCluster.extraEnv | list | `[]` |  |
+| registerMgmtClusterJob.registerMgmtCluster.extraVolumes | list | `[]` |  |
 | registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.image.repository | string | `"projectsveltos/register-mgmt-cluster"` |  |
@@ -205,6 +213,7 @@ Projectsveltos helm chart for Kubernetes
 | scManager.manager.args[2] | string | `"--v=5"` |  |
 | scManager.manager.extraArgs | object | `{}` |  |
 | scManager.manager.extraEnv | list | `[]` |  |
+| scManager.manager.extraVolumes | list | `[]` |  |
 | scManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | scManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | scManager.manager.image.repository | string | `"projectsveltos/sveltoscluster-manager"` |  |
@@ -227,6 +236,7 @@ Projectsveltos helm chart for Kubernetes
 | shardController.annotations | object | `{}` |  |
 | shardController.labels | object | `{}` |  |
 | shardController.extraEnv | list | `[]` |  |
+| shardController.extraVolumes | list | `[]` |  |
 | shardController.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | shardController.manager.args[1] | string | `"--v=5"` |  |
 | shardController.manager.args[2] | string | `"--report-mode=0"` |  |
@@ -237,6 +247,7 @@ Projectsveltos helm chart for Kubernetes
 | shardController.manager.argsAgentMgmtCluster[3] | string | `"--v=5"` |  |
 | shardController.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | shardController.manager.extraEnv | list | `[]` |  |
+| shardController.manager.extraVolumes | list | `[]` |  |
 | shardController.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | shardController.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | shardController.manager.image.repository | string | `"projectsveltos/shard-controller"` |  |
@@ -254,9 +265,11 @@ Projectsveltos helm chart for Kubernetes
 | techsupportController.annotations | object | `{}` |  |
 | techsupportController.labels | object | `{}` |  |
 | techsupportController.extraEnv | list | `[]` |  |
+| techsupportController.extraVolumes | list | `[]` |  |
 | techsupportController.controller.args[0] | string | `"--v=5"` |  |
 | techsupportController.controller.extraArgs | object | `{}` |  |
 | techsupportController.controller.extraEnv | list | `[]` |  |
+| techsupportController.controller.extraVolumes | list | `[]` |  |
 | techsupportController.controller.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | techsupportController.controller.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | techsupportController.controller.image.repository | string | `"projectsveltos/techsupport"` |  |
@@ -277,6 +290,7 @@ Projectsveltos helm chart for Kubernetes
 | mcpServer.controller.args[0] | string | `"--v=5"` |  |
 | mcpServer.controller.extraArgs | object | `{}` |  |
 | mcpServer.controller.extraEnv | list | `[]` |  |
+| mcpServer.controller.extraVolumes | list | `[]` |  |
 | mcpServer.controller.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | mcpServer.controller.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mcpServer.controller.image.repository | string | `"projectsveltos/mcp-server"` |  |

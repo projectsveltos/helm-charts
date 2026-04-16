@@ -16,6 +16,16 @@ accessManager:
       - --v=5
     extraArgs: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -70,6 +80,16 @@ addonController:
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -138,6 +158,16 @@ classifierManager:
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -181,6 +211,16 @@ eventManager:
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -221,6 +261,16 @@ hcManager:
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -251,6 +301,17 @@ crdManager:
 crdManagerJob:
   backoffLimit: 4
   crdManager:
+    extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -278,6 +339,16 @@ registerMgmtClusterJob:
       - --service-account-token=false
     extraArgs: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -303,6 +374,16 @@ scManager:
       - --v=5
     extraArgs: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -336,6 +417,16 @@ shardController:
   annotations: {}
   labels: {}
   extraEnv: []
+  extraVolumes:
+    - name: ca-config
+      mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+      subPath: ca.crt
+      readOnly: true
+      configMap:
+        name: projectsveltos-ca
+        items:
+          - key: ca.crt
+            path: ca.crt
   manager:
     args:
       - --diagnostics-address=:8443
@@ -349,6 +440,16 @@ shardController:
       - --v=5
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -376,11 +477,31 @@ techsupportController:
   annotations: {}
   labels: {}
   extraEnv: []
+  extraVolumes:
+    - name: ca-config
+      mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+      subPath: ca.crt
+      readOnly: true
+      configMap:
+        name: projectsveltos-ca
+        items:
+          - key: ca.crt
+            path: ca.crt
   controller:
     args:
       - --v=5
     extraArgs: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -414,6 +535,16 @@ mcpServer:
       - --v=5
     extraArgs: {}
     extraEnv: []
+    extraVolumes:
+      - name: ca-config
+        mountPath: /etc/ssl/certs/projectsveltos-ca.crt
+        subPath: ca.crt
+        readOnly: true
+        configMap:
+          name: projectsveltos-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
