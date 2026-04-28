@@ -114,6 +114,8 @@ addonController:
           - update
   clusterRoleExtra:
     rules: null
+  serviceMonitor:
+    additionalLabels: {}
 classifierManager:
   annotations: {}
   labels: {}
@@ -340,6 +342,8 @@ scManager:
   serviceAccount:
     annotations: {}
   type: ClusterIP
+  serviceMonitor:
+    additionalLabels: {}
 shardController:
   enabled: true
   annotations: {}

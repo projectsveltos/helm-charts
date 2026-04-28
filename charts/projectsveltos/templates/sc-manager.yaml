@@ -19,7 +19,9 @@ kind: ServiceMonitor
 metadata:
   name: sc-manager
   labels:
-    release: prometheus-operator
+  {{- with .Values.scManager.serviceMonitor.additionalLabels -}}
+    {{- toYaml . | nindent 4 -}}
+  {{- end -}}
   {{- include "projectsveltos.labels" . | nindent 4 }}
 spec:
   endpoints:
