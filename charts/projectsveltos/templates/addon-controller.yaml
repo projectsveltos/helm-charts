@@ -20,6 +20,9 @@ metadata:
   name: addon-controller
   labels:
     control-plane: addon-controller
+  {{- with .Values.addonController.serviceMonitor.additionalLabels -}}
+    {{- toYaml . | nindent 4 -}}
+  {{- end -}}
   {{- include "projectsveltos.labels" . | nindent 4 }}
 spec:
   endpoints:
