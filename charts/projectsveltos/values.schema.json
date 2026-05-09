@@ -351,6 +351,14 @@
                         }
                     }
                 },
+                "serviceMonitor": {
+                    "type": "object",
+                    "properties": {
+                        "additionalLabels": {
+                            "type": "object"
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
                 },
@@ -1278,6 +1286,14 @@
                     "type": "object",
                     "properties": {
                         "annotations": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "serviceMonitor": {
+                    "type": "object",
+                    "properties": {
+                        "additionalLabels": {
                             "type": "object"
                         }
                     }
