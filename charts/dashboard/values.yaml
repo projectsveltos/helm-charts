@@ -70,6 +70,18 @@ dashboard:
   nodeSelector:
     kubernetes.io/os: linux
   affinity: {}
+# auth configures authentication for the Sveltos Dashboard.
+# By default, manual token authentication is used.
+# To enable OIDC authentication, uncomment and fill in the oidc section.
+# auth:
+#   oidc:
+#     # Issuer URL of your OIDC provider
+#     issuer: ""
+#     # Client ID registered with your OIDC provider (must be a public client)
+#     clientId: ""
+#     # Full redirect URI after OIDC login (defaults to <origin>/oidc-callback if unset)
+#     redirectUri: ""
+
 kubernetesClusterDomain: cluster.local
 uiBackendManager:
   manager:
