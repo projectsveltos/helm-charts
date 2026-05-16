@@ -116,6 +116,16 @@ spec:
           value: {{ quote .Values.kubernetesClusterDomain }}
         - name: VITE_APP_VERSION
           value: {{ .Values.dashboard.dashboard.image.tag }}
+        {{- with ((.Values.auth).oidc) }}
+        - name: VITE_OIDC_ISSUER
+          value: {{ .issuer | quote }}
+        - name: VITE_OIDC_CLIENT_ID
+          value: {{ .clientId | quote }}
+        {{- if .redirectUri }}
+        - name: VITE_OIDC_REDIRECT_URI
+          value: {{ .redirectUri | quote }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.global.registry }}/{{ .Values.dashboard.dashboard.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.dashboard.dashboard.image.digest }}{{- else }}:{{ .Values.dashboard.dashboard.image.tag | default .Chart.AppVersion }}{{- end }}
         name: dashboard
         ports:
