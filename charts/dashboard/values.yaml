@@ -7,8 +7,8 @@ dashboard:
   dashboard:
     image:
       repository: projectsveltos/dashboard
-      tag: v1.10.0
-      digest: sha256:44ed73a47c2638f59733156519b916b8e039cacce350d001d5e73961d4e7007a
+      tag: v1.10.1
+      digest: sha256:0ed536770252846bbac024669a5836b666b25e765b80331471f9eb95716ca660
     resources:
       limits:
         cpu: 500m
