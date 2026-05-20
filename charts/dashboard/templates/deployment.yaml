@@ -117,12 +117,12 @@ spec:
         - name: VITE_APP_VERSION
           value: {{ .Values.dashboard.dashboard.image.tag }}
         {{- with ((.Values.auth).oidc) }}
-        - name: VITE_OIDC_ISSUER
+        - name: OIDC_ISSUER
           value: {{ .issuer | quote }}
-        - name: VITE_OIDC_CLIENT_ID
+        - name: OIDC_CLIENT_ID
           value: {{ .clientId | quote }}
         {{- if .redirectUri }}
-        - name: VITE_OIDC_REDIRECT_URI
+        - name: OIDC_REDIRECT_URI
           value: {{ .redirectUri | quote }}
         {{- end }}
         {{- end }}
