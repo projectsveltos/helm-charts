@@ -813,6 +813,15 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+  {{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+        - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
+        - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchSveltosApplierConfigMap.data) 0 }}
+        - --sveltos-applier-config={{ .Values.classifierManager.agentPatchSveltosApplierConfigMap.name }}
+  {{- end }}
   {{- else }}
       - args:
       {{- range .Values.shardController.manager.args }}
@@ -825,6 +834,15 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+  {{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+        - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
+        - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchSveltosApplierConfigMap.data) 0 }}
+        - --sveltos-applier-config={{ .Values.classifierManager.agentPatchSveltosApplierConfigMap.name }}
+  {{- end }}
   {{- end }}
         command:
         - /manager
