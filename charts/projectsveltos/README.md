@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 1.10.0](https://img.shields.io/badge/Version-1.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.10.0](https://img.shields.io/badge/AppVersion-1.10.0-informational?style=flat-square)
+![Version: 1.11.1](https://img.shields.io/badge/Version-1.11.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.11.1](https://img.shields.io/badge/AppVersion-1.11.1-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -25,8 +25,8 @@ Projectsveltos helm chart for Kubernetes
 | accessManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | accessManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | accessManager.manager.image.repository | string | `"projectsveltos/access-manager"` |  |
-| accessManager.manager.image.tag | string | `"v1.10.0"` |  |
-| accessManager.manager.image.digest | string | `"sha256:27704c35c5b4a5ab48e8047c4a40eb731aa3799f9c197e8bd6319c8cdca92333"` |  |
+| accessManager.manager.image.tag | string | `"v1.11.1"` |  |
+| accessManager.manager.image.digest | string | `"sha256:2ab2deb331109ef01aa0fa53cac2d57c99602172c1dc57fb8fb195868ee7c7c4"` |  |
 | accessManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | accessManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | accessManager.manager.resources.requests.cpu | string | `"10m"` |  |
@@ -38,8 +38,8 @@ Projectsveltos helm chart for Kubernetes
 | addonController.annotations | object | `{}` |  |
 | addonController.labels | object | `{}` |  |
 | addonController.initialization.image.repository | string | `"projectsveltos/addon-controller"` |  |
-| addonController.initialization.image.tag | string | `"v1.10.0"` |  |
-| addonController.initialization.image.digest | string | `"sha256:71e391b8d3f72185462037c13d112e677cf3f61c9e6dc305e61681eba2e88932"` |  |
+| addonController.initialization.image.tag | string | `"v1.11.1"` |  |
+| addonController.initialization.image.digest | string | `"sha256:a8400647fd71906a80955b5bba293a35cb3fbe623ec8f20f56037d24ee2d62bd"` |  |
 | addonController.initialization.resources.limits.cpu | string | `"500m"` |  |
 | addonController.initialization.resources.limits.memory | string | `"512Mi"` |  |
 | addonController.initialization.resources.requests.cpu | string | `"10m"` |  |
@@ -48,13 +48,13 @@ Projectsveltos helm chart for Kubernetes
 | addonController.controller.args[1] | string | `"--report-mode=0"` |  |
 | addonController.controller.args[2] | string | `"--shard-key="` |  |
 | addonController.controller.args[3] | string | `"--v=5"` |  |
-| addonController.controller.args[4] | string | `"--version=v1.10.0"` |  |
+| addonController.controller.args[4] | string | `"--version=v1.11.1"` |  |
 | addonController.controller.extraArgs | object | `{}` |  |
 | addonController.controller.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | addonController.controller.argsAgentMgmtCluster[1] | string | `"--report-mode=0"` |  |
 | addonController.controller.argsAgentMgmtCluster[2] | string | `"--shard-key="` |  |
 | addonController.controller.argsAgentMgmtCluster[3] | string | `"--v=5"` |  |
-| addonController.controller.argsAgentMgmtCluster[4] | string | `"--version=v1.10.0"` |  |
+| addonController.controller.argsAgentMgmtCluster[4] | string | `"--version=v1.11.1"` |  |
 | addonController.controller.argsAgentMgmtCluster[5] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | addonController.controller.extraArgsAgentMgmtCluster | object | `{}` |  |
 | addonController.controller.extraEnv | list | `[]` |  |
@@ -63,8 +63,8 @@ Projectsveltos helm chart for Kubernetes
 | addonController.controller.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | addonController.controller.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | addonController.controller.image.repository | string | `"projectsveltos/addon-controller"` |  |
-| addonController.controller.image.tag | string | `"v1.10.0"` |  |
-| addonController.controller.image.digest | string | `"sha256:71e391b8d3f72185462037c13d112e677cf3f61c9e6dc305e61681eba2e88932"` |  |
+| addonController.controller.image.tag | string | `"v1.11.1"` |  |
+| addonController.controller.image.digest | string | `"sha256:a8400647fd71906a80955b5bba293a35cb3fbe623ec8f20f56037d24ee2d62bd"` |  |
 | addonController.controller.resources.requests.memory | string | `"512Mi"` |  |
 | addonController.driftDetectionManagerPatchConfigMap.name | string | `"drift-detection-config"` |  |
 | addonController.driftDetectionManagerPatchConfigMap.data | object | `{}` |  |
@@ -95,13 +95,13 @@ Projectsveltos helm chart for Kubernetes
 | classifierManager.manager.args[1] | string | `"--report-mode=0"` |  |
 | classifierManager.manager.args[2] | string | `"--shard-key="` |  |
 | classifierManager.manager.args[3] | string | `"--v=5"` |  |
-| classifierManager.manager.args[4] | string | `"--version=v1.10.0"` |  |
+| classifierManager.manager.args[4] | string | `"--version=v1.11.1"` |  |
 | classifierManager.manager.extraArgs | object | `{}` |  |
 | classifierManager.manager.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | classifierManager.manager.argsAgentMgmtCluster[1] | string | `"--report-mode=0"` |  |
 | classifierManager.manager.argsAgentMgmtCluster[2] | string | `"--shard-key="` |  |
 | classifierManager.manager.argsAgentMgmtCluster[3] | string | `"--v=5"` |  |
-| classifierManager.manager.argsAgentMgmtCluster[4] | string | `"--version=v1.10.0"` |  |
+| classifierManager.manager.argsAgentMgmtCluster[4] | string | `"--version=v1.11.1"` |  |
 | classifierManager.manager.argsAgentMgmtCluster[5] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | classifierManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | classifierManager.manager.extraEnv | list | `[]` |  |
@@ -109,8 +109,8 @@ Projectsveltos helm chart for Kubernetes
 | classifierManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | classifierManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | classifierManager.manager.image.repository | string | `"projectsveltos/classifier"` |  |
-| classifierManager.manager.image.tag | string | `"v1.10.0"` |  |
-| classifierManager.manager.image.digest | string | `"sha256:b690a710e847fad71ab573cdea8872cc1488512f6ca2f375a036e0a33335c0b0"` |  |
+| classifierManager.manager.image.tag | string | `"v1.11.1"` |  |
+| classifierManager.manager.image.digest | string | `"sha256:e6edd6de893bf276aa2093416f12028a044bb9d764b15f772bbb6f863340f236"` |  |
 | classifierManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | classifierManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | classifierManager.manager.resources.requests.cpu | string | `"100m"` |  |
@@ -119,18 +119,30 @@ Projectsveltos helm chart for Kubernetes
 | classifierManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | classifierManager.tolerations | list | `[]` |  |
 | classifierManager.serviceAccount.annotations | object | `{}` |  |
+| clusterInventory.enabled | bool | `false` |  |
+| clusterInventory.image.repository | string | `"projectsveltos/clusterinventory-controller"` |  |
+| clusterInventory.image.tag | string | `"v1.11.1"` |  |
+| clusterInventory.image.digest | string | `"sha256:92daa430672533c477425091ed2e67691b87ac62ed2063356cfd29efec06f3af"` |  |
+| clusterInventory.resources.limits.cpu | int | `100` |  |
+| clusterInventory.resources.limits.memory | string | `"512Mi"` |  |
+| clusterInventory.resources.requests.cpu | string | `"100m"` |  |
+| clusterInventory.resources.requests.memory | string | `"256Mi"` |  |
+| clusterInventory.nodeSelector | object | `{}` |  |
+| clusterInventory.podSecurityContext.runAsNonRoot | bool | `true` |  |
+| clusterInventory.tolerations | list | `[]` |  |
+| clusterInventory.serviceAccount.annotations | object | `{}` |  |
 | driftDetectionManager.serviceAccount.annotations | object | `{}` |  |
 | eventManager.annotations | object | `{}` |  |
 | eventManager.labels | object | `{}` |  |
 | eventManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | eventManager.manager.args[1] | string | `"--shard-key="` |  |
 | eventManager.manager.args[2] | string | `"--v=5"` |  |
-| eventManager.manager.args[3] | string | `"--version=v1.10.0"` |  |
+| eventManager.manager.args[3] | string | `"--version=v1.11.1"` |  |
 | eventManager.manager.extraArgs | object | `{}` |  |
 | eventManager.manager.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | eventManager.manager.argsAgentMgmtCluster[1] | string | `"--shard-key="` |  |
 | eventManager.manager.argsAgentMgmtCluster[2] | string | `"--v=5"` |  |
-| eventManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.10.0"` |  |
+| eventManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.11.1"` |  |
 | eventManager.manager.argsAgentMgmtCluster[4] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | eventManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | eventManager.manager.extraEnv | list | `[]` |  |
@@ -138,8 +150,8 @@ Projectsveltos helm chart for Kubernetes
 | eventManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | eventManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | eventManager.manager.image.repository | string | `"projectsveltos/event-manager"` |  |
-| eventManager.manager.image.tag | string | `"v1.10.0"` |  |
-| eventManager.manager.image.digest | string | `"sha256:772763ae15f0935971fbf0614e21c1800ab89966b77dea6c84dde90778815455"` |  |
+| eventManager.manager.image.tag | string | `"v1.11.1"` |  |
+| eventManager.manager.image.digest | string | `"sha256:b7531c75e5b223a69fd128b6d1660ba19354f4165e6619241beea1cc9435a134"` |  |
 | eventManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | eventManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | eventManager.manager.resources.requests.cpu | string | `"10m"` |  |
@@ -153,12 +165,12 @@ Projectsveltos helm chart for Kubernetes
 | hcManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | hcManager.manager.args[1] | string | `"--shard-key="` |  |
 | hcManager.manager.args[2] | string | `"--v=5"` |  |
-| hcManager.manager.args[3] | string | `"--version=v1.10.0"` |  |
+| hcManager.manager.args[3] | string | `"--version=v1.11.1"` |  |
 | hcManager.manager.extraArgs | object | `{}` |  |
 | hcManager.manager.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | hcManager.manager.argsAgentMgmtCluster[1] | string | `"--shard-key="` |  |
 | hcManager.manager.argsAgentMgmtCluster[2] | string | `"--v=5"` |  |
-| hcManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.10.0"` |  |
+| hcManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.11.1"` |  |
 | hcManager.manager.argsAgentMgmtCluster[4] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | hcManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | hcManager.manager.extraEnv | list | `[]` |  |
@@ -166,8 +178,8 @@ Projectsveltos helm chart for Kubernetes
 | hcManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | hcManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | hcManager.manager.image.repository | string | `"projectsveltos/healthcheck-manager"` |  |
-| hcManager.manager.image.tag | string | `"v1.10.0"` |  |
-| hcManager.manager.image.digest | string | `"sha256:2125ccce8c407ca3a4b98677acc5f856a26606366a3355a6815df05d9c20d4aa"` |  |
+| hcManager.manager.image.tag | string | `"v1.11.1"` |  |
+| hcManager.manager.image.digest | string | `"sha256:f910c3fbb0f50cf039551b9bf2b742d6dc3d51b895f13e3643f810a561fc5d4b"` |  |
 | hcManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | hcManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | hcManager.manager.resources.requests.cpu | string | `"10m"` |  |
@@ -184,8 +196,8 @@ Projectsveltos helm chart for Kubernetes
 | crdManagerJob.crdManager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | crdManagerJob.crdManager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | crdManagerJob.crdManager.image.repository | string | `"projectsveltos/crd-manager"` |  |
-| crdManagerJob.crdManager.image.tag | string | `"v1.10.0"` |  |
-| crdManagerJob.crdManager.image.digest | string | `"sha256:2076e711fdfa9dd420f75417c854be20c932508f7449728777e2601773d84ac4"` |  |
+| crdManagerJob.crdManager.image.tag | string | `"v1.11.1"` |  |
+| crdManagerJob.crdManager.image.digest | string | `"sha256:06c47b7a4f3d6db94d9fac1c26bafee774ebfd3f786def870c991c703d69e542"` |  |
 | crdManagerJob.crdManager.imagePullPolicy | string | `"IfNotPresent"` |  |
 | crdManagerJob.crdManager.nodeSelector | object | `{}` |  |
 | crdManagerJob.crdManager.tolerations | list | `[]` |  |
@@ -201,8 +213,8 @@ Projectsveltos helm chart for Kubernetes
 | registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.image.repository | string | `"projectsveltos/register-mgmt-cluster"` |  |
-| registerMgmtClusterJob.registerMgmtCluster.image.tag | string | `"v1.10.0"` |  |
-| registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:f86198745ff82334ea5d3b79a2f42b609f8e0d780f01cae53d99c3f0bb3a3d80"` |  |
+| registerMgmtClusterJob.registerMgmtCluster.image.tag | string | `"v1.11.1"` |  |
+| registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:cda10f2041144b678233efdb14be76c053f0874b9b7d3b6a59fddf1e53114cef"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy | string | `"IfNotPresent"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.nodeSelector | object | `{}` |  |
 | registerMgmtClusterJob.registerMgmtCluster.tolerations | list | `[]` |  |
@@ -218,8 +230,8 @@ Projectsveltos helm chart for Kubernetes
 | scManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | scManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | scManager.manager.image.repository | string | `"projectsveltos/sveltoscluster-manager"` |  |
-| scManager.manager.image.tag | string | `"v1.10.0"` |  |
-| scManager.manager.image.digest | string | `"sha256:1588a7e106f34d7f5238c38786c7260f46319297a43d942bc9b0ea6aaeffa0b6"` |  |
+| scManager.manager.image.tag | string | `"v1.11.1"` |  |
+| scManager.manager.image.digest | string | `"sha256:7c6dbde6a2d0dbe554f6546cc3ae6686a3698300c31b93709074cb49ef7ee0a0"` |  |
 | scManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | scManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | scManager.manager.resources.requests.cpu | string | `"10m"` |  |
@@ -237,6 +249,8 @@ Projectsveltos helm chart for Kubernetes
 | shardController.enabled | bool | `true` |  |
 | shardController.annotations | object | `{}` |  |
 | shardController.labels | object | `{}` |  |
+| shardController.shardComponentsConfigMap.name | string | `"shard-components-config"` |  |
+| shardController.shardComponentsConfigMap.data | object | `{}` |  |
 | shardController.extraEnv | list | `[]` |  |
 | shardController.extraVolumes | list | `[]` |  |
 | shardController.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
@@ -253,8 +267,8 @@ Projectsveltos helm chart for Kubernetes
 | shardController.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | shardController.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | shardController.manager.image.repository | string | `"projectsveltos/shard-controller"` |  |
-| shardController.manager.image.tag | string | `"v1.10.0"` |  |
-| shardController.manager.image.digest | string | `"sha256:c08074b942dfa0441e2c2f7b9b2c3139d2a35c00258661b6f55dbba5f5686032"` |  |
+| shardController.manager.image.tag | string | `"v1.11.1"` |  |
+| shardController.manager.image.digest | string | `"sha256:2ad8504fd78b3f0d698cb9efd20b47c1eeb356878a7ea3f2cf58f006612070ed"` |  |
 | shardController.manager.resources.limits.cpu | string | `"500m"` |  |
 | shardController.manager.resources.limits.memory | string | `"512Mi"` |  |
 | shardController.manager.resources.requests.cpu | string | `"10m"` |  |
@@ -275,8 +289,8 @@ Projectsveltos helm chart for Kubernetes
 | techsupportController.controller.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | techsupportController.controller.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | techsupportController.controller.image.repository | string | `"projectsveltos/techsupport"` |  |
-| techsupportController.controller.image.tag | string | `"v1.10.0"` |  |
-| techsupportController.controller.image.digest | string | `"sha256:17a318588942ea2575a49972f75a877a19f765208943340e97a3610898b2f09a"` |  |
+| techsupportController.controller.image.tag | string | `"v1.11.1"` |  |
+| techsupportController.controller.image.digest | string | `"sha256:317c4141d2a1a747d0d964664aa3f61e580cb033cee5735d7cc3ef72783f89d5"` |  |
 | techsupportController.controller.resources.limits.cpu | string | `"500m"` |  |
 | techsupportController.controller.resources.limits.memory | string | `"1024Mi"` |  |
 | techsupportController.controller.resources.requests.cpu | string | `"10m"` |  |
@@ -296,8 +310,8 @@ Projectsveltos helm chart for Kubernetes
 | mcpServer.controller.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | mcpServer.controller.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mcpServer.controller.image.repository | string | `"projectsveltos/mcp-server"` |  |
-| mcpServer.controller.image.tag | string | `"v1.10.0"` |  |
-| mcpServer.controller.image.digest | string | `"sha256:41acddae75856d49af40cc996d568db92d1cf570f963f3f147d93d12bf08b12b"` |  |
+| mcpServer.controller.image.tag | string | `"v1.11.1"` |  |
+| mcpServer.controller.image.digest | string | `"sha256:10f1dc2ef1d80fe1fb30e949b274da073e008f18b83fd16636da9ab314c43c39"` |  |
 | mcpServer.controller.resources.limits.cpu | string | `"500m"` |  |
 | mcpServer.controller.resources.limits.memory | string | `"1024Mi"` |  |
 | mcpServer.controller.resources.requests.cpu | string | `"100m"` |  |

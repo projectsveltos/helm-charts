@@ -88,6 +88,15 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
+  - classifierreports/status
+  - classifiers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
   - classifiers/finalizers
   verbs:
   - update
