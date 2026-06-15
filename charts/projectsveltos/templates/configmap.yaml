@@ -40,3 +40,17 @@ data:
     {{- $value | toString | nindent 4 }}
   {{- end }}
 {{- end }}
+{{- if ne (len .Values.shardController.shardComponentsConfigMap.data) 0 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.shardController.shardComponentsConfigMap.name }}
+  labels:
+    {{- include "projectsveltos.labels" . | nindent 4 }}
+data:
+  {{- range $key, $value := .Values.shardController.shardComponentsConfigMap.data }}
+  {{ $key }}: |-
+    {{- $value | toString | nindent 4 }}
+  {{- end }}
+{{- end }}

@@ -34,19 +34,20 @@ fi
 tag="$1"
 # Array of base names
 declare -a base_names=(
-  "addon-controller"
-  "event-manager"
-  "register-mgmt-cluster"
-  "shard-controller"
-  "healthcheck-manager"
-  "sveltoscluster-manager"
   "access-manager"
+  "addon-controller"
   "classifier"
+  "clusterinventory-controller"
+  "event-manager"
+  "healthcheck-manager"
+  "crd-manager"
+  "register-mgmt-cluster"
+  "sveltoscluster-manager"
+  "shard-controller"
+  "techsupport"
+  "mcp-server"
   "dashboard"
   "ui-backend"
-  "techsupport"
-  "crd-manager"
-  "mcp-server"
 )
 
 # Loop through the base names

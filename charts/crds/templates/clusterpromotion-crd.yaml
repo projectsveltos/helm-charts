@@ -1039,13 +1039,14 @@ spec:
                           - Kustomize
                           type: string
                         group:
-                          description: Group of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Group of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                         kind:
-                          description: Kind of the resource to fetch in the managed
-                            Cluster.
-                          minLength: 1
+                          description: |-
+                            Kind of the resource to fetch in the managed Cluster.
+                            Leave empty for metric-only checks.
                           type: string
                         labelFilters:
                           description: LabelFilters allows to filter resources based
@@ -1071,6 +1072,68 @@ spec:
                             - operation
                             type: object
                           type: array
+                        metricQueries:
+                          description: |-
+                            MetricQueries lists the PromQL instant queries to execute against
+                            MetricSource. Results are injected into the evaluation script as a
+                            "metrics" map keyed by each query's Name field, value is the scalar
+                            float result. Scripts access results via metrics["<name>"].
+                          items:
+                            description: |-
+                              MetricQuery binds a PromQL instant-query result to a name the evaluation
+                              script can reference via the metrics table (e.g. metrics["errorRate"]).
+                            properties:
+                              name:
+                                description: |-
+                                  Name is the key under which the scalar result is available in the script.
+                                  Must be unique within the ValidateHealth entry.
+                                minLength: 1
+                                type: string
+                              query:
+                                description: Query is a PromQL instant-query expression.
+                                minLength: 1
+                                type: string
+                            required:
+                            - name
+                            - query
+                            type: object
+                          type: array
+                        metricSource:
+                          description: |-
+                            MetricSource identifies the Prometheus-compatible endpoint to query.
+                            Required when MetricQueries is set.
+                          properties:
+                            path:
+                              description: |-
+                                Path is the HTTP path for Prometheus instant queries.
+                                Defaults to /api/v1/query when empty.
+                              type: string
+                            secretRef:
+                              description: |-
+                                SecretRef optionally references a Secret on the managed cluster containing
+                                credentials to authenticate against the endpoint.
+                                The Secret namespace and name must both be specified.
+                                Supported keys: "token" (bearer token), "username" and "password" (basic auth).
+                              properties:
+                                name:
+                                  description: name is unique within a namespace to
+                                    reference a secret resource.
+                                  type: string
+                                namespace:
+                                  description: namespace defines the space within which
+                                    the secret name must be unique.
+                                  type: string
+                              type: object
+                              x-kubernetes-map-type: atomic
+                            url:
+                              description: |-
+                                URL is the base HTTP(S) address of the Prometheus-compatible endpoint
+                                (e.g. http://prometheus.monitoring.svc:9090).
+                              minLength: 1
+                              type: string
+                          required:
+                          - url
+                          type: object
                         name:
                           description: Name is the name of this check
                           type: string
@@ -1086,15 +1149,13 @@ spec:
                             representing whether object is a match (true or false)
                           type: string
                         version:
-                          description: Version of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Version of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                       required:
                       - featureID
-                      - group
-                      - kind
                       - name
-                      - version
                       type: object
                     type: array
                     x-kubernetes-list-type: atomic
@@ -1148,13 +1209,14 @@ spec:
                           - Kustomize
                           type: string
                         group:
-                          description: Group of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Group of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                         kind:
-                          description: Kind of the resource to fetch in the managed
-                            Cluster.
-                          minLength: 1
+                          description: |-
+                            Kind of the resource to fetch in the managed Cluster.
+                            Leave empty for metric-only checks.
                           type: string
                         labelFilters:
                           description: LabelFilters allows to filter resources based
@@ -1180,6 +1242,68 @@ spec:
                             - operation
                             type: object
                           type: array
+                        metricQueries:
+                          description: |-
+                            MetricQueries lists the PromQL instant queries to execute against
+                            MetricSource. Results are injected into the evaluation script as a
+                            "metrics" map keyed by each query's Name field, value is the scalar
+                            float result. Scripts access results via metrics["<name>"].
+                          items:
+                            description: |-
+                              MetricQuery binds a PromQL instant-query result to a name the evaluation
+                              script can reference via the metrics table (e.g. metrics["errorRate"]).
+                            properties:
+                              name:
+                                description: |-
+                                  Name is the key under which the scalar result is available in the script.
+                                  Must be unique within the ValidateHealth entry.
+                                minLength: 1
+                                type: string
+                              query:
+                                description: Query is a PromQL instant-query expression.
+                                minLength: 1
+                                type: string
+                            required:
+                            - name
+                            - query
+                            type: object
+                          type: array
+                        metricSource:
+                          description: |-
+                            MetricSource identifies the Prometheus-compatible endpoint to query.
+                            Required when MetricQueries is set.
+                          properties:
+                            path:
+                              description: |-
+                                Path is the HTTP path for Prometheus instant queries.
+                                Defaults to /api/v1/query when empty.
+                              type: string
+                            secretRef:
+                              description: |-
+                                SecretRef optionally references a Secret on the managed cluster containing
+                                credentials to authenticate against the endpoint.
+                                The Secret namespace and name must both be specified.
+                                Supported keys: "token" (bearer token), "username" and "password" (basic auth).
+                              properties:
+                                name:
+                                  description: name is unique within a namespace to
+                                    reference a secret resource.
+                                  type: string
+                                namespace:
+                                  description: namespace defines the space within which
+                                    the secret name must be unique.
+                                  type: string
+                              type: object
+                              x-kubernetes-map-type: atomic
+                            url:
+                              description: |-
+                                URL is the base HTTP(S) address of the Prometheus-compatible endpoint
+                                (e.g. http://prometheus.monitoring.svc:9090).
+                              minLength: 1
+                              type: string
+                          required:
+                          - url
+                          type: object
                         name:
                           description: Name is the name of this check
                           type: string
@@ -1195,15 +1319,13 @@ spec:
                             representing whether object is a match (true or false)
                           type: string
                         version:
-                          description: Version of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Version of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                       required:
                       - featureID
-                      - group
-                      - kind
                       - name
-                      - version
                       type: object
                     type: array
                     x-kubernetes-list-type: atomic
@@ -1257,13 +1379,14 @@ spec:
                           - Kustomize
                           type: string
                         group:
-                          description: Group of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Group of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                         kind:
-                          description: Kind of the resource to fetch in the managed
-                            Cluster.
-                          minLength: 1
+                          description: |-
+                            Kind of the resource to fetch in the managed Cluster.
+                            Leave empty for metric-only checks.
                           type: string
                         labelFilters:
                           description: LabelFilters allows to filter resources based
@@ -1289,6 +1412,68 @@ spec:
                             - operation
                             type: object
                           type: array
+                        metricQueries:
+                          description: |-
+                            MetricQueries lists the PromQL instant queries to execute against
+                            MetricSource. Results are injected into the evaluation script as a
+                            "metrics" map keyed by each query's Name field, value is the scalar
+                            float result. Scripts access results via metrics["<name>"].
+                          items:
+                            description: |-
+                              MetricQuery binds a PromQL instant-query result to a name the evaluation
+                              script can reference via the metrics table (e.g. metrics["errorRate"]).
+                            properties:
+                              name:
+                                description: |-
+                                  Name is the key under which the scalar result is available in the script.
+                                  Must be unique within the ValidateHealth entry.
+                                minLength: 1
+                                type: string
+                              query:
+                                description: Query is a PromQL instant-query expression.
+                                minLength: 1
+                                type: string
+                            required:
+                            - name
+                            - query
+                            type: object
+                          type: array
+                        metricSource:
+                          description: |-
+                            MetricSource identifies the Prometheus-compatible endpoint to query.
+                            Required when MetricQueries is set.
+                          properties:
+                            path:
+                              description: |-
+                                Path is the HTTP path for Prometheus instant queries.
+                                Defaults to /api/v1/query when empty.
+                              type: string
+                            secretRef:
+                              description: |-
+                                SecretRef optionally references a Secret on the managed cluster containing
+                                credentials to authenticate against the endpoint.
+                                The Secret namespace and name must both be specified.
+                                Supported keys: "token" (bearer token), "username" and "password" (basic auth).
+                              properties:
+                                name:
+                                  description: name is unique within a namespace to
+                                    reference a secret resource.
+                                  type: string
+                                namespace:
+                                  description: namespace defines the space within which
+                                    the secret name must be unique.
+                                  type: string
+                              type: object
+                              x-kubernetes-map-type: atomic
+                            url:
+                              description: |-
+                                URL is the base HTTP(S) address of the Prometheus-compatible endpoint
+                                (e.g. http://prometheus.monitoring.svc:9090).
+                              minLength: 1
+                              type: string
+                          required:
+                          - url
+                          type: object
                         name:
                           description: Name is the name of this check
                           type: string
@@ -1304,15 +1489,13 @@ spec:
                             representing whether object is a match (true or false)
                           type: string
                         version:
-                          description: Version of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Version of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                       required:
                       - featureID
-                      - group
-                      - kind
                       - name
-                      - version
                       type: object
                     type: array
                     x-kubernetes-list-type: atomic
@@ -1514,13 +1697,14 @@ spec:
                           - Kustomize
                           type: string
                         group:
-                          description: Group of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Group of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                         kind:
-                          description: Kind of the resource to fetch in the managed
-                            Cluster.
-                          minLength: 1
+                          description: |-
+                            Kind of the resource to fetch in the managed Cluster.
+                            Leave empty for metric-only checks.
                           type: string
                         labelFilters:
                           description: LabelFilters allows to filter resources based
@@ -1546,6 +1730,68 @@ spec:
                             - operation
                             type: object
                           type: array
+                        metricQueries:
+                          description: |-
+                            MetricQueries lists the PromQL instant queries to execute against
+                            MetricSource. Results are injected into the evaluation script as a
+                            "metrics" map keyed by each query's Name field, value is the scalar
+                            float result. Scripts access results via metrics["<name>"].
+                          items:
+                            description: |-
+                              MetricQuery binds a PromQL instant-query result to a name the evaluation
+                              script can reference via the metrics table (e.g. metrics["errorRate"]).
+                            properties:
+                              name:
+                                description: |-
+                                  Name is the key under which the scalar result is available in the script.
+                                  Must be unique within the ValidateHealth entry.
+                                minLength: 1
+                                type: string
+                              query:
+                                description: Query is a PromQL instant-query expression.
+                                minLength: 1
+                                type: string
+                            required:
+                            - name
+                            - query
+                            type: object
+                          type: array
+                        metricSource:
+                          description: |-
+                            MetricSource identifies the Prometheus-compatible endpoint to query.
+                            Required when MetricQueries is set.
+                          properties:
+                            path:
+                              description: |-
+                                Path is the HTTP path for Prometheus instant queries.
+                                Defaults to /api/v1/query when empty.
+                              type: string
+                            secretRef:
+                              description: |-
+                                SecretRef optionally references a Secret on the managed cluster containing
+                                credentials to authenticate against the endpoint.
+                                The Secret namespace and name must both be specified.
+                                Supported keys: "token" (bearer token), "username" and "password" (basic auth).
+                              properties:
+                                name:
+                                  description: name is unique within a namespace to
+                                    reference a secret resource.
+                                  type: string
+                                namespace:
+                                  description: namespace defines the space within which
+                                    the secret name must be unique.
+                                  type: string
+                              type: object
+                              x-kubernetes-map-type: atomic
+                            url:
+                              description: |-
+                                URL is the base HTTP(S) address of the Prometheus-compatible endpoint
+                                (e.g. http://prometheus.monitoring.svc:9090).
+                              minLength: 1
+                              type: string
+                          required:
+                          - url
+                          type: object
                         name:
                           description: Name is the name of this check
                           type: string
@@ -1561,15 +1807,13 @@ spec:
                             representing whether object is a match (true or false)
                           type: string
                         version:
-                          description: Version of the resource to fetch in the managed
-                            Cluster.
+                          description: |-
+                            Version of the resource to fetch in the managed Cluster.
+                            Required when Kind is set. Leave empty for metric-only checks.
                           type: string
                       required:
                       - featureID
-                      - group
-                      - kind
                       - name
-                      - version
                       type: object
                     type: array
                     x-kubernetes-list-type: atomic
@@ -1695,13 +1939,14 @@ spec:
                                     - Kustomize
                                     type: string
                                   group:
-                                    description: Group of the resource to fetch in the
-                                      managed Cluster.
+                                    description: |-
+                                      Group of the resource to fetch in the managed Cluster.
+                                      Required when Kind is set. Leave empty for metric-only checks.
                                     type: string
                                   kind:
-                                    description: Kind of the resource to fetch in the
-                                      managed Cluster.
-                                    minLength: 1
+                                    description: |-
+                                      Kind of the resource to fetch in the managed Cluster.
+                                      Leave empty for metric-only checks.
                                     type: string
                                   labelFilters:
                                     description: LabelFilters allows to filter resources
@@ -1727,6 +1972,69 @@ spec:
                                       - operation
                                       type: object
                                     type: array
+                                  metricQueries:
+                                    description: |-
+                                      MetricQueries lists the PromQL instant queries to execute against
+                                      MetricSource. Results are injected into the evaluation script as a
+                                      "metrics" map keyed by each query's Name field, value is the scalar
+                                      float result. Scripts access results via metrics["<name>"].
+                                    items:
+                                      description: |-
+                                        MetricQuery binds a PromQL instant-query result to a name the evaluation
+                                        script can reference via the metrics table (e.g. metrics["errorRate"]).
+                                      properties:
+                                        name:
+                                          description: |-
+                                            Name is the key under which the scalar result is available in the script.
+                                            Must be unique within the ValidateHealth entry.
+                                          minLength: 1
+                                          type: string
+                                        query:
+                                          description: Query is a PromQL instant-query
+                                            expression.
+                                          minLength: 1
+                                          type: string
+                                      required:
+                                      - name
+                                      - query
+                                      type: object
+                                    type: array
+                                  metricSource:
+                                    description: |-
+                                      MetricSource identifies the Prometheus-compatible endpoint to query.
+                                      Required when MetricQueries is set.
+                                    properties:
+                                      path:
+                                        description: |-
+                                          Path is the HTTP path for Prometheus instant queries.
+                                          Defaults to /api/v1/query when empty.
+                                        type: string
+                                      secretRef:
+                                        description: |-
+                                          SecretRef optionally references a Secret on the managed cluster containing
+                                          credentials to authenticate against the endpoint.
+                                          The Secret namespace and name must both be specified.
+                                          Supported keys: "token" (bearer token), "username" and "password" (basic auth).
+                                        properties:
+                                          name:
+                                            description: name is unique within a namespace
+                                              to reference a secret resource.
+                                            type: string
+                                          namespace:
+                                            description: namespace defines the space
+                                              within which the secret name must be unique.
+                                            type: string
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                      url:
+                                        description: |-
+                                          URL is the base HTTP(S) address of the Prometheus-compatible endpoint
+                                          (e.g. http://prometheus.monitoring.svc:9090).
+                                        minLength: 1
+                                        type: string
+                                    required:
+                                    - url
+                                    type: object
                                   name:
                                     description: Name is the name of this check
                                     type: string
@@ -1742,15 +2050,13 @@ spec:
                                       representing whether object is a match (true or false)
                                     type: string
                                   version:
-                                    description: Version of the resource to fetch in
-                                      the managed Cluster.
+                                    description: |-
+                                      Version of the resource to fetch in the managed Cluster.
+                                      Required when Kind is set. Leave empty for metric-only checks.
                                     type: string
                                 required:
                                 - featureID
-                                - group
-                                - kind
                                 - name
-                                - version
                                 type: object
                               type: array
                             preHealthCheckDeployment:
@@ -1984,13 +2290,14 @@ spec:
                                     - Kustomize
                                     type: string
                                   group:
-                                    description: Group of the resource to fetch in the
-                                      managed Cluster.
+                                    description: |-
+                                      Group of the resource to fetch in the managed Cluster.
+                                      Required when Kind is set. Leave empty for metric-only checks.
                                     type: string
                                   kind:
-                                    description: Kind of the resource to fetch in the
-                                      managed Cluster.
-                                    minLength: 1
+                                    description: |-
+                                      Kind of the resource to fetch in the managed Cluster.
+                                      Leave empty for metric-only checks.
                                     type: string
                                   labelFilters:
                                     description: LabelFilters allows to filter resources
@@ -2016,6 +2323,69 @@ spec:
                                       - operation
                                       type: object
                                     type: array
+                                  metricQueries:
+                                    description: |-
+                                      MetricQueries lists the PromQL instant queries to execute against
+                                      MetricSource. Results are injected into the evaluation script as a
+                                      "metrics" map keyed by each query's Name field, value is the scalar
+                                      float result. Scripts access results via metrics["<name>"].
+                                    items:
+                                      description: |-
+                                        MetricQuery binds a PromQL instant-query result to a name the evaluation
+                                        script can reference via the metrics table (e.g. metrics["errorRate"]).
+                                      properties:
+                                        name:
+                                          description: |-
+                                            Name is the key under which the scalar result is available in the script.
+                                            Must be unique within the ValidateHealth entry.
+                                          minLength: 1
+                                          type: string
+                                        query:
+                                          description: Query is a PromQL instant-query
+                                            expression.
+                                          minLength: 1
+                                          type: string
+                                      required:
+                                      - name
+                                      - query
+                                      type: object
+                                    type: array
+                                  metricSource:
+                                    description: |-
+                                      MetricSource identifies the Prometheus-compatible endpoint to query.
+                                      Required when MetricQueries is set.
+                                    properties:
+                                      path:
+                                        description: |-
+                                          Path is the HTTP path for Prometheus instant queries.
+                                          Defaults to /api/v1/query when empty.
+                                        type: string
+                                      secretRef:
+                                        description: |-
+                                          SecretRef optionally references a Secret on the managed cluster containing
+                                          credentials to authenticate against the endpoint.
+                                          The Secret namespace and name must both be specified.
+                                          Supported keys: "token" (bearer token), "username" and "password" (basic auth).
+                                        properties:
+                                          name:
+                                            description: name is unique within a namespace
+                                              to reference a secret resource.
+                                            type: string
+                                          namespace:
+                                            description: namespace defines the space
+                                              within which the secret name must be unique.
+                                            type: string
+                                        type: object
+                                        x-kubernetes-map-type: atomic
+                                      url:
+                                        description: |-
+                                          URL is the base HTTP(S) address of the Prometheus-compatible endpoint
+                                          (e.g. http://prometheus.monitoring.svc:9090).
+                                        minLength: 1
+                                        type: string
+                                    required:
+                                    - url
+                                    type: object
                                   name:
                                     description: Name is the name of this check
                                     type: string
@@ -2031,15 +2401,13 @@ spec:
                                       representing whether object is a match (true or false)
                                     type: string
                                   version:
-                                    description: Version of the resource to fetch in
-                                      the managed Cluster.
+                                    description: |-
+                                      Version of the resource to fetch in the managed Cluster.
+                                      Required when Kind is set. Leave empty for metric-only checks.
                                     type: string
                                 required:
                                 - featureID
-                                - group
-                                - kind
                                 - name
-                                - version
                                 type: object
                               type: array
                             preHealthCheckDeployment:

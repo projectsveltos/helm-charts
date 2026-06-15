@@ -91,6 +91,10 @@ spec:
             resourceFieldRef:
               divisor: "0"
               resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.addonController.controller.extraEnv }}
@@ -168,6 +172,20 @@ spec:
   {{- end }}
         - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: IS_INITIALIZATION
           value: "true"
         - name: KUBERNETES_CLUSTER_DOMAIN
@@ -348,6 +366,20 @@ spec:
         command:
         - /manager
         env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.scManager.manager.extraEnv }}
@@ -465,6 +497,20 @@ spec:
         command:
         - /manager
         env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.hcManager.manager.extraEnv }}
@@ -582,6 +628,20 @@ spec:
         command:
         - /manager
         env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.eventManager.manager.extraEnv }}
@@ -647,6 +707,8 @@ metadata:
   {{- end }}
   {{- end }}
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels:
@@ -711,12 +773,27 @@ spec:
         command:
         - /manager
         env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.classifierManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
         image: {{ .Values.global.registry }}/{{ .Values.classifierManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.classifierManager.manager.image.digest }}{{- else }}:{{ .Values.classifierManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        imagePullPolicy: {{ .Values.classifierManager.manager.imagePullPolicy }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -749,6 +826,25 @@ spec:
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
         {{- end }}
+      initContainers:
+      - command:
+        - /manager
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: IS_INITIALIZATION
+          value: "true"
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.global.registry }}/{{ .Values.classifierManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.classifierManager.manager.image.digest }}{{- else }}:{{ .Values.classifierManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        imagePullPolicy: {{ .Values.classifierManager.manager.imagePullPolicy }}
+        name: migrate
+        resources: {{- toYaml .Values.classifierManager.manager.resources | nindent 10
+          }}
+        securityContext: {{- toYaml .Values.classifierManager.manager.containerSecurityContext
+          | nindent 10 }}
       securityContext: {{- toYaml .Values.classifierManager.podSecurityContext | nindent 8 }}
       {{- with .Values.classifierManager.manager.extraVolumes }}
       volumes:
@@ -813,6 +909,18 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+  {{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+        - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
+        - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchSveltosApplierConfigMap.data) 0 }}
+        - --sveltos-applier-config={{ .Values.classifierManager.agentPatchSveltosApplierConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.shardController.shardComponentsConfigMap.data) 0 }}
+        - --shard-components-config={{ .Values.shardController.shardComponentsConfigMap.name }}
+  {{- end }}
   {{- else }}
       - args:
       {{- range .Values.shardController.manager.args }}
@@ -825,10 +933,36 @@ spec:
         - --{{ $key }}
         {{- end }}
       {{- end }}
+  {{- if ne (len .Values.addonController.driftDetectionManagerPatchConfigMap.data) 0 }}
+        - --drift-detection-config={{ .Values.addonController.driftDetectionManagerPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchConfigMap.data) 0 }}
+        - --sveltos-agent-config={{ .Values.classifierManager.agentPatchConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.classifierManager.agentPatchSveltosApplierConfigMap.data) 0 }}
+        - --sveltos-applier-config={{ .Values.classifierManager.agentPatchSveltosApplierConfigMap.name }}
+  {{- end }}
+  {{- if ne (len .Values.shardController.shardComponentsConfigMap.data) 0 }}
+        - --shard-components-config={{ .Values.shardController.shardComponentsConfigMap.name }}
+  {{- end }}
   {{- end }}
         command:
         - /manager
         env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.shardController.manager.extraEnv }}
@@ -933,6 +1067,20 @@ spec:
         command:
         - /manager
         env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.techsupportController.controller.extraEnv }}
@@ -1038,6 +1186,10 @@ spec:
             resourceFieldRef:
               divisor: "0"
               resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.mcpServer.controller.extraEnv }}
@@ -1084,4 +1236,112 @@ spec:
       {{- with .Values.mcpServer.controller.extraVolumes }}
 {{ include "projectsveltos.extraVolumes" . | nindent 6 }}
       {{- end }}
+{{- end }}
+{{- if .Values.clusterInventory.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  {{- with .Values.clusterInventory.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+  name: clusterinventory-controller
+  labels:
+    ontrol-plane: clusterinventory-controller
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: clusterinventory-controller
+    {{- include "projectsveltos.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        control-plane: clusterinventory-controller
+        {{- with .Values.clusterInventory.labels }}
+        {{- range $key, $value := . }}
+          {{ $key }}: {{ $value | quote }}
+        {{- end }}
+        {{- end }}
+      {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
+      annotations:
+        kubectl.kubernetes.io/default-container: controller
+    spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mcpServer.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mcpServer.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - args: {{- toYaml .Values.clusterInventory.manager.args | nindent 8 }}
+        command:
+        - /manager
+        env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.global.registry }}/{{ .Values.clusterInventory.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.clusterInventory.controller.image.digest }}{{- else }}:{{ .Values.clusterInventory.controller.image.tag | default .Chart.AppVersion }}{{- end }}
+        imagePullPolicy: {{ .Values.clusterInventory.controller.imagePullPolicy }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: healthz
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        ports:
+        - containerPort: 8443
+          name: metrics
+          protocol: TCP
+        - containerPort: 9440
+          name: healthz
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: healthz
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources: {{- toYaml .Values.clusterInventory.controller.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.clusterInventory.controller.containerSecurityContext
+          | nindent 10 }}
+        {{- with .Values.clusterInventory.extraVolumes }}
+        volumeMounts:
+{{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
+      securityContext: {{- toYaml .Values.clusterInventory.podSecurityContext | nindent 8 }}
+      {{- with .Values.clusterInventory.extraVolumes }}
+      volumes:
+{{ include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
+      serviceAccountName: clusterinventory-controller
+      terminationGracePeriodSeconds: ext
 {{- end }}
