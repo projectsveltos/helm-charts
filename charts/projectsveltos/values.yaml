@@ -276,6 +276,7 @@ crdManager:
       helm.sh/hook: pre-upgrade,pre-rollback
       helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
 crdManagerJob:
+  enabled: true
   backoffLimit: 4
   crdManager:
     extraEnv: []
