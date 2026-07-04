@@ -263,6 +263,20 @@ spec:
         command:
         - /manager
         env:
+        - name: TOTAL_MEMORY_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         {{- with .Values.accessManager.manager.extraEnv }}
@@ -773,7 +787,7 @@ spec:
         command:
         - /manager
         env:
-        - name: GOMEMLIMIT
+        - name: TOTAL_MEMORY_LIMIT
           valueFrom:
             resourceFieldRef:
               divisor: "0"

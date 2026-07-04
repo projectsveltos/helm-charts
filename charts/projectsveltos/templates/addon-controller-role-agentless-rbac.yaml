@@ -1,0 +1,15 @@
+{{- if .Values.agent.managementCluster }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: addon-controller-role-agentless
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - '*'
+{{- end }}

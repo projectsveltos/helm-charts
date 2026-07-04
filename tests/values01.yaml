@@ -1,6 +1,9 @@
 global:
   additionalLabels:
     label: all
+  serviceAccountAnnotations:
+    iam.gke.io/gcp-service-account: sveltos-wi@project.iam.gserviceaccount.com
+    common-annotation: common-value
 accessManager:
   annotations:
     annotation1: value1
@@ -13,6 +16,9 @@ addonController:
     annotation2: value2
   labels:
     label2: value2
+  serviceAccount:
+    annotations:
+      common-annotation: overridden-value
   controller:
     extraArgs: { "addonController": "value1", "controller": "value2" }
     extraArgsAgentMgmtCluster:

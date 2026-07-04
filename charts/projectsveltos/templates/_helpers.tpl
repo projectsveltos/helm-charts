@@ -46,6 +46,18 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
+Merge a component's serviceAccount.annotations with global.serviceAccountAnnotations
+(e.g. for cloud Workload Identity), with the component-specific annotations taking
+precedence on key collisions.
+Usage: {{ include "projectsveltos.serviceAccountAnnotations" (dict "root" $ "specific" .Values.addonController.serviceAccount.annotations) }}
+*/}}
+{{- define "projectsveltos.serviceAccountAnnotations" -}}
+{{- $specific := .specific | default dict }}
+{{- $common := .root.Values.global.serviceAccountAnnotations | default dict }}
+{{- toYaml (merge $specific $common) }}
+{{- end }}
+
+{{/*
 Selector labels
 */}}
 {{- define "projectsveltos.selectorLabels" -}}
