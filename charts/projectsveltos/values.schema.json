@@ -102,6 +102,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -289,6 +297,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -437,6 +453,14 @@
                                             }
                                         }
                                     }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -503,6 +527,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -524,6 +556,9 @@
             "properties": {
                 "enabled": {
                     "type": "boolean"
+                },
+                "extraVolumes": {
+                    "type": "array"
                 },
                 "image": {
                     "type": "object",
@@ -547,6 +582,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -636,6 +679,14 @@
                                             }
                                         }
                                     }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -682,6 +733,9 @@
                             "type": "array"
                         }
                     }
+                },
+                "enabled": {
+                    "type": "boolean"
                 }
             }
         },
@@ -760,6 +814,14 @@
                                             }
                                         }
                                     }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -826,6 +888,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -905,6 +975,14 @@
                                             }
                                         }
                                     }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -971,6 +1049,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -1019,6 +1105,14 @@
                                             "items": {
                                                 "type": "string"
                                             }
+                                        }
+                                    }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
                                         }
                                     }
                                 }
@@ -1090,6 +1184,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -1181,6 +1283,14 @@
                                             }
                                         }
                                     }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -1267,6 +1377,14 @@
                                             }
                                         }
                                     }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -1330,6 +1448,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -1426,6 +1552,14 @@
                                             }
                                         }
                                     }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -1492,6 +1626,14 @@
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
+                        },
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
@@ -1561,6 +1703,14 @@
                                             "items": {
                                                 "type": "string"
                                             }
+                                        }
+                                    }
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
                                         }
                                     }
                                 }

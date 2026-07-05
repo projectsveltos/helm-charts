@@ -6,6 +6,7 @@ global:
     # - name: my-registry-secret
   additionalLabels: {}
   enableNatsWatcher: false
+  serviceAccountAnnotations: {}
 accessManager:
   enabled: true
   annotations: {}
@@ -24,8 +25,8 @@ accessManager:
           - ALL
     image:
       repository: projectsveltos/access-manager
-      tag: v1.11.1
-      digest: sha256:2ab2deb331109ef01aa0fa53cac2d57c99602172c1dc57fb8fb195868ee7c7c4
+      tag: v1.12.0
+      digest: sha256:3e93d2fed49fb75ddb2c67bc26dced2c733b0a888bcdfb5b2bda352a9e22b45b
     resources:
       limits:
         cpu: 500m
@@ -36,6 +37,8 @@ accessManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   tolerations: []
   serviceAccount:
     annotations: {}
@@ -45,8 +48,8 @@ addonController:
   initialization:
     image:
       repository: projectsveltos/addon-controller
-      tag: v1.11.1
-      digest: sha256:a8400647fd71906a80955b5bba293a35cb3fbe623ec8f20f56037d24ee2d62bd
+      tag: v1.12.0
+      digest: sha256:98312b5bc21f1cd6dd3d9b3d6d2d530981f8f3369477ae5455869ef11fceaf18
     resources:
       limits:
         cpu: 500m
@@ -60,14 +63,14 @@ addonController:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -81,8 +84,8 @@ addonController:
         type: RuntimeDefault
     image:
       repository: projectsveltos/addon-controller
-      tag: v1.11.1
-      digest: sha256:a8400647fd71906a80955b5bba293a35cb3fbe623ec8f20f56037d24ee2d62bd
+      tag: v1.12.0
+      digest: sha256:98312b5bc21f1cd6dd3d9b3d6d2d530981f8f3369477ae5455869ef11fceaf18
     resources:
       requests:
         memory: 512Mi
@@ -91,6 +94,8 @@ addonController:
     data: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   ports:
     - name: metrics
       port: 80
@@ -131,14 +136,14 @@ classifierManager:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -148,10 +153,12 @@ classifierManager:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/classifier
-      tag: v1.11.1
-      digest: sha256:e6edd6de893bf276aa2093416f12028a044bb9d764b15f772bbb6f863340f236
+      tag: v1.12.0
+      digest: sha256:1ecc84c8f162337f7fe547313ce75796468a752ab6e25684ced9be52be02c078
     resources:
       limits:
         cpu: 500m
@@ -162,6 +169,8 @@ classifierManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   tolerations: []
   serviceAccount:
     annotations: {}
@@ -169,8 +178,8 @@ clusterInventory:
   enabled: false
   image:
     repository: projectsveltos/clusterinventory-controller
-    tag: v1.11.1
-    digest: sha256:92daa430672533c477425091ed2e67691b87ac62ed2063356cfd29efec06f3af
+    tag: v1.12.0
+    digest: sha256:2ba52e276e1292af40c243591d98d955c0daf007b786bb5d97f29d672c871464
   resources:
     limits:
       cpu: 100
@@ -181,6 +190,8 @@ clusterInventory:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   tolerations: []
   extraVolumes: []
   serviceAccount:
@@ -196,13 +207,13 @@ eventManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -212,10 +223,12 @@ eventManager:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/event-manager
-      tag: v1.11.1
-      digest: sha256:b7531c75e5b223a69fd128b6d1660ba19354f4165e6619241beea1cc9435a134
+      tag: v1.12.0
+      digest: sha256:fd31a6163d6ca133ca4bef7216a9d2bcf3eb6ae15638d5e3ad3a9e20aa6d464f
     resources:
       limits:
         cpu: 500m
@@ -226,6 +239,8 @@ eventManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   tolerations: []
   serviceAccount:
     annotations: {}
@@ -237,13 +252,13 @@ hcManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.11.1
+      - --version=v1.12.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -253,10 +268,12 @@ hcManager:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/healthcheck-manager
-      tag: v1.11.1
-      digest: sha256:f910c3fbb0f50cf039551b9bf2b742d6dc3d51b895f13e3643f810a561fc5d4b
+      tag: v1.12.0
+      digest: sha256:d86c6f7e19c56af5cbbd7a982ef7a3c2dac29bdd2538c52dcd9e211e7b5c32ef
     resources:
       limits:
         cpu: 500m
@@ -267,6 +284,8 @@ hcManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   tolerations: []
   serviceAccount:
     annotations: {}
@@ -286,10 +305,12 @@ crdManagerJob:
       capabilities:
         drop:
         - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/crd-manager
-      tag: v1.11.1
-      digest: sha256:06c47b7a4f3d6db94d9fac1c26bafee774ebfd3f786def870c991c703d69e542
+      tag: v1.12.0
+      digest: sha256:1f4e369052722469ddf7307da2fadd6049ae8b53a12ce71af4cf352169480d94
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -314,10 +335,12 @@ registerMgmtClusterJob:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/register-mgmt-cluster
-      tag: v1.11.1
-      digest: sha256:cda10f2041144b678233efdb14be76c053f0874b9b7d3b6a59fddf1e53114cef
+      tag: v1.12.0
+      digest: sha256:92674874615df8bffc31de9b8f12e6e9c0f621a03fbf3384596fdf658f655a98
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -340,10 +363,12 @@ scManager:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/sveltoscluster-manager
-      tag: v1.11.1
-      digest: sha256:7c6dbde6a2d0dbe554f6546cc3ae6686a3698300c31b93709074cb49ef7ee0a0
+      tag: v1.12.0
+      digest: sha256:56434c735d1f3f87553caf9888cb516fa64e5c13d3a006f795b8d5a9057d7c57
     resources:
       limits:
         cpu: 500m
@@ -354,6 +379,8 @@ scManager:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   ports:
     - name: metrics
       port: 80
@@ -393,10 +420,12 @@ shardController:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/shard-controller
-      tag: v1.11.1
-      digest: sha256:2ad8504fd78b3f0d698cb9efd20b47c1eeb356878a7ea3f2cf58f006612070ed
+      tag: v1.12.0
+      digest: sha256:cecfad5d3e89ee547606f69ca87b9bb179f902a20e7c898ad74e81d9f00b2c6c
     resources:
       limits:
         cpu: 500m
@@ -407,6 +436,8 @@ shardController:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   tolerations: []
   serviceAccount:
     annotations: {}
@@ -427,10 +458,12 @@ techsupportController:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/techsupport
-      tag: v1.11.1
-      digest: sha256:317c4141d2a1a747d0d964664aa3f61e580cb033cee5735d7cc3ef72783f89d5
+      tag: v1.12.0
+      digest: sha256:266f323014066ef07986c35ef66e8c6b785cdc1320f5b542d4f700239e98a3e4
     resources:
       limits:
         cpu: 500m
@@ -461,10 +494,12 @@ mcpServer:
       capabilities:
         drop:
           - ALL
+      seccompProfile:
+        type: RuntimeDefault
     image:
       repository: projectsveltos/mcp-server
-      tag: v1.11.1
-      digest: sha256:10f1dc2ef1d80fe1fb30e949b274da073e008f18b83fd16636da9ab314c43c39
+      tag: v1.12.0
+      digest: sha256:97da764e1a7fa093c99f83ba54dc0e371e9993f7f37ea9fd47a4f4683051f279
     resources:
       limits:
         cpu: 500m
@@ -475,6 +510,8 @@ mcpServer:
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   ports:
     - name: metrics
       port: 80
