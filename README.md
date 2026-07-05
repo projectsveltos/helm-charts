@@ -78,7 +78,7 @@ where term:
 
 Here is an example of how to require that any CAPI Cluster with label _env: prod_ has following features deployed:
 
-1. Kyverno helm chart (version v3.0.1)
+1. Kyverno helm chart (version v3.7.2)
 2. kubernetes resource(s) contained in the referenced Secret: _default/storage-class_
 3. kubernetes resource(s) contained in the referenced ConfigMap: _default/contour_.
 
@@ -94,7 +94,7 @@ spec:
     - repositoryURL: https://kyverno.github.io/kyverno/
       repositoryName: kyverno
       chartName: kyverno/kyverno
-      chartVersion: v3.0.1
+      chartVersion: v3.7.2
       releaseName: kyverno-latest
       releaseNamespace: kyverno
       helmChartAction: Install
