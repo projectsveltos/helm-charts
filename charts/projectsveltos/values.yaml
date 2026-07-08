@@ -176,17 +176,23 @@ classifierManager:
     annotations: {}
 clusterInventory:
   enabled: false
-  image:
-    repository: projectsveltos/clusterinventory-controller
-    tag: v1.12.0
-    digest: sha256:2ba52e276e1292af40c243591d98d955c0daf007b786bb5d97f29d672c871464
-  resources:
-    limits:
-      cpu: 100
-      memory: 512Mi
-    requests:
-      cpu: 100m
-      memory: 256Mi
+  annotations: {}
+  labels: {}
+  manager:
+    args:
+      - --v=0
+    image:
+      repository: projectsveltos/clusterinventory-controller
+      tag: v1.12.0
+      digest: sha256:2ba52e276e1292af40c243591d98d955c0daf007b786bb5d97f29d672c871464
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 100
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
   nodeSelector: {}
   podSecurityContext:
     runAsNonRoot: true
