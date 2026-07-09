@@ -5,6 +5,10 @@ metadata:
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
 rules:
+# TODO(remove): stopgap for projectsveltos/classifier#485 — the pre-fix migrate
+# initContainer Gets the Namespace of each migrated cluster entry. Drop the namespace
+# RBAC once the fleet has moved to a classifier release containing the fix that checks
+# cluster existence instead (no longer needs "namespaces" get).
 - apiGroups:
   - ""
   resources:
