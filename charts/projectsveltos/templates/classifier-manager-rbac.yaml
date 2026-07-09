@@ -42,6 +42,18 @@ rules:
   - subjectaccessreviews
   verbs:
   - create
+# TODO(remove): stopgap for projectsveltos/classifier#485 — the pre-fix migrate
+# initContainer Gets the Namespace of each migrated cluster entry. Drop this rule
+# once the fleet has moved to a classifier release containing the fix that checks
+# cluster existence instead (no longer needs "namespaces" get).
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
 - apiGroups:
   - cluster.x-k8s.io
   resources:
