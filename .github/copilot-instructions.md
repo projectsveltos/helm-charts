@@ -1,6 +1,6 @@
 # GitHub Copilot Instructions
 
-Follow the repository-wide agent guidance in `AGENTS.md`. This repository contains Helm charts for Grafana ecosystem components.
+Follow the repository-wide agent guidance in `AGENTS.md`. This repository contains Helm charts for Sveltos ecosystem components.
 
 Most tasks are Helm chart feature changes. When changing a chart:
 
