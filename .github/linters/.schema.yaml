@@ -20,5 +20,5 @@ noAdditionalProperties: false
 noDefaultGlobal: false
 
 schemaRoot:
-  id: https://github.com/grafana-community/helm-charts
+  id: https://github.com/projectsveltos/helm-charts
   additionalProperties: true
