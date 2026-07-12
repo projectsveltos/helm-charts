@@ -66,4 +66,3 @@ All of the CI jobs must pass before a PR can be merged
 - If no chart maintainer reviews within **two weeks**, the PR author may request a review from a repository admin
 - Every chart should have at least **two maintainers** so PRs can always be reviewed
 
-For the full process, see [PROCESSES.md](./PROCESSES.md).
