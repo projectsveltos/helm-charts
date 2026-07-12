@@ -4,7 +4,7 @@ The following guidelines apply to all files in this repository.
 
 ## Repository Overview
 
-This is the **Project Sveltos Helm Charts** repository — a collection of Helm charts for Grafana ecosystem components. Charts are published to both a Helm repository (`projectsveltos`) and as OCI artifacts on `ghcr.io`.
+This is the **Project Sveltos Helm Charts** repository — a collection of Helm charts for Sveltos ecosystem components. Charts are published to both a Helm repository (`projectsveltos`) and as OCI artifacts on `ghcr.io`.
 
 ## Charts
 
