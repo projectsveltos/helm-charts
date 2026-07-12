@@ -55,7 +55,7 @@ make helm-unittest HELM_CHART=<chart-name>
 ## Contributing Conventions
 
 - **One chart per PR**: CI enforces that PRs only change a single chart.
-- **PR title format**: Must start with `[chart-name] ` (e.g., `[grafana] Add new feature`).
+- **PR title format**: Must start with `[chart-name] ` (e.g., `[projectsveltos] Add new feature`).
 - **Version bumps**: Every chart change (excluding files listed in `.helmignore`) requires a SemVer version bump in `Chart.yaml`. Major bumps for breaking changes.
 - **DCO sign-off**: Commits must include `Signed-off-by` line (`git commit -s`).
 - **Squash merge only**: The repository only allows squash merges.
