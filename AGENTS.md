@@ -60,7 +60,7 @@ make helm-unittest HELM_CHART=<chart-name>
 - **DCO sign-off**: Commits must include `Signed-off-by` line (`git commit -s`).
 - **Squash merge only**: The repository only allows squash merges.
 - **CODEOWNERS/MAINTAINERS**: Auto-generated from `Chart.yaml` maintainer entries by `scripts/generate-codeowners.sh` and `scripts/generate-maintainers.sh`. Do not edit `.github/CODEOWNERS` or `MAINTAINERS.md` directly.
-- **Minimum Kubernetes version**: Charts target `^1.25.0-0` (`kubeVersion` in `Chart.yaml`).
+- **Minimum Kubernetes version**: Charts target `^1.25.0-0` (`kubeVersion` in `Chart.yaml`). `dashboard` Chart have `1.28.0` at minimum.
 
 ## Dependency Management
 
