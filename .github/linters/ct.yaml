@@ -4,10 +4,6 @@ additional-commands:
   - helm unittest --strict --file 'tests/**/*.yaml' {{ .Path }}
 chart-dirs:
   - charts
-chart-repos:
-  - minio=https://charts.min.io/
-  - grafana=https://grafana.github.io/helm-charts
-  - prometheus-community=https://prometheus-community.github.io/helm-charts
 github-groups: true
 helm-extra-args: --timeout 600s
 remote: origin
