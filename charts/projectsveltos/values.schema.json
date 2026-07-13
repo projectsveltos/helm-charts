@@ -1,5 +1,6 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://github.com/projectsveltos/helm-charts",
     "type": "object",
     "properties": {
         "accessManager": {
@@ -57,7 +58,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -136,13 +142,7 @@
                     "type": "object",
                     "properties": {
                         "rules": {
-                            "oneOf": [
-                                { "type": "array" },
-                                { "type": "null" }
-                            ],
-                            "items": {
-                                "type": "object"
-                            }
+                            "type": "null"
                         }
                     }
                 },
@@ -206,7 +206,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -249,7 +254,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -482,7 +492,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -554,23 +569,75 @@
         "clusterInventory": {
             "type": "object",
             "properties": {
+                "annotations": {
+                    "type": "object"
+                },
                 "enabled": {
                     "type": "boolean"
                 },
                 "extraVolumes": {
                     "type": "array"
                 },
-                "image": {
+                "labels": {
+                    "type": "object"
+                },
+                "manager": {
                     "type": "object",
                     "properties": {
-                        "digest": {
+                        "args": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "digest": {
+                                    "type": "string"
+                                },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
+                                "repository": {
+                                    "description": "Docker image repository",
+                                    "type": "string"
+                                },
+                                "tag": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "imagePullPolicy": {
                             "type": "string"
                         },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "tag": {
-                            "type": "string"
+                        "resources": {
+                            "type": "object",
+                            "properties": {
+                                "limits": {
+                                    "type": "object",
+                                    "properties": {
+                                        "cpu": {
+                                            "type": "integer"
+                                        },
+                                        "memory": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "requests": {
+                                    "type": "object",
+                                    "properties": {
+                                        "cpu": {
+                                            "type": "string"
+                                        },
+                                        "memory": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -587,33 +654,6 @@
                             "type": "object",
                             "properties": {
                                 "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                },
-                "resources": {
-                    "type": "object",
-                    "properties": {
-                        "limits": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "integer"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "requests": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
                                     "type": "string"
                                 }
                             }
@@ -702,7 +742,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -843,7 +888,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -930,6 +980,9 @@
                 "registry": {
                     "type": "string"
                 },
+                "serviceAccountAnnotations": {
+                    "type": "object"
+                },
                 "useDigest": {
                     "type": "boolean"
                 }
@@ -1004,7 +1057,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -1133,7 +1191,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -1309,7 +1372,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -1403,7 +1471,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -1581,7 +1654,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -1731,7 +1809,12 @@
                                 "digest": {
                                     "type": "string"
                                 },
+                                "registry": {
+                                    "description": "The Docker registry. Defaults to global.registry if empty.",
+                                    "type": "string"
+                                },
                                 "repository": {
+                                    "description": "Docker image repository",
                                     "type": "string"
                                 },
                                 "tag": {
@@ -1820,5 +1903,6 @@
                 }
             }
         }
-    }
+    },
+    "additionalProperties": true
 }

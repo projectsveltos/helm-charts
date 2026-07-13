@@ -1,0 +1,172 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: image helper
+templates:
+  - templates/deployment.yaml
+  - templates/configmap.yaml
+  - templates/crd-manager-job.yaml
+  - templates/register-mgmt-cluster-job.yaml
+tests:
+  - it: renders the add-on controller image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+    set:
+      addonController.controller.image.tag: v0.0.0
+      addonController.initialization.image.tag: v0.0.0
+      global.registry: registry.example
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/addon-controller:v0.0.0
+      - equal:
+          path: spec.template.spec.initContainers[0].image
+          value: registry.example/projectsveltos/addon-controller:v0.0.0
+  - it: renders the access manager image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: access-manager
+    set:
+      accessManager.manager.image.tag: v0.0.0
+      global.registry: registry.example
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/access-manager:v0.0.0
+  - it: renders the SveltosCluster manager image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: sc-manager
+    set:
+      scManager.manager.image.tag: v0.0.0
+      global.registry: registry.example
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/sveltoscluster-manager:v0.0.0
+  - it: renders the health check manager image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: hc-manager
+    set:
+      global.registry: registry.example
+      hcManager.manager.image.tag: v0.0.0
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/healthcheck-manager:v0.0.0
+  - it: renders the event manager image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: event-manager
+    set:
+      eventManager.manager.image.tag: v0.0.0
+      global.registry: registry.example
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/event-manager:v0.0.0
+  - it: renders the classifier manager image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: classifier-manager
+    set:
+      classifierManager.manager.image.tag: v0.0.0
+      global.registry: registry.example
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/classifier:v0.0.0
+      - equal:
+          path: spec.template.spec.initContainers[0].image
+          value: registry.example/projectsveltos/classifier:v0.0.0
+  - it: renders the shard controller image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: shard-controller
+    set:
+      global.registry: registry.example
+      shardController.manager.image.tag: v0.0.0
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/shard-controller:v0.0.0
+  - it: renders the techsupport controller image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: techsupport-controller
+    set:
+      global.registry: registry.example
+      techsupportController.controller.image.tag: v0.0.0
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/techsupport:v0.0.0
+  - it: renders the MCP server image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: mcp-server
+    set:
+      global.registry: registry.example
+      mcpServer.controller.image.tag: v0.0.0
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/mcp-server:v0.0.0
+  - it: renders the cluster inventory image with a tag
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: clusterinventory-controller
+    set:
+      clusterInventory.enabled: true
+      clusterInventory.manager.image.tag: v0.0.0
+      global.registry: registry.example
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/clusterinventory-controller:v0.0.0
+  - it: renders the CRD manager image with a tag
+    template: templates/crd-manager-job.yaml
+    documentSelector:
+      path: metadata.name
+      value: crd-manager-job
+    set:
+      crdManagerJob.crdManager.image.tag: v0.0.0
+      global.registry: registry.example
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/crd-manager:v0.0.0
+  - it: renders the management-cluster registration image with a tag
+    template: templates/register-mgmt-cluster-job.yaml
+    documentSelector:
+      path: metadata.name
+      value: register-mgmt-cluster-job
+    set:
+      global.registry: registry.example
+      registerMgmtClusterJob.registerMgmtCluster.image.tag: v0.0.0
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: registry.example/projectsveltos/register-mgmt-cluster:v0.0.0
+  - it: renders a digest-pinned image when enabled
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+    set:
+      global.registry: registry.example
+      global.useDigest: true
+    asserts:
+      - matchRegex:
+          path: spec.template.spec.containers[0].image
+          pattern: '^registry\.example/projectsveltos/addon-controller@sha256:[a-f0-9]{64}$'

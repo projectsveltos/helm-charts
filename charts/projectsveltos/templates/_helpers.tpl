@@ -108,3 +108,11 @@ Render extra volumes from a list of extraVolumes entries.
   {{- end }}
 {{- end }}
 {{- end }}
+
+{{/*
+Image helper
+*/}}
+{{- define "projectsveltos.image" -}}
+{{- .component.image.registry | default .ctx.Values.global.registry -}}/{{- .component.image.repository -}}
+{{- if .ctx.Values.global.useDigest }}@{{ .component.image.digest }}{{- else }}:{{- .component.image.tag | default .ctx.Chart.AppVersion -}}{{- end }}
+{{- end }}
