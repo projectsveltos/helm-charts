@@ -3,13 +3,13 @@
 [Helm](https://helm.sh) must be installed to use the charts. Please refer to
 Helm's [documentation](https://helm.sh/docs) to get started.
 
-Once Helm has been set up correctly, add the repo as follows:
+Once Helm has been set up correctly, add the repository as follows:
 
 ```bash
 helm repo add projectsveltos https://projectsveltos.github.io/helm-charts
 ```
 
-If you had already added this repo earlier, run `helm repo update` to retrieve
+If you had already added this repository earlier, run `helm repo update` to retrieve
 the latest versions of the packages. You can then run `helm search repo
 projectsveltos` to see the charts.
 
@@ -169,8 +169,8 @@ Sveltos can automatically detect drift between the desired state, defined in the
 
 If you want to try projectsveltos with a test cluster:
 
-1. git clone https://github.com/projectsveltos/addon-controller
-2. make quickstart
+1. `git clone https://github.com/projectsveltos/addon-controller`
+2. `make quickstart`
 
 will create a management cluster using Kind, deploy clusterAPI and projectsveltos, create a workload cluster powered by clusterAPI.
 
@@ -178,7 +178,7 @@ will create a management cluster using Kind, deploy clusterAPI and projectsvelto
 
 ❤️ Your contributions are always welcome! If you want to contribute, have questions, noticed any bug or want to get the latest project news, you can connect with us in the following ways:
 
-1. Open a bug/feature enhancement on github [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/projectsveltos/sveltos-manager/issues)
+1. Open a bug/feature enhancement on GitHub [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/projectsveltos/sveltos-manager/issues)
 2. Chat with us on the Slack in the #projectsveltos channel [![Slack](https://img.shields.io/badge/join%20slack-%23projectsveltos-brighteen)](https://join.slack.com/t/projectsveltos/shared_invite/zt-1hraownbr-W8NTs6LTimxLPB8Erj8Q6Q)
 3. [Contact Us](mailto:support@projectsveltos.io)
 

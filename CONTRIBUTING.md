@@ -31,6 +31,12 @@ See `git help commit`:
 
 ***NOTE***: In order to make testing and merging of PRs easier, please submit changes to multiple charts in separate PRs.
 
+### Pull Request Title Format
+
+Any PR that modifies a chart under `charts/<chart-name>/` must have a title starting with `[<chart-name>] `, e.g. `[dashboard] fix values schema`. Current chart names: `crds`, `dashboard`, `projectsveltos`.
+
+If the title doesn't match, the "Check Title" GitHub Action fails with `PR title must start with '[<chart-name>] '.`. That message is only written to the job's log, not shown as a PR-level annotation, so open the "Check Title" run to see it. PRs that don't touch any chart directory skip this check.
+
 ### Technical Requirements
 
 * Must pass [DCO check](#sign-off-your-work)

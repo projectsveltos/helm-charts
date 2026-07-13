@@ -245,14 +245,14 @@ Prefer `equal`, `contains`, and specific negative assertions over broad `exists`
   - it: targets a single Deployment by name
     templates:
       - templates/deployment.yaml
-      - templates/image-renderer-deployment.yaml
+      - templates/worker-deployment.yaml
     asserts:
       - equal:
           path: spec.replicas
           value: 1
         documentSelector:
           path: metadata.name
-          value: RELEASE-NAME-grafana
+          value: RELEASE-NAME-myapp
 ```
 
 ```yaml
