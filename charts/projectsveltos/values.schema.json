@@ -25,23 +25,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -72,31 +58,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -104,20 +68,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -142,7 +95,13 @@
                     "type": "object",
                     "properties": {
                         "rules": {
-                            "type": "null"
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "items": {
+                                "type": "object"
+                            }
                         }
                     }
                 },
@@ -162,31 +121,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -220,17 +157,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -268,31 +197,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -303,20 +210,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "ports": {
                     "type": "array",
@@ -342,7 +238,10 @@
                     "type": "object",
                     "properties": {
                         "rules": {
-                            "type": "array",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
                             "items": {
                                 "type": "object",
                                 "properties": {
@@ -353,10 +252,12 @@
                                         }
                                     },
                                     "resources": {
+                                        "description": "Resource requests and limits",
                                         "type": "array",
                                         "items": {
                                             "type": "string"
-                                        }
+                                        },
+                                        "additionalProperties": true
                                     },
                                     "verbs": {
                                         "type": "array",
@@ -448,31 +349,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -506,31 +385,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -538,20 +395,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -613,31 +459,9 @@
                             "type": "string"
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "integer"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -645,20 +469,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -704,31 +517,9 @@
                     "type": "object",
                     "properties": {
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraEnv": {
                             "type": "array"
@@ -762,17 +553,9 @@
                             "type": "object"
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "tolerations": {
                             "type": "array"
@@ -844,31 +627,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -902,31 +663,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -934,20 +673,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -1013,31 +741,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -1071,31 +777,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -1103,20 +787,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -1150,31 +823,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -1205,31 +856,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -1243,20 +872,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "ports": {
                     "type": "array",
@@ -1331,31 +949,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -1392,17 +988,9 @@
                             "type": "object"
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "tolerations": {
                             "type": "array"
@@ -1430,31 +1018,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -1485,31 +1051,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -1517,20 +1061,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "ports": {
                     "type": "array",
@@ -1610,31 +1143,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -1668,31 +1179,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -1700,20 +1189,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -1768,31 +1246,9 @@
                             }
                         },
                         "containerSecurityContext": {
+                            "description": "The SecurityContext for the containers",
                             "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object",
-                                    "properties": {
-                                        "drop": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "seccompProfile": {
-                                    "type": "object",
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         },
                         "extraArgs": {
                             "type": "object"
@@ -1823,31 +1279,9 @@
                             }
                         },
                         "resources": {
+                            "description": "Resource requests and limits",
                             "type": "object",
-                            "properties": {
-                                "limits": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "requests": {
-                                    "type": "object",
-                                    "properties": {
-                                        "cpu": {
-                                            "type": "string"
-                                        },
-                                        "memory": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "additionalProperties": true
                         }
                     }
                 },
@@ -1867,20 +1301,9 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
+                    "description": "The SecurityContext for the pod",
                     "type": "object",
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "seccompProfile": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                    "additionalProperties": true
                 },
                 "serviceAccount": {
                     "type": "object",
