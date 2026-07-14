@@ -108,8 +108,7 @@ jobs:
     timeout-minutes: 15
     needs: chart-testing
     runs-on: ubuntu-latest
-    # disable integration tests for now
-    if: needs.chart-testing.outputs.changed == 'true' && false
+    if: needs.chart-testing.outputs.changed == 'true'
     strategy:
       fail-fast: false
       matrix:
