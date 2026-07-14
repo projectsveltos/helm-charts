@@ -24,6 +24,9 @@ accessManager:
         drop:
           - ALL
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/access-manager
       tag: v1.12.0
       digest: sha256:3e93d2fed49fb75ddb2c67bc26dced2c733b0a888bcdfb5b2bda352a9e22b45b
@@ -47,6 +50,9 @@ addonController:
   labels: {}
   initialization:
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/addon-controller
       tag: v1.12.0
       digest: sha256:98312b5bc21f1cd6dd3d9b3d6d2d530981f8f3369477ae5455869ef11fceaf18
@@ -83,6 +89,9 @@ addonController:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/addon-controller
       tag: v1.12.0
       digest: sha256:98312b5bc21f1cd6dd3d9b3d6d2d530981f8f3369477ae5455869ef11fceaf18
@@ -156,6 +165,9 @@ classifierManager:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/classifier
       tag: v1.12.0
       digest: sha256:1ecc84c8f162337f7fe547313ce75796468a752ab6e25684ced9be52be02c078
@@ -182,6 +194,9 @@ clusterInventory:
     args:
       - --v=0
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/clusterinventory-controller
       tag: v1.12.0
       digest: sha256:2ba52e276e1292af40c243591d98d955c0daf007b786bb5d97f29d672c871464
@@ -232,6 +247,9 @@ eventManager:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/event-manager
       tag: v1.12.0
       digest: sha256:fd31a6163d6ca133ca4bef7216a9d2bcf3eb6ae15638d5e3ad3a9e20aa6d464f
@@ -277,6 +295,9 @@ hcManager:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/healthcheck-manager
       tag: v1.12.0
       digest: sha256:d86c6f7e19c56af5cbbd7a982ef7a3c2dac29bdd2538c52dcd9e211e7b5c32ef
@@ -314,6 +335,9 @@ crdManagerJob:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/crd-manager
       tag: v1.12.0
       digest: sha256:1f4e369052722469ddf7307da2fadd6049ae8b53a12ce71af4cf352169480d94
@@ -344,6 +368,9 @@ registerMgmtClusterJob:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/register-mgmt-cluster
       tag: v1.12.0
       digest: sha256:92674874615df8bffc31de9b8f12e6e9c0f621a03fbf3384596fdf658f655a98
@@ -372,6 +399,9 @@ scManager:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/sveltoscluster-manager
       tag: v1.12.0
       digest: sha256:56434c735d1f3f87553caf9888cb516fa64e5c13d3a006f795b8d5a9057d7c57
@@ -429,6 +459,9 @@ shardController:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/shard-controller
       tag: v1.12.0
       digest: sha256:cecfad5d3e89ee547606f69ca87b9bb179f902a20e7c898ad74e81d9f00b2c6c
@@ -467,6 +500,9 @@ techsupportController:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/techsupport
       tag: v1.12.0
       digest: sha256:266f323014066ef07986c35ef66e8c6b785cdc1320f5b542d4f700239e98a3e4
@@ -503,6 +539,9 @@ mcpServer:
       seccompProfile:
         type: RuntimeDefault
     image:
+      # -- The Docker registry. Defaults to global.registry if empty.
+      registry: ""
+      # -- Docker image repository
       repository: projectsveltos/mcp-server
       tag: v1.12.0
       digest: sha256:97da764e1a7fa093c99f83ba54dc0e371e9993f7f37ea9fd47a4f4683051f279

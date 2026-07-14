@@ -49,15 +49,12 @@ spec:
         {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.repository
-           }}{{- if .Values.global.useDigest }}@{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.digest }}{{- else }}:{{ .Values.registerMgmtClusterJob.registerMgmtCluster.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.registerMgmtClusterJob.registerMgmtCluster) }}"
         imagePullPolicy: {{ .Values.registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy
           }}
         name: register-mgmt-cluster
-        resources: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.resources
-          | nindent 10 }}
-        securityContext: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext
-          | nindent 10 }}
+        resources: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext | nindent 10 }}
         {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}

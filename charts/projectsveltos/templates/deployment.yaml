@@ -100,7 +100,7 @@ spec:
         {{- with .Values.addonController.controller.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.addonController.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.addonController.controller.image.digest }}{{- else }}:{{ .Values.addonController.controller.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.addonController.controller) }}"
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -127,8 +127,7 @@ spec:
           periodSeconds: 10
         resources: {{- toYaml .Values.addonController.controller.resources | nindent 10
           }}
-        securityContext: {{- toYaml .Values.addonController.controller.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.addonController.controller.containerSecurityContext | nindent 10 }}
         volumeMounts:
         - mountPath: /tmp
           name: tmp
@@ -190,11 +189,10 @@ spec:
           value: "true"
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.global.registry }}/{{ .Values.addonController.initialization.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.addonController.initialization.image.digest }}{{- else }}:{{ .Values.addonController.initialization.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.addonController.initialization) }}"
         name: initialization
         resources: {{- toYaml .Values.addonController.initialization.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.addonController.initialization.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.addonController.initialization.containerSecurityContext | nindent 10 }}
       serviceAccountName: addon-controller
       terminationGracePeriodSeconds: 10
       volumes:
@@ -282,7 +280,7 @@ spec:
         {{- with .Values.accessManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.accessManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.accessManager.manager.image.digest }}{{- else }}:{{ .Values.accessManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.accessManager.manager) }}"
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -308,8 +306,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.accessManager.manager.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.accessManager.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.accessManager.manager.containerSecurityContext | nindent 10 }}
         {{- with .Values.accessManager.manager.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
@@ -399,7 +396,7 @@ spec:
         {{- with .Values.scManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.scManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.scManager.manager.image.digest }}{{- else }}:{{ .Values.scManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.scManager.manager) }}"
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -425,8 +422,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.scManager.manager.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.scManager.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.scManager.manager.containerSecurityContext | nindent 10 }}
         {{- with .Values.scManager.manager.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
@@ -530,7 +526,7 @@ spec:
         {{- with .Values.hcManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.hcManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.hcManager.manager.image.digest }}{{- else }}:{{ .Values.hcManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.hcManager.manager) }}"
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -556,8 +552,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.hcManager.manager.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.hcManager.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.hcManager.manager.containerSecurityContext | nindent 10 }}
         {{- with .Values.hcManager.manager.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
@@ -661,7 +656,7 @@ spec:
         {{- with .Values.eventManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.eventManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.eventManager.manager.image.digest }}{{- else }}:{{ .Values.eventManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.eventManager.manager) }}"
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -687,8 +682,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.eventManager.manager.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.eventManager.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.eventManager.manager.containerSecurityContext | nindent 10 }}
         {{- with .Values.eventManager.manager.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
@@ -806,7 +800,7 @@ spec:
         {{- with .Values.classifierManager.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.classifierManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.classifierManager.manager.image.digest }}{{- else }}:{{ .Values.classifierManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.classifierManager.manager) }}"
         imagePullPolicy: {{ .Values.classifierManager.manager.imagePullPolicy }}
         livenessProbe:
           failureThreshold: 3
@@ -834,8 +828,7 @@ spec:
           periodSeconds: 10
         resources: {{- toYaml .Values.classifierManager.manager.resources | nindent 10
           }}
-        securityContext: {{- toYaml .Values.classifierManager.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.classifierManager.manager.containerSecurityContext | nindent 10 }}
         {{- with .Values.classifierManager.manager.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
@@ -852,13 +845,12 @@ spec:
           value: "true"
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.global.registry }}/{{ .Values.classifierManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.classifierManager.manager.image.digest }}{{- else }}:{{ .Values.classifierManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.classifierManager.manager) }}"
         imagePullPolicy: {{ .Values.classifierManager.manager.imagePullPolicy }}
         name: migrate
         resources: {{- toYaml .Values.classifierManager.manager.resources | nindent 10
           }}
-        securityContext: {{- toYaml .Values.classifierManager.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.classifierManager.manager.containerSecurityContext | nindent 10 }}
       securityContext: {{- toYaml .Values.classifierManager.podSecurityContext | nindent 8 }}
       {{- with .Values.classifierManager.manager.extraVolumes }}
       volumes:
@@ -982,7 +974,7 @@ spec:
         {{- with .Values.shardController.manager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.shardController.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.shardController.manager.image.digest }}{{- else }}:{{ .Values.shardController.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.shardController.manager) }}"
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -1008,8 +1000,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.shardController.manager.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.shardController.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.shardController.manager.containerSecurityContext | nindent 10 }}
         {{- with .Values.shardController.manager.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
@@ -1100,7 +1091,7 @@ spec:
         {{- with .Values.techsupportController.controller.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.techsupportController.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.techsupportController.controller.image.digest }}{{- else }}:{{ .Values.techsupportController.controller.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.techsupportController.controller) }}"
         livenessProbe:
           httpGet:
             path: /healthz
@@ -1115,8 +1106,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.techsupportController.controller.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.techsupportController.controller.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.techsupportController.controller.containerSecurityContext | nindent 10 }}
         {{- with .Values.techsupportController.controller.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
@@ -1209,7 +1199,7 @@ spec:
         {{- with .Values.mcpServer.controller.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.mcpServer.controller.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.mcpServer.controller.image.digest }}{{- else }}:{{ .Values.mcpServer.controller.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.mcpServer.controller) }}"
         imagePullPolicy: {{ .Values.mcpServer.controller.imagePullPolicy }}
         livenessProbe:
           failureThreshold: 3
@@ -1233,8 +1223,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.mcpServer.controller.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.mcpServer.controller.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.mcpServer.controller.containerSecurityContext | nindent 10 }}
         volumeMounts:
         - mountPath: /tmp
           name: tmp
@@ -1318,7 +1307,7 @@ spec:
               fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.global.registry }}/{{ .Values.clusterInventory.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.clusterInventory.manager.image.digest }}{{- else }}:{{ .Values.clusterInventory.manager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.clusterInventory.manager) }}"
         imagePullPolicy: {{ .Values.clusterInventory.manager.imagePullPolicy }}
         livenessProbe:
           failureThreshold: 3
@@ -1345,8 +1334,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         resources: {{- toYaml .Values.clusterInventory.manager.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.clusterInventory.manager.containerSecurityContext
-          | nindent 10 }}
+        securityContext: {{- toYaml .Values.clusterInventory.manager.containerSecurityContext | nindent 10 }}
         {{- with .Values.clusterInventory.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}

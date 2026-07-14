@@ -25,15 +25,12 @@ spec:
         {{- with .Values.crdManagerJob.crdManager.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ .Values.global.registry }}/{{ .Values.crdManagerJob.crdManager.image.repository
-           }}{{- if .Values.global.useDigest }}@{{ .Values.crdManagerJob.crdManager.image.digest }}{{- else }}:{{ .Values.crdManagerJob.crdManager.image.tag | default .Chart.AppVersion }}{{- end }}
+        image: "{{ include "projectsveltos.image" (dict "ctx" . "component" .Values.crdManagerJob.crdManager) }}"
         imagePullPolicy: {{ .Values.crdManagerJob.crdManager.imagePullPolicy
           }}
         name: crd-manager
-        resources: {{- toYaml .Values.crdManagerJob.crdManager.resources
-          | nindent 10 }}
-        securityContext: {{- toYaml .Values.crdManagerJob.crdManager.containerSecurityContext
-          | nindent 10 }}
+        resources: {{- toYaml .Values.crdManagerJob.crdManager.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.crdManagerJob.crdManager.containerSecurityContext | nindent 10 }}
         {{- with .Values.crdManagerJob.crdManager.extraVolumes }}
         volumeMounts:
 {{ include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
