@@ -1,0 +1,6 @@
+techsupportController:
+  enabled: false
+mcpServer:
+  enabled: false
+agent:
+  managementCluster: false
