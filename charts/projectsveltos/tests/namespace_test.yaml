@@ -1,0 +1,104 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: namespaced resources
+templates:
+  - templates/*.yaml
+release:
+  namespace: namespace-under-test
+set:
+  agent.managementCluster: true
+  clusterInventory.enabled: true
+  prometheus.enabled: true
+  addonController.driftDetectionManagerPatchConfigMap.data.test: test
+  classifierManager.agentPatchConfigMap.data.test: test
+  classifierManager.agentPatchSveltosApplierConfigMap.data.test: test
+  shardController.shardComponentsConfigMap.data.test: test
+tests:
+  - it: assigns the release namespace to every ConfigMap
+    documentSelector:
+      path: kind
+      value: ConfigMap
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - hasDocuments:
+          count: 4
+          filterAware: true
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
+  - it: assigns the release namespace to every Deployment
+    documentSelector:
+      path: kind
+      value: Deployment
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - hasDocuments:
+          count: 10
+          filterAware: true
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
+  - it: assigns the release namespace to every Job
+    documentSelector:
+      path: kind
+      value: Job
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
+  - it: assigns the release namespace to every Role
+    documentSelector:
+      path: kind
+      value: Role
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
+  - it: assigns the release namespace to every RoleBinding
+    documentSelector:
+      path: kind
+      value: RoleBinding
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
+  - it: assigns the release namespace to every Service
+    documentSelector:
+      path: kind
+      value: Service
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
+  - it: assigns the release namespace to every ServiceAccount
+    documentSelector:
+      path: kind
+      value: ServiceAccount
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - hasDocuments:
+          count: 14
+          filterAware: true
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
+  - it: assigns the release namespace to every ServiceMonitor
+    documentSelector:
+      path: kind
+      value: ServiceMonitor
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: namespace-under-test
