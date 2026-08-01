@@ -52,6 +52,9 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
+  - classifierreports
+  - classifiers
+  - classifiers/status
   - debuggingconfigurations
   - eventreports
   - eventreports/status
@@ -59,6 +62,9 @@ rules:
   - eventsources/status
   - eventtriggers
   - eventtriggers/status
+  - managementclusterclassifierreports
+  - managementclusterclassifiers
+  - managementclusterclassifiers/status
   - sveltosclusters
   - sveltosclusters/status
   verbs:
