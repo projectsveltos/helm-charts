@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-manager
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    control-plane: event-manager
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.eventManager.type }}
+  selector:
+    control-plane: event-manager
+    {{- include "projectsveltos.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.eventManager.ports | toYaml | nindent 2 }}
+{{ if .Values.prometheus.enabled }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: event-manager
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+  {{- with .Values.eventManager.serviceMonitor.additionalLabels -}}
+    {{- toYaml . | nindent 4 -}}
+  {{- end -}}
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    path: /metrics
+    port: metrics
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: true
+  namespaceSelector:
+    matchNames:
+    - '{{ .Release.Namespace }}'
+  selector:
+    matchLabels:
+      control-plane: event-manager
+{{ end }}

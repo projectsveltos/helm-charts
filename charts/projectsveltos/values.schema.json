@@ -399,6 +399,26 @@
                     "type": "object",
                     "additionalProperties": true
                 },
+                "ports": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "port": {
+                                "type": "integer"
+                            },
+                            "protocol": {
+                                "type": "string"
+                            },
+                            "targetPort": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
                 "serviceAccount": {
                     "type": "object",
                     "properties": {
@@ -407,8 +427,19 @@
                         }
                     }
                 },
+                "serviceMonitor": {
+                    "type": "object",
+                    "properties": {
+                        "additionalLabels": {
+                            "type": "object"
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },
@@ -677,6 +708,26 @@
                     "type": "object",
                     "additionalProperties": true
                 },
+                "ports": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "port": {
+                                "type": "integer"
+                            },
+                            "protocol": {
+                                "type": "string"
+                            },
+                            "targetPort": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
                 "serviceAccount": {
                     "type": "object",
                     "properties": {
@@ -685,8 +736,19 @@
                         }
                     }
                 },
+                "serviceMonitor": {
+                    "type": "object",
+                    "properties": {
+                        "additionalLabels": {
+                            "type": "object"
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },

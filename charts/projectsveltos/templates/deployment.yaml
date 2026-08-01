@@ -1263,7 +1263,7 @@ metadata:
   name: clusterinventory-controller
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    ontrol-plane: clusterinventory-controller
+    control-plane: clusterinventory-controller
   {{- include "projectsveltos.labels" . | nindent 4 }}
 spec:
   replicas: 1
@@ -1282,7 +1282,7 @@ spec:
         {{- end }}
       {{- include "projectsveltos.selectorLabels" . | nindent 8 }}
       annotations:
-        kubectl.kubernetes.io/default-container: controller
+        kubectl.kubernetes.io/default-container: manager
     spec:
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:

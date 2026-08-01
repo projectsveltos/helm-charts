@@ -1,4 +1,5 @@
 [codespell]
 # AKS = Azure Kubernetes Service (valid acronym)
 # notin = Kubernetes matchExpression operator "NotIn"
-ignore-words-list = aks,notin
+# requestor = valid alternate spelling of "requester", used in ConfigurationGroup's RequestorHash field
+ignore-words-list = aks,notin,requestor
