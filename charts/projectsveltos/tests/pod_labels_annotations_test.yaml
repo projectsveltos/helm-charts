@@ -129,3 +129,48 @@ tests:
       - equal:
           path: spec.template.metadata.annotations["custom-annotation"]
           value: value1
+
+  - it: renders podLabels on techsupport-controller pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: techsupport-controller
+    set:
+      techsupportController.enabled: true
+      techsupportController.podLabels:
+        azure.workload.identity/use: "true"
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+
+  - it: renders podAnnotations on techsupport-controller pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: techsupport-controller
+    set:
+      techsupportController.enabled: true
+      techsupportController.podAnnotations:
+        custom-annotation: value1
+    asserts:
+      - equal:
+          path: spec.template.metadata.annotations["custom-annotation"]
+          value: value1
+
+  - it: renders podAnnotations on clusterinventory-controller pod template alongside static annotation
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: clusterinventory-controller
+    set:
+      clusterInventory.enabled: true
+      clusterInventory.podAnnotations:
+        custom-annotation: value1
+    asserts:
+      - equal:
+          path: spec.template.metadata.annotations["kubectl.kubernetes.io/default-container"]
+          value: manager
+      - equal:
+          path: spec.template.metadata.annotations["custom-annotation"]
+          value: value1
