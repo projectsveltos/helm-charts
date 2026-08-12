@@ -11,6 +11,8 @@ accessManager:
   enabled: true
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -54,6 +56,8 @@ accessManager:
 addonController:
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   initialization:
     image:
       # -- The Docker registry. Defaults to global.registry if empty.
@@ -151,6 +155,8 @@ addonController:
 classifierManager:
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   agentPatchConfigMap:
     name: sveltos-agent-config
     data: {}
@@ -222,6 +228,8 @@ clusterInventory:
   enabled: false
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   manager:
     args:
       - --v=0
@@ -259,6 +267,8 @@ driftDetectionManager:
 eventManager:
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -321,6 +331,8 @@ eventManager:
 hcManager:
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -447,6 +459,8 @@ registerMgmtClusterJob:
 scManager:
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   manager:
     args:
       - --diagnostics-address=:8443
@@ -502,6 +516,8 @@ shardController:
   enabled: true
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   shardComponentsConfigMap:
     name: shard-components-config
     data: {}
@@ -560,6 +576,8 @@ techsupportController:
   enabled: true
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   extraEnv: []
   extraVolumes: []
   controller:
@@ -607,6 +625,8 @@ mcpServer:
   enabled: true
   annotations: {}
   labels: {}
+  podLabels: {}
+  podAnnotations: {}
   controller:
     args:
       - --v=5

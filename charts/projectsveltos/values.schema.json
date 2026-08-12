@@ -1,1393 +1,1453 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://github.com/projectsveltos/helm-charts",
-    "type": "object",
-    "properties": {
-        "accessManager": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "manager": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                }
-            }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/projectsveltos/helm-charts",
+  "type": "object",
+  "properties": {
+    "accessManager": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
         },
-        "addonController": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "clusterRoleExtra": {
-                    "type": "object",
-                    "properties": {
-                        "rules": {
-                            "type": [
-                                "array",
-                                "null"
-                            ],
-                            "items": {
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "controller": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "argsAgentMgmtCluster": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraArgsAgentMgmtCluster": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "driftDetectionManagerPatchConfigMap": {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "initialization": {
-                    "type": "object",
-                    "properties": {
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "ports": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "port": {
-                                "type": "integer"
-                            },
-                            "protocol": {
-                                "type": "string"
-                            },
-                            "targetPort": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                "roleExtra": {
-                    "type": "object",
-                    "properties": {
-                        "rules": {
-                            "type": [
-                                "array",
-                                "null"
-                            ],
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "apiGroups": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "resources": {
-                                        "description": "Resource requests and limits",
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "additionalProperties": true
-                                    },
-                                    "verbs": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "serviceMonitor": {
-                    "type": "object",
-                    "properties": {
-                        "additionalLabels": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
+        "enabled": {
+          "type": "boolean"
         },
-        "agent": {
-            "type": "object",
-            "properties": {
-                "managementCluster": {
-                    "type": "boolean"
-                }
-            }
+        "labels": {
+          "type": "object"
         },
-        "classifierManager": {
-            "type": "object",
-            "properties": {
-                "agentPatchConfigMap": {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "agentPatchSveltosApplierConfigMap": {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "annotations": {
-                    "type": "object"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "manager": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "argsAgentMgmtCluster": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraArgsAgentMgmtCluster": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "ports": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "port": {
-                                "type": "integer"
-                            },
-                            "protocol": {
-                                "type": "string"
-                            },
-                            "targetPort": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "serviceMonitor": {
-                    "type": "object",
-                    "properties": {
-                        "additionalLabels": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "clusterInventory": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "extraVolumes": {
-                    "type": "array"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "manager": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "imagePullPolicy": {
-                            "type": "string"
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                }
-            }
-        },
-        "crdManager": {
-            "type": "object",
-            "properties": {
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object",
-                            "properties": {
-                                "helm.sh/hook": {
-                                    "type": "string"
-                                },
-                                "helm.sh/hook-delete-policy": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "crdManagerJob": {
-            "type": "object",
-            "properties": {
-                "backoffLimit": {
-                    "type": "integer"
-                },
-                "crdManager": {
-                    "type": "object",
-                    "properties": {
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "imagePullPolicy": {
-                            "type": "string"
-                        },
-                        "nodeSelector": {
-                            "type": "object"
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "tolerations": {
-                            "type": "array"
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "defaultClassifier": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "labels": {
-                    "type": "object"
-                }
-            }
-        },
-        "defaultDebuggingConfiguration": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "labels": {
-                    "type": "object"
-                }
-            }
-        },
-        "driftDetectionManager": {
-            "type": "object",
-            "properties": {
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "eventManager": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "manager": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "argsAgentMgmtCluster": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraArgsAgentMgmtCluster": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "ports": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "port": {
-                                "type": "integer"
-                            },
-                            "protocol": {
-                                "type": "string"
-                            },
-                            "targetPort": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "serviceMonitor": {
-                    "type": "object",
-                    "properties": {
-                        "additionalLabels": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "global": {
-            "type": "object",
-            "properties": {
-                "additionalLabels": {
-                    "type": "object"
-                },
-                "capiOnboardAnnotation": {
-                    "type": "string"
-                },
-                "enableNatsWatcher": {
-                    "type": "boolean"
-                },
-                "imagePullSecrets": {
-                    "type": "array"
+        "manager": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
                 },
                 "registry": {
-                    "type": "string"
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
                 },
-                "serviceAccountAnnotations": {
-                    "type": "object"
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
                 },
-                "useDigest": {
-                    "type": "boolean"
+                "tag": {
+                  "type": "string"
                 }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
             }
+          }
         },
-        "hcManager": {
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "addonController": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "clusterRoleExtra": {
+          "type": "object",
+          "properties": {
+            "rules": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "controller": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "argsAgentMgmtCluster": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraArgsAgentMgmtCluster": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "driftDetectionManagerPatchConfigMap": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "initialization": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "labels": {
+          "type": "object"
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "ports": {
+          "type": "array",
+          "items": {
             "type": "object",
             "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "manager": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "argsAgentMgmtCluster": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraArgsAgentMgmtCluster": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                }
+              "name": {
+                "type": "string"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "targetPort": {
+                "type": "integer"
+              }
             }
+          }
         },
-        "kubernetesClusterDomain": {
-            "type": "string"
-        },
-        "mcpServer": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "controller": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "ports": {
+        "roleExtra": {
+          "type": "object",
+          "properties": {
+            "rules": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "properties": {
+                  "apiGroups": {
                     "type": "array",
                     "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "port": {
-                                "type": "integer"
-                            },
-                            "protocol": {
-                                "type": "string"
-                            },
-                            "targetPort": {
-                                "type": "integer"
-                            }
-                        }
+                      "type": "string"
                     }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
+                  },
+                  "resources": {
+                    "description": "Resource requests and limits",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "additionalProperties": true
+                  },
+                  "verbs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
-                },
-                "tolerations": {
-                    "type": "array"
-                },
-                "type": {
-                    "type": "string"
+                  }
                 }
+              }
             }
+          }
         },
-        "prometheus": {
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "serviceMonitor": {
+          "type": "object",
+          "properties": {
+            "additionalLabels": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "agent": {
+      "type": "object",
+      "properties": {
+        "managementCluster": {
+          "type": "boolean"
+        }
+      }
+    },
+    "classifierManager": {
+      "type": "object",
+      "properties": {
+        "agentPatchConfigMap": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "agentPatchSveltosApplierConfigMap": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "annotations": {
+          "type": "object"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "manager": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "argsAgentMgmtCluster": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraArgsAgentMgmtCluster": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "ports": {
+          "type": "array",
+          "items": {
             "type": "object",
             "properties": {
-                "enabled": {
-                    "type": "boolean"
-                }
+              "name": {
+                "type": "string"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "targetPort": {
+                "type": "integer"
+              }
             }
+          }
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "serviceMonitor": {
+          "type": "object",
+          "properties": {
+            "additionalLabels": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "clusterInventory": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "extraVolumes": {
+          "type": "array"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "manager": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "imagePullPolicy": {
+              "type": "string"
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "crdManager": {
+      "type": "object",
+      "properties": {
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object",
+              "properties": {
+                "helm.sh/hook": {
+                  "type": "string"
+                },
+                "helm.sh/hook-delete-policy": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "crdManagerJob": {
+      "type": "object",
+      "properties": {
+        "backoffLimit": {
+          "type": "integer"
+        },
+        "crdManager": {
+          "type": "object",
+          "properties": {
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "imagePullPolicy": {
+              "type": "string"
+            },
+            "nodeSelector": {
+              "type": "object"
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "tolerations": {
+              "type": "array"
+            }
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "defaultClassifier": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "labels": {
+          "type": "object"
+        }
+      }
+    },
+    "defaultDebuggingConfiguration": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "labels": {
+          "type": "object"
+        }
+      }
+    },
+    "driftDetectionManager": {
+      "type": "object",
+      "properties": {
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "eventManager": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "manager": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "argsAgentMgmtCluster": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraArgsAgentMgmtCluster": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "targetPort": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "serviceMonitor": {
+          "type": "object",
+          "properties": {
+            "additionalLabels": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "global": {
+      "type": "object",
+      "properties": {
+        "additionalLabels": {
+          "type": "object"
+        },
+        "capiOnboardAnnotation": {
+          "type": "string"
+        },
+        "enableNatsWatcher": {
+          "type": "boolean"
+        },
+        "imagePullSecrets": {
+          "type": "array"
+        },
+        "registry": {
+          "type": "string"
+        },
+        "serviceAccountAnnotations": {
+          "type": "object"
+        },
+        "useDigest": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hcManager": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "manager": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "argsAgentMgmtCluster": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraArgsAgentMgmtCluster": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "kubernetesClusterDomain": {
+      "type": "string"
+    },
+    "mcpServer": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "controller": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "targetPort": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "prometheus": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "registerMgmtCluster": {
+      "type": "object",
+      "properties": {
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "registerMgmtClusterJob": {
+      "type": "object",
+      "properties": {
+        "backoffLimit": {
+          "type": "integer"
         },
         "registerMgmtCluster": {
-            "type": "object",
-            "properties": {
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
                 }
+              }
+            },
+            "imagePullPolicy": {
+              "type": "string"
+            },
+            "nodeSelector": {
+              "type": "object"
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "tolerations": {
+              "type": "array"
             }
-        },
-        "registerMgmtClusterJob": {
-            "type": "object",
-            "properties": {
-                "backoffLimit": {
-                    "type": "integer"
-                },
-                "registerMgmtCluster": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "imagePullPolicy": {
-                            "type": "string"
-                        },
-                        "nodeSelector": {
-                            "type": "object"
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "tolerations": {
-                            "type": "array"
-                        }
-                    }
-                }
-            }
-        },
-        "scManager": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "manager": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "ports": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "port": {
-                                "type": "integer"
-                            },
-                            "protocol": {
-                                "type": "string"
-                            },
-                            "targetPort": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "serviceMonitor": {
-                    "type": "object",
-                    "properties": {
-                        "additionalLabels": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "shardController": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "extraEnv": {
-                    "type": "array"
-                },
-                "extraVolumes": {
-                    "type": "array"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "manager": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "argsAgentMgmtCluster": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraArgsAgentMgmtCluster": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "shardComponentsConfigMap": {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                }
-            }
-        },
-        "sveltosAgentManager": {
-            "type": "object",
-            "properties": {
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "techsupportController": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "controller": {
-                    "type": "object",
-                    "properties": {
-                        "args": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "containerSecurityContext": {
-                            "description": "The SecurityContext for the containers",
-                            "type": "object",
-                            "additionalProperties": true
-                        },
-                        "extraArgs": {
-                            "type": "object"
-                        },
-                        "extraEnv": {
-                            "type": "array"
-                        },
-                        "extraVolumes": {
-                            "type": "array"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "registry": {
-                                    "description": "The Docker registry. Defaults to global.registry if empty.",
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "description": "Docker image repository",
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "resources": {
-                            "description": "Resource requests and limits",
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "extraEnv": {
-                    "type": "array"
-                },
-                "extraVolumes": {
-                    "type": "array"
-                },
-                "labels": {
-                    "type": "object"
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "description": "The SecurityContext for the pod",
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
-                }
-            }
-        },
-        "telemetry": {
-            "type": "object",
-            "properties": {
-                "disabled": {
-                    "type": "boolean"
-                }
-            }
+          }
         }
+      }
     },
-    "additionalProperties": true
+    "scManager": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "manager": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "targetPort": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "serviceMonitor": {
+          "type": "object",
+          "properties": {
+            "additionalLabels": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "shardController": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "extraEnv": {
+          "type": "array"
+        },
+        "extraVolumes": {
+          "type": "array"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "manager": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "argsAgentMgmtCluster": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraArgsAgentMgmtCluster": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "shardComponentsConfigMap": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "sveltosAgentManager": {
+      "type": "object",
+      "properties": {
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "techsupportController": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "controller": {
+          "type": "object",
+          "properties": {
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "containerSecurityContext": {
+              "description": "The SecurityContext for the containers",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "extraArgs": {
+              "type": "object"
+            },
+            "extraEnv": {
+              "type": "array"
+            },
+            "extraVolumes": {
+              "type": "array"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string"
+                },
+                "registry": {
+                  "description": "The Docker registry. Defaults to global.registry if empty.",
+                  "type": "string"
+                },
+                "repository": {
+                  "description": "Docker image repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            },
+            "resources": {
+              "description": "Resource requests and limits",
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "extraEnv": {
+          "type": "array"
+        },
+        "extraVolumes": {
+          "type": "array"
+        },
+        "labels": {
+          "type": "object"
+        },
+        "nodeSelector": {
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "The SecurityContext for the pod",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "serviceAccount": {
+          "type": "object",
+          "properties": {
+            "annotations": {
+              "type": "object"
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        },
+        "podLabels": {
+          "type": "object"
+        },
+        "podAnnotations": {
+          "type": "object"
+        }
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "additionalProperties": true
 }

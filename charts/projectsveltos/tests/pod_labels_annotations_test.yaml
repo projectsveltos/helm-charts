@@ -1,0 +1,131 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: pod labels and annotations
+templates:
+  - templates/deployment.yaml
+  - templates/configmap.yaml
+tests:
+  - it: renders podLabels on addon-controller pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+    set:
+      addonController.podLabels:
+        azure.workload.identity/use: "true"
+        custom-label: test
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+      - equal:
+          path: spec.template.metadata.labels["custom-label"]
+          value: test
+
+  - it: renders podAnnotations on addon-controller pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+    set:
+      addonController.podAnnotations:
+        custom-annotation: value1
+    asserts:
+      - equal:
+          path: spec.template.metadata.annotations["custom-annotation"]
+          value: value1
+
+  - it: renders podLabels on access-manager pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: access-manager
+    set:
+      accessManager.podLabels:
+        azure.workload.identity/use: "true"
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+
+  - it: renders podLabels on sc-manager pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: sc-manager
+    set:
+      scManager.podLabels:
+        azure.workload.identity/use: "true"
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+
+  - it: renders podLabels on hc-manager pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: hc-manager
+    set:
+      hcManager.podLabels:
+        azure.workload.identity/use: "true"
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+
+  - it: renders podLabels on event-manager pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: event-manager
+    set:
+      eventManager.podLabels:
+        azure.workload.identity/use: "true"
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+
+  - it: renders podLabels on classifier pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: classifier-manager
+    set:
+      classifierManager.podLabels:
+        azure.workload.identity/use: "true"
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+
+  - it: renders podLabels on shard-controller pod template
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: shard-controller
+    set:
+      shardController.enabled: true
+      shardController.podLabels:
+        azure.workload.identity/use: "true"
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels["azure.workload.identity/use"]
+          value: "true"
+
+  - it: renders podAnnotations on mcp-server pod template alongside static annotation
+    template: templates/deployment.yaml
+    documentSelector:
+      path: metadata.name
+      value: mcp-server
+    set:
+      mcpServer.enabled: true
+      mcpServer.podAnnotations:
+        custom-annotation: value1
+    asserts:
+      - equal:
+          path: spec.template.metadata.annotations["kubectl.kubernetes.io/default-container"]
+          value: controller
+      - equal:
+          path: spec.template.metadata.annotations["custom-annotation"]
+          value: value1
