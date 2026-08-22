@@ -39,7 +39,8 @@ spec:
           metadata:
             type: object
           status:
-            description: ClusterConfigurationStatus defines the observed state of ClusterConfiguration
+            description: ClusterConfigurationStatus defines the observed state of
+              ClusterConfiguration
             properties:
               clusterProfileResources:
                 description: |-
@@ -57,8 +58,8 @@ spec:
                       items:
                         properties:
                           charts:
-                            description: Charts is a list of helm charts deployed in
-                              the Cluster.
+                            description: Charts is a list of helm charts deployed
+                              in the Cluster.
                             items:
                               properties:
                                 appVersion:
@@ -66,8 +67,8 @@ spec:
                                     deployed in the Cluster.
                                   type: string
                                 chartVersion:
-                                  description: ChartVersion is the version of the helm
-                                    chart deployed in the Cluster.
+                                  description: ChartVersion is the version of the
+                                    helm chart deployed in the Cluster.
                                   type: string
                                 icon:
                                   description: The URL to an icon file.
@@ -108,8 +109,8 @@ spec:
                             - Kustomize
                             type: string
                           resources:
-                            description: Resources is a list of resources deployed in
-                              the Cluster.
+                            description: Resources is a list of resources deployed
+                              in the Cluster.
                             items:
                               properties:
                                 deploymentType:
@@ -146,8 +147,8 @@ spec:
                                     Empty for resources scoped at cluster level.
                                   type: string
                                 version:
-                                  description: Version of the resource deployed in the
-                                    Cluster.
+                                  description: Version of the resource deployed in
+                                    the Cluster.
                                   minLength: 1
                                   type: string
                               required:
@@ -185,8 +186,8 @@ spec:
                       items:
                         properties:
                           charts:
-                            description: Charts is a list of helm charts deployed in
-                              the Cluster.
+                            description: Charts is a list of helm charts deployed
+                              in the Cluster.
                             items:
                               properties:
                                 appVersion:
@@ -194,8 +195,8 @@ spec:
                                     deployed in the Cluster.
                                   type: string
                                 chartVersion:
-                                  description: ChartVersion is the version of the helm
-                                    chart deployed in the Cluster.
+                                  description: ChartVersion is the version of the
+                                    helm chart deployed in the Cluster.
                                   type: string
                                 icon:
                                   description: The URL to an icon file.
@@ -236,8 +237,8 @@ spec:
                             - Kustomize
                             type: string
                           resources:
-                            description: Resources is a list of resources deployed in
-                              the Cluster.
+                            description: Resources is a list of resources deployed
+                              in the Cluster.
                             items:
                               properties:
                                 deploymentType:
@@ -274,8 +275,8 @@ spec:
                                     Empty for resources scoped at cluster level.
                                   type: string
                                 version:
-                                  description: Version of the resource deployed in the
-                                    Cluster.
+                                  description: Version of the resource deployed in
+                                    the Cluster.
                                   minLength: 1
                                   type: string
                               required:
@@ -290,8 +291,8 @@ spec:
                         type: object
                       type: array
                     profileName:
-                      description: ProfileName is the name of the Profile matching the
-                        Cluster.
+                      description: ProfileName is the name of the Profile matching
+                        the Cluster.
                       type: string
                   required:
                   - profileName
