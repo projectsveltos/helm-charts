@@ -1,8 +1,12 @@
 # sveltos-dashboard
 
-![Version: 1.13.0](https://img.shields.io/badge/Version-1.13.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.13.0](https://img.shields.io/badge/AppVersion-1.13.0-informational?style=flat-square)
+![Version: 1.14.0](https://img.shields.io/badge/Version-1.14.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.14.0](https://img.shields.io/badge/AppVersion-1.14.0-informational?style=flat-square)
 
 A Helm chart for Sveltos dashboard
+
+## Requirements
+
+Kubernetes: `>=1.28.0-0`
 
 ## Values
 
@@ -13,8 +17,8 @@ A Helm chart for Sveltos dashboard
 | global.imagePullSecrets | list | `[]` |  |
 | dashboard.annotations | object | `{}` |  |
 | dashboard.dashboard.image.repository | string | `"projectsveltos/dashboard"` |  |
-| dashboard.dashboard.image.tag | string | `"v1.13.0"` |  |
-| dashboard.dashboard.image.digest | string | `"sha256:87689637ccdde2bf60fe35cc57b45b72fb8d6e28bce816fd066fe9469291fab1"` |  |
+| dashboard.dashboard.image.tag | string | `"v1.14.0"` |  |
+| dashboard.dashboard.image.digest | string | `"sha256:f0afecaf619121f2d9cc5d9b9a6510f57f10792770b920d686577168a9074d7d"` |  |
 | dashboard.dashboard.resources.limits.cpu | string | `"500m"` |  |
 | dashboard.dashboard.resources.limits.memory | string | `"512Mi"` |  |
 | dashboard.dashboard.resources.requests.cpu | string | `"100m"` |  |
@@ -47,13 +51,14 @@ A Helm chart for Sveltos dashboard
 | uiBackendManager.manager.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | uiBackendManager.manager.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | uiBackendManager.manager.image.repository | string | `"projectsveltos/ui-backend"` |  |
-| uiBackendManager.manager.image.tag | string | `"v1.13.0"` |  |
-| uiBackendManager.manager.image.digest | string | `"sha256:b74ff54c2c0ac1ffe099c627fea79f2611e824bfea1a5c6ce39a7c5deefc17fb"` |  |
+| uiBackendManager.manager.image.tag | string | `"v1.14.0"` |  |
+| uiBackendManager.manager.image.digest | string | `"sha256:c5244d5c5d1a04eb834dabfd3224f9292734b778a71f631f4b234f60d6cf1273"` |  |
 | uiBackendManager.manager.resources.limits.cpu | string | `"500m"` |  |
 | uiBackendManager.manager.resources.limits.memory | string | `"512Mi"` |  |
 | uiBackendManager.manager.resources.requests.cpu | string | `"100m"` |  |
 | uiBackendManager.manager.resources.requests.memory | string | `"128Mi"` |  |
 | uiBackendManager.podSecurityContext.runAsNonRoot | bool | `true` |  |
+| uiBackendManager.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | uiBackendManager.ports[0].port | int | `80` |  |
 | uiBackendManager.ports[0].protocol | string | `"TCP"` |  |
 | uiBackendManager.ports[0].targetPort | int | `8080` |  |

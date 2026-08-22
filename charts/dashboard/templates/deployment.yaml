@@ -41,6 +41,10 @@ spec:
         command:
         - /manager
         env:
+        - name: TOTAL_MEMORY_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.memory
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         image: {{ .Values.global.registry }}/{{ .Values.uiBackendManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.uiBackendManager.manager.image.digest }}{{- else }}:{{ .Values.uiBackendManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
