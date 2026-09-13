@@ -9,8 +9,21 @@ rules:
   - ""
   resources:
   - configmaps
+  verbs:
+  {{- if .Values.agent.managementCluster }}
+  - delete
+  {{- end }}
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
   - secrets
   verbs:
+  {{- if .Values.agent.managementCluster }}
+  - delete
+  {{- end }}
   - get
   - list
   - watch
