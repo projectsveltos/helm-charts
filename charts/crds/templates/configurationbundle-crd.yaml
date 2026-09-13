@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: configurationbundles.lib.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.21.0
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: configurationbundles.lib.projectsveltos.io
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
@@ -18,7 +18,8 @@ spec:
   - name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ConfigurationBundle is the Schema for the configurationbundle API
+        description: ConfigurationBundle is the Schema for the configurationbundle
+          API
         properties:
           apiVersion:
             description: |-
@@ -135,7 +136,8 @@ spec:
                   permissions to manage namespaces at the cluster level.
                 type: boolean
               timeout:
-                description: time to wait for Kubernetes operation (like Jobs for hooks)
+                description: time to wait for Kubernetes operation (like Jobs for
+                  hooks)
                 type: string
             type: object
           status:
@@ -152,4 +154,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status: {}

@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: classifiers.lib.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.21.0
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: classifiers.lib.projectsveltos.io
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
@@ -104,7 +104,8 @@ spec:
                             Evaluation stops at the first rule that returns true; subsequent
                             rules will not be evaluated.
                           items:
-                            description: CELRule defines a named CEL rule used in EvaluateCEL.
+                            description: CELRule defines a named CEL rule used in
+                              EvaluateCEL.
                             properties:
                               name:
                                 description: Name is a human-readable identifier for
@@ -224,8 +225,8 @@ spec:
                 - resourceSelectors
                 type: object
               kubernetesVersionConstraints:
-                description: KubernetesVersionConstraints allows to classify based on
-                  current kubernetes version
+                description: KubernetesVersionConstraints allows to classify based
+                  on current kubernetes version
                 items:
                   properties:
                     comparison:
@@ -304,8 +305,8 @@ spec:
                       type: object
                       x-kubernetes-map-type: atomic
                     failureMessage:
-                      description: FailureMessage provides more information about the
-                        error.
+                      description: FailureMessage provides more information about
+                        the error.
                       type: string
                     hash:
                       description: |-
@@ -417,4 +418,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status: {}

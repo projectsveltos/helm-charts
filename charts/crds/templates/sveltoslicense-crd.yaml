@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: sveltoslicenses.lib.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.21.0
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: sveltoslicenses.lib.projectsveltos.io
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
@@ -48,17 +48,18 @@ spec:
                 format: date-time
                 type: string
               features:
-                description: Features is a list of feature strings enabled by this license.
+                description: Features is a list of feature strings enabled by this
+                  license.
                 items:
                   type: string
                 type: array
               maxClusters:
-                description: MaxClusters is the maximum number of clusters allowed for
-                  this license.
+                description: MaxClusters is the maximum number of clusters allowed
+                  for this license.
                 type: integer
               message:
-                description: Message provides a human-readable explanation of the current
-                  license status.
+                description: Message provides a human-readable explanation of the
+                  current license status.
                 type: string
               status:
                 description: |-
@@ -80,4 +81,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status: {}
