@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: sets.lib.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.21.0
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: sets.lib.projectsveltos.io
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
@@ -42,8 +42,8 @@ spec:
               clusterRefs:
                 description: ClusterRefs identifies clusters to associate to.
                 items:
-                  description: ObjectReference contains enough information to let you
-                    inspect or modify the referred object.
+                  description: ObjectReference contains enough information to let
+                    you inspect or modify the referred object.
                   properties:
                     apiVersion:
                       description: API version of the referent.
@@ -146,8 +146,8 @@ spec:
                   MatchingClusterRefs reference all the clusters currently matching
                   ClusterSet/Set ClusterSelector
                 items:
-                  description: ObjectReference contains enough information to let you
-                    inspect or modify the referred object.
+                  description: ObjectReference contains enough information to let
+                    you inspect or modify the referred object.
                   properties:
                     apiVersion:
                       description: API version of the referent.
@@ -195,8 +195,8 @@ spec:
                   SelectedClusters reference all the cluster currently selected among
                   all the ones matching
                 items:
-                  description: ObjectReference contains enough information to let you
-                    inspect or modify the referred object.
+                  description: ObjectReference contains enough information to let
+                    you inspect or modify the referred object.
                   properties:
                     apiVersion:
                       description: API version of the referent.
@@ -245,4 +245,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status: {}

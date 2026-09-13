@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: classifierreports.lib.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.21.0
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: classifierreports.lib.projectsveltos.io
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
@@ -73,8 +73,8 @@ spec:
             description: ClassifierReportStatus defines the observed state of ClassifierReport
             properties:
               deploymentStatus:
-                description: DeploymentStatus is the current deployment status of the
-                  Classifier on the cluster.
+                description: DeploymentStatus is the current deployment status of
+                  the Classifier on the cluster.
                 enum:
                 - Provisioning
                 - Provisioned
@@ -131,4 +131,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status: {}

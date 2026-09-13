@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: eventreports.lib.projectsveltos.io
   annotations:
-    controller-gen.kubebuilder.io/version: v0.21.0
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: eventreports.lib.projectsveltos.io
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 spec:
@@ -70,8 +70,8 @@ spec:
                 description: MatchingResources contains a list of resources matching
                   an EventSource
                 items:
-                  description: ObjectReference contains enough information to let you
-                    inspect or modify the referred object.
+                  description: ObjectReference contains enough information to let
+                    you inspect or modify the referred object.
                   properties:
                     apiVersion:
                       description: API version of the referent.
@@ -148,4 +148,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status: {}
