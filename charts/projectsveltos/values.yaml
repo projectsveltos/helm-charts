@@ -32,8 +32,8 @@ accessManager:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/access-manager
-      tag: v1.14.0
-      digest: sha256:b1c03cab5fbe7f18bd282afdddc33e042356a4bc3a7bd78ce34dd557f5920df1
+      tag: v1.15.0
+      digest: sha256:1b396a28296e83428e400c007516c16641e1749e35f84304e7e912da48feca93
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -64,8 +64,8 @@ addonController:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/addon-controller
-      tag: v1.14.0
-      digest: sha256:a166696b97f6ae9fc629193cfb0b1db0f4577b023c21e3e0052a6694609f6d2b
+      tag: v1.15.0
+      digest: sha256:8eb5a2a2a4749667806008f8e7a2f37b3b8cca048bcd6930670634f74727aabf
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -81,14 +81,14 @@ addonController:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -107,8 +107,8 @@ addonController:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/addon-controller
-      tag: v1.14.0
-      digest: sha256:a166696b97f6ae9fc629193cfb0b1db0f4577b023c21e3e0052a6694609f6d2b
+      tag: v1.15.0
+      digest: sha256:8eb5a2a2a4749667806008f8e7a2f37b3b8cca048bcd6930670634f74727aabf
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -169,14 +169,14 @@ classifierManager:
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --report-mode=0
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -195,8 +195,8 @@ classifierManager:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/classifier
-      tag: v1.14.0
-      digest: sha256:50a65fd53210427dc2ac2a54714ac8a8257b5ec46a84b08de43339c5fcf6a60d
+      tag: v1.15.0
+      digest: sha256:fe379e5bcb87eb293fc36fec9867df585c03e811f3ff8c883cbd3635bcc9d4f6
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -239,8 +239,8 @@ clusterInventory:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/clusterinventory-controller
-      tag: v1.14.0
-      digest: sha256:282e19d16df97cf5e90957608c07acee76b3478d77d171bf8388adbaf6e3d495
+      tag: v1.15.0
+      digest: sha256:2cce013972bad621b684e74bee127ec4f3ab48d2b903ac6e6e07b087893a4f2d
     imagePullPolicy: IfNotPresent
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
@@ -249,8 +249,8 @@ clusterInventory:
         cpu: 500m
         memory: 512Mi
       requests:
-        cpu: 100m
-        memory: 256Mi
+        cpu: 10m
+        memory: 128Mi
   nodeSelector: {}
   # @schema skipProperties:true;additionalProperties:true
   # -- The SecurityContext for the pod
@@ -275,13 +275,13 @@ eventManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -300,8 +300,8 @@ eventManager:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/event-manager
-      tag: v1.14.0
-      digest: sha256:0101dd4832db62aefae0cd0c23db017ca452afc6231bbfb5eb0075294e2f7092
+      tag: v1.15.0
+      digest: sha256:52f1d173c43d80de1b69175c95ca60668f1fe1378767d12564d85bbe0df79f97
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -339,13 +339,13 @@ hcManager:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
     extraArgs: {}
     argsAgentMgmtCluster:
       - --diagnostics-address=:8443
       - --shard-key=
       - --v=5
-      - --version=v1.14.0
+      - --version=v1.15.0
       - --agent-in-mgmt-cluster=true
     extraArgsAgentMgmtCluster: {}
     extraEnv: []
@@ -364,8 +364,8 @@ hcManager:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/healthcheck-manager
-      tag: v1.14.0
-      digest: sha256:07113fb3e50a1c30105982d2668189024b58497220b900536e25b776fff4b103
+      tag: v1.15.0
+      digest: sha256:499a2593435fc15863818b7ceed5fe876b8d2c0c2c9eb42ef10374f5408782c2
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -410,8 +410,8 @@ crdManagerJob:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/crd-manager
-      tag: v1.14.0
-      digest: sha256:62c541e20f69ad95d6115e47efd76710d7e6eb66a92a19119cb445f29d11ce2a
+      tag: v1.15.0
+      digest: sha256:0e20f9836f18b12ad76040b2738840712c558480cee49ce74a9ecb8fe32b428b
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -447,8 +447,8 @@ registerMgmtClusterJob:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/register-mgmt-cluster
-      tag: v1.14.0
-      digest: sha256:f6e99d6a3df18804c64fec5c27eb85ea112a61a7c492c782e88ac469f26ad489
+      tag: v1.15.0
+      digest: sha256:30a501da7b1c30efaa4c3a70216886d0a61b8695ac8ef57427fda053ec5dd14d
     imagePullPolicy: IfNotPresent
     nodeSelector: {}
     tolerations: []
@@ -484,8 +484,8 @@ scManager:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/sveltoscluster-manager
-      tag: v1.14.0
-      digest: sha256:e6bff2b85843621f03028e63fd32d4a34719459560ac8ebd297b05bc4d8b73f2
+      tag: v1.15.0
+      digest: sha256:b032d483935efb77aa9ffddf8aafcdc024bd05ebe2bbb312987e7178b30f9d25
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -552,8 +552,8 @@ shardController:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/shard-controller
-      tag: v1.14.0
-      digest: sha256:4616d10393623be2c80bd3cfecca532d3e59702835a6ce2d5970bd02f318bc4f
+      tag: v1.15.0
+      digest: sha256:872e772ff1a14bd1f146ca194c49faed7b938347c80b67bed082673e38a69e83
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -601,8 +601,8 @@ techsupportController:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/techsupport
-      tag: v1.14.0
-      digest: sha256:35a331c70fe742a2022d0f63b7b8214e8cc171f39a679cbd40cb726ea046c205
+      tag: v1.15.0
+      digest: sha256:44826fb1280d80ecaa55be67d47c0012c3bfaa0bcbd6a2dd7b49c783c9003ea4
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -648,8 +648,8 @@ mcpServer:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/mcp-server
-      tag: v1.14.0
-      digest: sha256:c637a3482c6564c9392ffc5773b109bc7f750661e0b19bc4642d092a2448d9a2
+      tag: v1.15.0
+      digest: sha256:7bbc39bf8f100d62b834011cadfdbbc33ca693b6b783edd423e385b1a8c5c3fc
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
