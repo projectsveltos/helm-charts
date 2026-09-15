@@ -81,6 +81,8 @@ dashboard:
 #     clientId: ""
 #     # Full redirect URI after OIDC login (defaults to <origin>/oidc-callback if unset)
 #     redirectUri: ""
+#     # Scopes to request from your OIDC provider (defaults to "openid profile email offline_access" if unset)
+#     scopes: ""
 
 kubernetesClusterDomain: cluster.local
 uiBackendManager:
