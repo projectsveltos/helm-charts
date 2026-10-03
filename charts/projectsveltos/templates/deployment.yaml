@@ -47,9 +47,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.addonController.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.addonController) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
   {{- if .Values.agent.managementCluster }}
@@ -257,9 +257,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.accessManager.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.accessManager) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
       - args:
@@ -382,9 +382,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.scManager.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.scManager) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
       - args:
@@ -505,9 +505,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.hcManager.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.hcManager) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
   {{- if .Values.agent.managementCluster }}
@@ -643,9 +643,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.eventManager.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.eventManager) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
   {{- if .Values.agent.managementCluster }}
@@ -784,9 +784,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.classifierManager.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.classifierManager) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
     {{- if .Values.agent.managementCluster }}
@@ -954,9 +954,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.shardController.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.shardController) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
   {{- if .Values.agent.managementCluster }}
@@ -1117,9 +1117,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.techsupportController.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.techsupportController) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
       - args:
@@ -1232,9 +1232,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.mcpServer.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.mcpServer) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
       - args:
@@ -1356,13 +1356,13 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.mcpServer.tolerations }}
+      {{- with .Values.clusterInventory.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.mcpServer.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.clusterInventory) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       containers:
       - args: {{- toYaml .Values.clusterInventory.manager.args | nindent 8 }}
