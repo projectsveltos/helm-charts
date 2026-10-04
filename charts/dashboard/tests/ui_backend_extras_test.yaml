@@ -1,0 +1,98 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: ui-backend extra args, env and volumes
+templates:
+  - templates/deployment.yaml
+# Rendered order in templates/deployment.yaml: 0 ServiceAccount, 1 ui-backend-manager Deployment, 2 dashboard Deployment
+tests:
+  - it: has no extra volumes, env or flags by default
+    documentIndex: 1
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].args
+          value:
+            - --diagnostics-address=:8443
+            - --v=5
+      - notExists:
+          path: spec.template.spec.volumes
+      - notExists:
+          path: spec.template.spec.containers[0].volumeMounts
+      - lengthEqual:
+          path: spec.template.spec.containers[0].env
+          count: 2
+  - it: appends extraArgs, the empty value renders a bare flag
+    set:
+      uiBackendManager.manager.extraArgs:
+        oidc-proxy-host: https://kube-oidc-proxy.kube-oidc-proxy.svc.cluster.local:443
+        oidc-proxy-ca-file: /etc/oidc-proxy-ca/ca.crt
+        some-flag: ""
+    documentIndex: 1
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].args
+          value:
+            - --diagnostics-address=:8443
+            - --v=5
+            - --oidc-proxy-ca-file=/etc/oidc-proxy-ca/ca.crt
+            - --oidc-proxy-host=https://kube-oidc-proxy.kube-oidc-proxy.svc.cluster.local:443
+            - --some-flag
+  - it: appends extraEnv
+    set:
+      uiBackendManager.manager.extraEnv:
+        - name: HTTPS_PROXY
+          value: http://proxy:3128
+    documentIndex: 1
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: HTTPS_PROXY
+            value: http://proxy:3128
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: KUBERNETES_CLUSTER_DOMAIN
+            value: cluster.local
+  - it: mounts a secret and a configMap
+    set:
+      uiBackendManager.manager.extraVolumes:
+        - name: oidc-proxy-ca
+          mountPath: /etc/oidc-proxy-ca
+          readOnly: true
+          secret:
+            secretName: kube-oidc-proxy-ca
+        - name: proxy-config
+          mountPath: /etc/proxy/config
+          subPath: config
+          configMap:
+            name: proxy-kubeconfig
+    documentIndex: 1
+    asserts:
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - name: oidc-proxy-ca
+              secret:
+                secretName: kube-oidc-proxy-ca
+            - name: proxy-config
+              configMap:
+                name: proxy-kubeconfig
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - name: oidc-proxy-ca
+              mountPath: /etc/oidc-proxy-ca
+              readOnly: true
+            - name: proxy-config
+              mountPath: /etc/proxy/config
+              subPath: config
+  - it: leaves the dashboard Deployment untouched
+    set:
+      uiBackendManager.manager.extraVolumes:
+        - name: oidc-proxy-ca
+          mountPath: /etc/oidc-proxy-ca
+          secret:
+            secretName: kube-oidc-proxy-ca
+    documentIndex: 2
+    asserts:
+      - notExists:
+          path: spec.template.spec.volumes

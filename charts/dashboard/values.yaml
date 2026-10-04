@@ -7,8 +7,8 @@ dashboard:
   dashboard:
     image:
       repository: projectsveltos/dashboard
-      tag: v1.15.0
-      digest: sha256:1380c9314dd4955f3c324ef1c933d15f7b9698367653fa2f955a9f27229d4327
+      tag: v1.16.0
+      digest: sha256:c231fab2d0e109c2405a02b2bedc03c72b3b935ffabd8958bdb82984ac350815
     resources:
       limits:
         cpu: 500m
@@ -90,6 +90,19 @@ uiBackendManager:
     args:
       - --diagnostics-address=:8443
       - --v=5
+    # -- Additional ui-backend flags, as flag: value (an empty value renders the bare flag). Set oidc-proxy-host (and oidc-proxy-ca-file) to send the dashboard user's token through an OIDC-aware proxy such as kube-oidc-proxy.
+    extraArgs: {}
+    #  oidc-proxy-host: https://kube-oidc-proxy.kube-oidc-proxy.svc.cluster.local:443
+    #  oidc-proxy-ca-file: /etc/oidc-proxy-ca/ca.crt
+    # -- Additional environment variables for ui-backend, as a list of Kubernetes EnvVar entries. Do not point KUBERNETES_SERVICE_HOST at an OIDC proxy: ui-backend's own ServiceAccount calls must keep reaching the real API server (use extraArgs oidc-proxy-host for the user tokens instead).
+    extraEnv: []
+    # -- Additional volumes mounted in ui-backend. Each entry takes name, mountPath, optional subPath and readOnly, and a secret or configMap volume source.
+    extraVolumes: []
+    #  - name: oidc-proxy-ca
+    #    mountPath: /etc/oidc-proxy-ca
+    #    readOnly: true
+    #    secret:
+    #      secretName: kube-oidc-proxy-ca
     containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -97,8 +110,8 @@ uiBackendManager:
           - ALL
     image:
       repository: projectsveltos/ui-backend
-      tag: v1.15.0
-      digest: sha256:33efd0a00a5491e22c9cb578d1c7532733930af724ab566e8392cbd967651f49
+      tag: v1.16.0
+      digest: sha256:aed29fcf5937ca4e9de35766684d23eddb128943d81e18096444e464bdfc3da1
     resources:
       limits:
         cpu: 500m
