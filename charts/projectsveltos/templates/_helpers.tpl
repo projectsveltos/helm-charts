@@ -116,3 +116,27 @@ Image helper
 {{- .component.image.registry | default .ctx.Values.global.registry -}}/{{- .component.image.repository -}}
 {{- if .ctx.Values.global.useDigest }}@{{ .component.image.digest }}{{- else }}:{{- .component.image.tag | default .ctx.Chart.AppVersion -}}{{- end }}
 {{- end }}
+
+{{/*
+Authentication for the metrics endpoint scraped by the ServiceMonitors.
+authorization (for instance a Secret holding a bearer token) takes precedence over bearerTokenFile.
+*/}}
+{{- define "projectsveltos.serviceMonitorAuth" -}}
+{{- $serviceMonitor := .Values.prometheus.serviceMonitor -}}
+{{- if $serviceMonitor.authorization -}}
+authorization:
+  {{- toYaml $serviceMonitor.authorization | nindent 2 }}
+{{- else if $serviceMonitor.bearerTokenFile -}}
+bearerTokenFile: {{ $serviceMonitor.bearerTokenFile | quote }}
+{{- end -}}
+{{- end }}
+
+{{/*
+nodeSelector of a pod: global.nodeSelector merged with the component's own nodeSelector.
+On the same key the component's value wins. Renders nothing when both are empty.
+Usage: include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.addonController)
+*/}}
+{{- define "projectsveltos.nodeSelector" -}}
+{{- $nodeSelector := merge (deepCopy (.component.nodeSelector | default dict)) (.ctx.Values.global.nodeSelector | default dict) -}}
+{{- with $nodeSelector }}{{ toYaml . }}{{ end }}
+{{- end }}

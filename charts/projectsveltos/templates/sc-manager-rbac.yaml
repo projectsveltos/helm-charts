@@ -8,12 +8,26 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
   - secrets
   verbs:
   - get
   - list
   - update
   - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts/token
+  verbs:
+  - create
 - apiGroups:
   - authentication.k8s.io
   resources:
@@ -29,15 +43,8 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
-  - debuggingconfigurations
-  - sveltoslicenses
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - lib.projectsveltos.io
-  resources:
+  - configurationbundles
+  - configurationgroups
   - sveltosclusters
   verbs:
   - create
@@ -46,6 +53,25 @@ rules:
   - list
   - patch
   - update
+  - watch
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - configurationbundles/status
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - configurationgroups/status
+  - debuggingconfigurations
+  - sveltoslicenses
+  verbs:
+  - get
+  - list
   - watch
 - apiGroups:
   - lib.projectsveltos.io

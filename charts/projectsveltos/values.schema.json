@@ -797,6 +797,10 @@
         "imagePullSecrets": {
           "type": "array"
         },
+        "nodeSelector": {
+          "description": "NodeSelector applied to every Deployment and Job of this chart. A component's own nodeSelector is merged over it (same key: the component wins). Agents deployed in managed clusters are not affected: use their patch ConfigMaps.",
+          "type": "object"
+        },
         "registry": {
           "type": "string"
         },
@@ -1021,6 +1025,28 @@
       "properties": {
         "enabled": {
           "type": "boolean"
+        },
+        "serviceMonitor": {
+          "type": "object",
+          "properties": {
+            "authorization": {
+              "description": "Authorization for the ServiceMonitor endpoints, used instead of bearerTokenFile when set. Needed by scrapers rejecting bearerTokenFile (for instance Grafana Alloy 1.19+). The referenced Secret must be in the release namespace.",
+              "type": "object"
+            },
+            "bearerTokenFile": {
+              "description": "File holding the bearer token used to scrape metrics. Ignored when authorization is set.",
+              "type": "string"
+            },
+            "tlsConfig": {
+              "description": "TLS configuration of the ServiceMonitor endpoints. The metrics endpoints use a self-signed certificate: set insecureSkipVerify to false (or null to drop it) and provide a CA (for instance ca.secret) to verify it.",
+              "type": "object",
+              "properties": {
+                "insecureSkipVerify": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
         }
       }
     },

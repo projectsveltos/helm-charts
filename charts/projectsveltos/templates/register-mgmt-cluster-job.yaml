@@ -64,9 +64,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.registerMgmtClusterJob.registerMgmtCluster) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       {{- with .Values.registerMgmtClusterJob.registerMgmtCluster.extraVolumes }}
       volumes:

@@ -21,9 +21,6 @@ rules:
   resources:
   - secrets
   verbs:
-  {{- if .Values.agent.managementCluster }}
-  - delete
-  {{- end }}
   - get
   - list
   - watch

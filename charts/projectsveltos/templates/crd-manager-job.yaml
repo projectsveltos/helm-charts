@@ -40,9 +40,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.crdManagerJob.crdManager.nodeSelector }}
+      {{- with include "projectsveltos.nodeSelector" (dict "ctx" . "component" .Values.crdManagerJob.crdManager) }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- . | nindent 8 }}
       {{- end }}
       {{- with .Values.crdManagerJob.crdManager.extraVolumes }}
       volumes:

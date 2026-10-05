@@ -1,0 +1,124 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: nodeSelector
+templates:
+  - templates/deployment.yaml
+  - templates/configmap.yaml
+  - templates/crd-manager-job.yaml
+  - templates/register-mgmt-cluster-job.yaml
+set:
+  clusterInventory.enabled: true
+tests:
+  - it: no nodeSelector by default
+    documentSelector:
+      path: kind
+      value: Deployment
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - notExists:
+          path: spec.template.spec.nodeSelector
+  - it: global.nodeSelector is applied to every Deployment
+    set:
+      global.nodeSelector:
+        kubernetes.io/os: linux
+    documentSelector:
+      path: kind
+      value: Deployment
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - hasDocuments:
+          count: 10
+          filterAware: true
+      - equal:
+          path: spec.template.spec.nodeSelector
+          value:
+            kubernetes.io/os: linux
+  - it: global.nodeSelector is applied to every Job
+    set:
+      global.nodeSelector:
+        kubernetes.io/os: linux
+    documentSelector:
+      path: kind
+      value: Job
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - hasDocuments:
+          count: 1
+          filterAware: true
+      - equal:
+          path: spec.template.spec.nodeSelector
+          value:
+            kubernetes.io/os: linux
+  - it: component nodeSelector is merged over global.nodeSelector
+    set:
+      global.nodeSelector:
+        kubernetes.io/os: linux
+        pool: shared
+      scManager.nodeSelector:
+        pool: sveltos
+        disk: ssd
+    documentSelector:
+      path: metadata.name
+      value: sc-manager
+    template: templates/deployment.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.nodeSelector
+          value:
+            kubernetes.io/os: linux
+            pool: sveltos
+            disk: ssd
+  - it: component nodeSelector alone still works
+    set:
+      accessManager.nodeSelector:
+        disk: ssd
+    documentSelector:
+      path: metadata.name
+      value: access-manager
+    template: templates/deployment.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.nodeSelector
+          value:
+            disk: ssd
+  - it: job nodeSelector is merged over global.nodeSelector
+    set:
+      global.nodeSelector:
+        kubernetes.io/os: linux
+      crdManagerJob.crdManager.nodeSelector:
+        disk: ssd
+    template: templates/crd-manager-job.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.nodeSelector
+          value:
+            kubernetes.io/os: linux
+            disk: ssd
+  - it: clusterinventory-controller uses clusterInventory nodeSelector and tolerations
+    set:
+      mcpServer.nodeSelector:
+        for: mcp
+      mcpServer.tolerations:
+        - key: mcp
+          operator: Exists
+      clusterInventory.nodeSelector:
+        for: inventory
+      clusterInventory.tolerations:
+        - key: inventory
+          operator: Exists
+    documentSelector:
+      path: metadata.name
+      value: clusterinventory-controller
+    template: templates/deployment.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.nodeSelector
+          value:
+            for: inventory
+      - equal:
+          path: spec.template.spec.tolerations
+          value:
+            - key: inventory
+              operator: Exists

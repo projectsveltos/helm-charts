@@ -1,0 +1,118 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: ServiceMonitor endpoint authentication
+templates:
+  - templates/addon-controller.yaml
+  - templates/classifier-manager.yaml
+  - templates/event-manager.yaml
+  - templates/sc-manager.yaml
+tests:
+  - it: no ServiceMonitor by default
+    asserts:
+      - hasDocuments:
+          count: 1
+  - it: uses bearerTokenFile by default
+    set:
+      prometheus.enabled: true
+    documentSelector:
+      path: kind
+      value: ServiceMonitor
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: spec.endpoints[0].bearerTokenFile
+          value: /var/run/secrets/kubernetes.io/serviceaccount/token
+      - notExists:
+          path: spec.endpoints[0].authorization
+      - equal:
+          path: spec.endpoints[0].tlsConfig.insecureSkipVerify
+          value: true
+  - it: authorization replaces bearerTokenFile
+    set:
+      prometheus.enabled: true
+      prometheus.serviceMonitor.authorization:
+        type: Bearer
+        credentials:
+          name: sveltos-metrics-token
+          key: token
+    documentSelector:
+      path: kind
+      value: ServiceMonitor
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: spec.endpoints[0].authorization
+          value:
+            type: Bearer
+            credentials:
+              name: sveltos-metrics-token
+              key: token
+      - notExists:
+          path: spec.endpoints[0].bearerTokenFile
+  - it: bearerTokenFile can be changed
+    set:
+      prometheus.enabled: true
+      prometheus.serviceMonitor.bearerTokenFile: /tmp/token
+    documentSelector:
+      path: kind
+      value: ServiceMonitor
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: spec.endpoints[0].bearerTokenFile
+          value: /tmp/token
+  - it: no authentication when bearerTokenFile is cleared
+    set:
+      prometheus.enabled: true
+      prometheus.serviceMonitor.bearerTokenFile: null
+    documentSelector:
+      path: kind
+      value: ServiceMonitor
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - notExists:
+          path: spec.endpoints[0].bearerTokenFile
+      - notExists:
+          path: spec.endpoints[0].authorization
+      - equal:
+          path: spec.endpoints[0].path
+          value: /metrics
+  - it: tlsConfig can be overridden
+    set:
+      prometheus.enabled: true
+      prometheus.serviceMonitor.tlsConfig:
+        insecureSkipVerify: false
+        ca:
+          secret:
+            name: sveltos-metrics-ca
+            key: ca.crt
+    documentSelector:
+      path: kind
+      value: ServiceMonitor
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - equal:
+          path: spec.endpoints[0].tlsConfig
+          value:
+            insecureSkipVerify: false
+            ca:
+              secret:
+                name: sveltos-metrics-ca
+                key: ca.crt
+  - it: tlsConfig is omitted when empty
+    set:
+      prometheus.enabled: true
+      prometheus.serviceMonitor.tlsConfig:
+        insecureSkipVerify: null
+    documentSelector:
+      path: kind
+      value: ServiceMonitor
+      matchMany: true
+      skipEmptyTemplates: true
+    asserts:
+      - notExists:
+          path: spec.endpoints[0].tlsConfig
