@@ -844,6 +844,9 @@ spec:
                                                                                     (.tar.gz) of the Kustomize directory
                                                           "oci://"                — OCI registry artifact whose layers are extracted
                                                                                     the same way, preserving the directory tree
+                                                        URL can be expressed as a template and instantiated using any cluster field,
+                                                        so a single profile can fetch different content for each matching cluster,
+                                                        e.g. "oci://registry.example/space/app-{{ `{{ .Cluster.metadata.name }}` }}:latest".
                                                     pattern: ^(https?|oci)://
                                                     type: string
                                             required:
@@ -890,11 +893,11 @@ spec:
                                                 to do more than just replace placeholders. Variables can be used to dynamically
                                                 construct values based on other resources or variables within the Kustomize output.
                                                 For example, imagine you have a Region key with a template value like:
-                                                {{ quote " '{{ index .Cluster.metadata.labels \"region\" }}' "}}.
+                                                '{{ `{{ index .Cluster.metadata.labels "region" }}` }}'.
                                                 This template retrieves the region label from the cluster instance metadata.
                                                 Finally, Sveltos uses these processed values to fill placeholders in the Kustomize output.
                                                 The output itself can also contain templates, like:
-                                                region: {{ quote " '{{ default \"west\" .Region }}' "}}.
+                                                region: '{{ `{{ default "west" .Region }}` }}'.
                                                 This way, the final output from Kustomize will have the region set dynamically based on
                                                 the actual region retrieved earlier.
                                             type: object
@@ -908,11 +911,11 @@ spec:
                                                 to do more than just replace placeholders. Variables can be used to dynamically
                                                 construct values based on other resources or variables within the Kustomize output.
                                                 For example, imagine you have a Region key with a template value like:
-                                                {{ quote " '{{ index .Cluster.metadata.labels \"region\" }}' "}}.
+                                                '{{ `{{ index .Cluster.metadata.labels "region" }}` }}'.
                                                 This template retrieves the region label from the cluster instance metadata.
                                                 Finally, Sveltos uses these processed values to fill placeholders in the Kustomize output.
                                                 The output itself can also contain templates, like:
-                                                region: {{ quote " '{{ default \"west\" .Region }}' "}}.
+                                                region: '{{ `{{ default "west" .Region }}` }}'.
                                                 This way, the final output from Kustomize will have the region set dynamically based on
                                                 the actual region retrieved earlier.
                                             items:
@@ -1218,6 +1221,9 @@ spec:
                                                           "oci://"                — OCI registry artifact whose layers are accepted
                                                                                     in the same shapes: raw YAML/JSON, gzip-compressed
                                                                                     YAML/JSON, uncompressed tar, or gzip-compressed tar
+                                                        URL can be expressed as a template and instantiated using any cluster field,
+                                                        so a single profile can fetch different content for each matching cluster,
+                                                        e.g. "oci://registry.example/space/app-{{ `{{ .Cluster.metadata.name }}` }}:latest".
                                                     pattern: ^(https?|oci)://
                                                     type: string
                                             required:
