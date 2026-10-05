@@ -38,6 +38,13 @@ spec:
       {{- end }}
       containers:
       - args: {{- toYaml .Values.uiBackendManager.manager.args | nindent 8 }}
+      {{- range $key, $value := .Values.uiBackendManager.manager.extraArgs }}
+        {{- if $value }}
+        - --{{ $key }}={{ $value }}
+        {{- else }}
+        - --{{ $key }}
+        {{- end }}
+      {{- end }}
         command:
         - /manager
         env:
@@ -47,6 +54,9 @@ spec:
               resource: limits.memory
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
+        {{- with .Values.uiBackendManager.manager.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.global.registry }}/{{ .Values.uiBackendManager.manager.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.uiBackendManager.manager.image.digest }}{{- else }}:{{ .Values.uiBackendManager.manager.image.tag | default .Chart.AppVersion }}{{- end }}
         livenessProbe:
           failureThreshold: 3
@@ -78,6 +88,10 @@ spec:
         resources: {{- toYaml .Values.uiBackendManager.manager.resources | nindent 10 }}
         securityContext: {{- toYaml .Values.uiBackendManager.manager.containerSecurityContext
           | nindent 10 }}
+        {{- with .Values.uiBackendManager.manager.extraVolumes }}
+        volumeMounts:
+        {{- include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       securityContext: {{- toYaml .Values.uiBackendManager.podSecurityContext | nindent
         8 }}
       serviceAccountName: ui-backend-manager
@@ -85,6 +99,10 @@ spec:
       nodeSelector: {{- toYaml .Values.uiBackendManager.nodeSelector | nindent 8 }}
       affinity: {{- toYaml .Values.uiBackendManager.affinity | nindent 8 }}
       tolerations: {{- toYaml .Values.uiBackendManager.tolerations | nindent 8 }}
+      {{- with .Values.uiBackendManager.manager.extraVolumes }}
+      volumes:
+      {{- include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
 ---
 apiVersion: apps/v1
 kind: Deployment

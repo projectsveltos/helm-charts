@@ -236,6 +236,18 @@
                                 }
                             }
                         },
+                        "extraArgs": {
+                            "description": "Additional ui-backend flags, as flag: value (an empty value renders the bare flag). To send the dashboard user's token through an OIDC-aware proxy, set oidc-proxy-host and oidc-proxy-ca-file.",
+                            "type": "object"
+                        },
+                        "extraEnv": {
+                            "description": "Additional environment variables for ui-backend, as a list of Kubernetes EnvVar entries.",
+                            "type": "array"
+                        },
+                        "extraVolumes": {
+                            "description": "Additional volumes, mounted in ui-backend. Each entry takes name, mountPath, optional subPath and readOnly, and a secret or configMap volume source.",
+                            "type": "array"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {
