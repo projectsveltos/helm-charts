@@ -237,7 +237,7 @@
                             }
                         },
                         "extraArgs": {
-                            "description": "Additional ui-backend flags, as flag: value (an empty value renders the bare flag). To send the dashboard user's token through an OIDC-aware proxy, set oidc-proxy-host and oidc-proxy-ca-file.",
+                            "description": "Additional ui-backend flags, as flag: value (an empty value renders the bare flag). To send the dashboard user's token through an OIDC-aware proxy, set oidc-proxy-host and oidc-proxy-ca-file. Every user token then goes to the proxy, including a ServiceAccount token from the manual login, which the proxy refuses unless token passthrough is enabled on it.",
                             "type": "object"
                         },
                         "extraEnv": {

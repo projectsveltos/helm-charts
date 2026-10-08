@@ -151,6 +151,13 @@ spec:
         - name: OIDC_SCOPE
           value: {{ .scopes | quote }}
         {{- end }}
+        {{- if .tokenType }}
+        {{- if not (has .tokenType (list "access_token" "id_token")) }}
+        {{- fail (printf "auth.oidc.tokenType must be access_token or id_token, got %q" .tokenType) }}
+        {{- end }}
+        - name: OIDC_TOKEN_TYPE
+          value: {{ .tokenType | quote }}
+        {{- end }}
         {{- end }}
         image: {{ .Values.global.registry }}/{{ .Values.dashboard.dashboard.image.repository }}{{- if .Values.global.useDigest }}@{{ .Values.dashboard.dashboard.image.digest }}{{- else }}:{{ .Values.dashboard.dashboard.image.tag | default .Chart.AppVersion }}{{- end }}
         name: dashboard

@@ -1,0 +1,58 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: dashboard OIDC token type
+templates:
+  - templates/deployment.yaml
+# Rendered order in templates/deployment.yaml: 0 ServiceAccount, 1 ui-backend-manager Deployment, 2 dashboard Deployment
+tests:
+  - it: sets no OIDC environment by default
+    documentIndex: 2
+    asserts:
+      - lengthEqual:
+          path: spec.template.spec.containers[0].env
+          count: 2
+  - it: leaves the token type to the dashboard default when OIDC is set without it
+    set:
+      auth.oidc.issuer: https://idp.example.com
+      auth.oidc.clientId: sveltos-dashboard
+    documentIndex: 2
+    asserts:
+      - lengthEqual:
+          path: spec.template.spec.containers[0].env
+          count: 4
+      - notContains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: OIDC_TOKEN_TYPE
+            value: id_token
+  - it: passes the token type to the dashboard
+    set:
+      auth.oidc.issuer: https://idp.example.com
+      auth.oidc.clientId: sveltos-dashboard
+      auth.oidc.tokenType: id_token
+    documentIndex: 2
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: OIDC_TOKEN_TYPE
+            value: id_token
+  - it: accepts access_token explicitly
+    set:
+      auth.oidc.issuer: https://idp.example.com
+      auth.oidc.clientId: sveltos-dashboard
+      auth.oidc.tokenType: access_token
+    documentIndex: 2
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: OIDC_TOKEN_TYPE
+            value: access_token
+  - it: rejects a token type that is neither access_token nor id_token
+    set:
+      auth.oidc.issuer: https://idp.example.com
+      auth.oidc.clientId: sveltos-dashboard
+      auth.oidc.tokenType: bogus
+    asserts:
+      - failedTemplate:
+          errorMessage: auth.oidc.tokenType must be access_token or id_token, got "bogus"

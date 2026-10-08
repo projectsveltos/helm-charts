@@ -7,8 +7,8 @@ dashboard:
   dashboard:
     image:
       repository: projectsveltos/dashboard
-      tag: v1.16.0
-      digest: sha256:c231fab2d0e109c2405a02b2bedc03c72b3b935ffabd8958bdb82984ac350815
+      tag: v1.16.1
+      digest: sha256:5b068eeee64eee7195a5198f4849a04fa9a962a50d8597a19caa9fe9befbea9f
     resources:
       limits:
         cpu: 500m
@@ -83,6 +83,10 @@ dashboard:
 #     redirectUri: ""
 #     # Scopes to request from your OIDC provider (defaults to "openid profile email offline_access" if unset)
 #     scopes: ""
+#     # Which token of the login is sent to the backend as the bearer token: "access_token" (default) or "id_token".
+#     # Use "id_token" when the provider issues access tokens that are encrypted (JWE) or opaque: the Kubernetes API
+#     # server and kube-oidc-proxy can only verify signed JWTs, which the ID token is.
+#     tokenType: ""
 
 kubernetesClusterDomain: cluster.local
 uiBackendManager:
@@ -90,7 +94,7 @@ uiBackendManager:
     args:
       - --diagnostics-address=:8443
       - --v=5
-    # -- Additional ui-backend flags, as flag: value (an empty value renders the bare flag). Set oidc-proxy-host (and oidc-proxy-ca-file) to send the dashboard user's token through an OIDC-aware proxy such as kube-oidc-proxy.
+    # -- Additional ui-backend flags, as flag: value (an empty value renders the bare flag). Set oidc-proxy-host (and oidc-proxy-ca-file) to send the dashboard user's token through an OIDC-aware proxy such as kube-oidc-proxy. Every user token goes to the proxy, including a ServiceAccount token from the manual login, which the proxy refuses unless token passthrough is enabled on it.
     extraArgs: {}
     #  oidc-proxy-host: https://kube-oidc-proxy.kube-oidc-proxy.svc.cluster.local:443
     #  oidc-proxy-ca-file: /etc/oidc-proxy-ca/ca.crt
@@ -110,8 +114,8 @@ uiBackendManager:
           - ALL
     image:
       repository: projectsveltos/ui-backend
-      tag: v1.16.0
-      digest: sha256:aed29fcf5937ca4e9de35766684d23eddb128943d81e18096444e464bdfc3da1
+      tag: v1.16.1
+      digest: sha256:f6fa338637ebb0df857f325a6f778a35949c27370c85e7836d3af1b58e73766e
     resources:
       limits:
         cpu: 500m
