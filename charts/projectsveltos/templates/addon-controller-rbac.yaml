@@ -171,7 +171,6 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
-  - clusterhealthchecks
   - configurationgroups/status
   - debuggingconfigurations
   - eventtriggers
@@ -184,9 +183,11 @@ rules:
 - apiGroups:
   - lib.projectsveltos.io
   resources:
+  - clusterhealthchecks
   - clustersets
   - configurationbundles
   - configurationgroups
+  - healthchecks
   - reloaders
   - resourcesummaries
   - sets
