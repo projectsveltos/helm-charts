@@ -1,0 +1,93 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sveltos-dashboard-editor
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - cluster.x-k8s.io
+  resources:
+  - clusters
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - config.projectsveltos.io
+  resources:
+  - clustersummaries
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - config.projectsveltos.io
+  resources:
+  - clusterprofiles
+  - profiles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - update
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - classifiers
+  - eventtriggers
+  - managementclusterclassifiers
+  - sveltosclusters
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sveltos-dashboard-viewer
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - cluster.x-k8s.io
+  resources:
+  - clusters
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - config.projectsveltos.io
+  resources:
+  - clusterprofiles
+  - clustersummaries
+  - profiles
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - classifiers
+  - eventtriggers
+  - managementclusterclassifiers
+  - sveltosclusters
+  verbs:
+  - get
+  - list
+  - watch

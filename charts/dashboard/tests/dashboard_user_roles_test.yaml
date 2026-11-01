@@ -1,0 +1,67 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: dashboard user ClusterRoles
+templates:
+  - templates/dashboard-user-roles-rbac.yaml
+# Rendered order in templates/dashboard-user-roles-rbac.yaml: 0 sveltos-dashboard-editor, 1 sveltos-dashboard-viewer
+tests:
+  - it: renders the editor and viewer ClusterRoles by default
+    asserts:
+      - hasDocuments:
+          count: 2
+      - equal:
+          path: metadata.name
+          value: sveltos-dashboard-editor
+        documentIndex: 0
+      - equal:
+          path: metadata.name
+          value: sveltos-dashboard-viewer
+        documentIndex: 1
+      - isKind:
+          of: ClusterRole
+  - it: lets the editor manage profiles and clusterprofiles
+    documentIndex: 0
+    asserts:
+      - contains:
+          path: rules
+          content:
+            apiGroups:
+              - config.projectsveltos.io
+            resources:
+              - clusterprofiles
+              - profiles
+            verbs:
+              - create
+              - delete
+              - get
+              - list
+              - patch
+              - update
+              - watch
+  - it: gives the viewer read-only access to profiles and clusterprofiles
+    documentIndex: 1
+    asserts:
+      - contains:
+          path: rules
+          content:
+            apiGroups:
+              - config.projectsveltos.io
+            resources:
+              - clusterprofiles
+              - clustersummaries
+              - profiles
+            verbs:
+              - get
+              - list
+              - watch
+      - notContains:
+          path: rules
+          content:
+            apiGroups:
+              - ""
+            resources:
+              - configmaps
+            verbs:
+              - create
+              - delete
+              - get
+              - update

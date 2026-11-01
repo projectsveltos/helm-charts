@@ -18,7 +18,14 @@ tests:
           path: spec.template.spec.containers[0].volumeMounts
       - lengthEqual:
           path: spec.template.spec.containers[0].env
-          count: 2
+          count: 3
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
   - it: appends extraArgs, the empty value renders a bare flag
     set:
       uiBackendManager.manager.extraArgs:
