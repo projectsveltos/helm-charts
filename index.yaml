@@ -2,6 +2,29 @@ apiVersion: v1
 entries:
   projectsveltos:
   - apiVersion: v2
+    appVersion: v1.17.0
+    created: "2026-11-02T18:25:25.07990269Z"
+    description: Projectsveltos helm chart for Kubernetes
+    digest: 8a796f76592e04e479d437691f1e38327068952316d00b5c787fdfa3cb5a69c6
+    home: https://projectsveltos.github.io/helm-charts/
+    icon: https://github.com/projectsveltos/sveltos/raw/main/docs/assets/logo.png
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - email: gianluca@projectsveltos.io
+      name: Gianluca Mardente
+      url: https://github.com/gianlucam76
+    - email: github@jkroepke.de
+      name: Jan-Otto Kröpke
+      url: https://github.com/jkroepke
+    name: projectsveltos
+    sources:
+    - https://github.com/projectsveltos/
+    - https://github.com/projectsveltos/helm-charts
+    type: application
+    urls:
+    - https://github.com/projectsveltos/helm-charts/releases/download/projectsveltos-1.17.0/projectsveltos-1.17.0.tgz
+    version: 1.17.0
+  - apiVersion: v2
     appVersion: v1.16.1
     created: "2026-10-26T09:44:19.5928223Z"
     description: Projectsveltos helm chart for Kubernetes
@@ -2725,4 +2748,4 @@ entries:
     urls:
     - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-dashboard-0.47.0/sveltos-dashboard-0.47.0.tgz
     version: 0.47.0
-generated: "2026-10-26T09:44:19.593216131Z"
+generated: "2026-11-02T18:25:25.080626356Z"
