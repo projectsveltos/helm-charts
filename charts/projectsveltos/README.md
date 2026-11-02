@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 1.16.1](https://img.shields.io/badge/Version-1.16.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.16.1](https://img.shields.io/badge/AppVersion-v1.16.1-informational?style=flat-square)
+![Version: 1.17.0](https://img.shields.io/badge/Version-1.17.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.17.0](https://img.shields.io/badge/AppVersion-v1.17.0-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -47,8 +47,8 @@ Kubernetes: `>=1.25.0-0`
 | accessManager.manager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}` | The SecurityContext for the containers |
 | accessManager.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | accessManager.manager.image.repository | string | `"projectsveltos/access-manager"` | Docker image repository |
-| accessManager.manager.image.tag | string | `"v1.16.0"` |  |
-| accessManager.manager.image.digest | string | `"sha256:3518240977ab0ec695e28236cb13bc055591da8dc5f641fce3697a25863fa0fb"` |  |
+| accessManager.manager.image.tag | string | `"v1.17.0"` |  |
+| accessManager.manager.image.digest | string | `"sha256:69f3ee3f4bdf7b746027b4f4217c6b6ec3610690059cc8f4d3f6006cc3ae13ea"` |  |
 | accessManager.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | accessManager.nodeSelector | object | `{}` |  |
 | accessManager.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
@@ -60,20 +60,20 @@ Kubernetes: `>=1.25.0-0`
 | addonController.podAnnotations | object | `{}` |  |
 | addonController.initialization.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | addonController.initialization.image.repository | string | `"projectsveltos/addon-controller"` | Docker image repository |
-| addonController.initialization.image.tag | string | `"v1.16.1"` |  |
-| addonController.initialization.image.digest | string | `"sha256:6af46fa4a2c7b26cbb947e98cb59033573804a85905a3d015cd260a423928f47"` |  |
+| addonController.initialization.image.tag | string | `"v1.17.0"` |  |
+| addonController.initialization.image.digest | string | `"sha256:95f36a53eab7d7284aec941d6c651b83051c52b004f5c2b6d156c81eceea47b5"` |  |
 | addonController.initialization.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | addonController.controller.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | addonController.controller.args[1] | string | `"--report-mode=0"` |  |
 | addonController.controller.args[2] | string | `"--shard-key="` |  |
 | addonController.controller.args[3] | string | `"--v=5"` |  |
-| addonController.controller.args[4] | string | `"--version=v1.16.0"` |  |
+| addonController.controller.args[4] | string | `"--version=v1.17.0"` |  |
 | addonController.controller.extraArgs | object | `{}` |  |
 | addonController.controller.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | addonController.controller.argsAgentMgmtCluster[1] | string | `"--report-mode=0"` |  |
 | addonController.controller.argsAgentMgmtCluster[2] | string | `"--shard-key="` |  |
 | addonController.controller.argsAgentMgmtCluster[3] | string | `"--v=5"` |  |
-| addonController.controller.argsAgentMgmtCluster[4] | string | `"--version=v1.16.0"` |  |
+| addonController.controller.argsAgentMgmtCluster[4] | string | `"--version=v1.17.0"` |  |
 | addonController.controller.argsAgentMgmtCluster[5] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | addonController.controller.extraArgsAgentMgmtCluster | object | `{}` |  |
 | addonController.controller.extraEnv | list | `[]` |  |
@@ -81,8 +81,8 @@ Kubernetes: `>=1.25.0-0`
 | addonController.controller.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | addonController.controller.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | addonController.controller.image.repository | string | `"projectsveltos/addon-controller"` | Docker image repository |
-| addonController.controller.image.tag | string | `"v1.16.1"` |  |
-| addonController.controller.image.digest | string | `"sha256:6af46fa4a2c7b26cbb947e98cb59033573804a85905a3d015cd260a423928f47"` |  |
+| addonController.controller.image.tag | string | `"v1.17.0"` |  |
+| addonController.controller.image.digest | string | `"sha256:95f36a53eab7d7284aec941d6c651b83051c52b004f5c2b6d156c81eceea47b5"` |  |
 | addonController.controller.resources | object | `{"requests":{"memory":"512Mi"}}` | Resource requests and limits |
 | addonController.driftDetectionManagerPatchConfigMap.name | string | `"drift-detection-config"` |  |
 | addonController.driftDetectionManagerPatchConfigMap.data | object | `{}` |  |
@@ -115,13 +115,13 @@ Kubernetes: `>=1.25.0-0`
 | classifierManager.manager.args[1] | string | `"--report-mode=0"` |  |
 | classifierManager.manager.args[2] | string | `"--shard-key="` |  |
 | classifierManager.manager.args[3] | string | `"--v=5"` |  |
-| classifierManager.manager.args[4] | string | `"--version=v1.16.0"` |  |
+| classifierManager.manager.args[4] | string | `"--version=v1.17.0"` |  |
 | classifierManager.manager.extraArgs | object | `{}` |  |
 | classifierManager.manager.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | classifierManager.manager.argsAgentMgmtCluster[1] | string | `"--report-mode=0"` |  |
 | classifierManager.manager.argsAgentMgmtCluster[2] | string | `"--shard-key="` |  |
 | classifierManager.manager.argsAgentMgmtCluster[3] | string | `"--v=5"` |  |
-| classifierManager.manager.argsAgentMgmtCluster[4] | string | `"--version=v1.16.0"` |  |
+| classifierManager.manager.argsAgentMgmtCluster[4] | string | `"--version=v1.17.0"` |  |
 | classifierManager.manager.argsAgentMgmtCluster[5] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | classifierManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | classifierManager.manager.extraEnv | list | `[]` |  |
@@ -129,8 +129,8 @@ Kubernetes: `>=1.25.0-0`
 | classifierManager.manager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | classifierManager.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | classifierManager.manager.image.repository | string | `"projectsveltos/classifier"` | Docker image repository |
-| classifierManager.manager.image.tag | string | `"v1.16.0"` |  |
-| classifierManager.manager.image.digest | string | `"sha256:b738da42f6c405d324cfbeef5d3e20229466fcc4eb9de2a45606f4ca12675244"` |  |
+| classifierManager.manager.image.tag | string | `"v1.17.0"` |  |
+| classifierManager.manager.image.digest | string | `"sha256:3fddc6c8abfd071c0deae7871d84d632fa31cc2024eac0fe2c32aea162cc4e5f"` |  |
 | classifierManager.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}` | Resource requests and limits |
 | classifierManager.nodeSelector | object | `{}` |  |
 | classifierManager.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
@@ -151,8 +151,8 @@ Kubernetes: `>=1.25.0-0`
 | clusterInventory.manager.args[1] | string | `"--v=5"` |  |
 | clusterInventory.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | clusterInventory.manager.image.repository | string | `"projectsveltos/clusterinventory-controller"` | Docker image repository |
-| clusterInventory.manager.image.tag | string | `"v1.16.0"` |  |
-| clusterInventory.manager.image.digest | string | `"sha256:f350bf99347958db8e9f462946b231d867c762168d14c4f68693dbf90db75299"` |  |
+| clusterInventory.manager.image.tag | string | `"v1.17.0"` |  |
+| clusterInventory.manager.image.digest | string | `"sha256:93ff242edbc2e989abc7f79681cef761e2c32b06b8bde885677dabf7c6889665"` |  |
 | clusterInventory.manager.imagePullPolicy | string | `"IfNotPresent"` |  |
 | clusterInventory.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | clusterInventory.nodeSelector | object | `{}` |  |
@@ -168,12 +168,12 @@ Kubernetes: `>=1.25.0-0`
 | eventManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | eventManager.manager.args[1] | string | `"--shard-key="` |  |
 | eventManager.manager.args[2] | string | `"--v=5"` |  |
-| eventManager.manager.args[3] | string | `"--version=v1.16.0"` |  |
+| eventManager.manager.args[3] | string | `"--version=v1.17.0"` |  |
 | eventManager.manager.extraArgs | object | `{}` |  |
 | eventManager.manager.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | eventManager.manager.argsAgentMgmtCluster[1] | string | `"--shard-key="` |  |
 | eventManager.manager.argsAgentMgmtCluster[2] | string | `"--v=5"` |  |
-| eventManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.16.0"` |  |
+| eventManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.17.0"` |  |
 | eventManager.manager.argsAgentMgmtCluster[4] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | eventManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | eventManager.manager.extraEnv | list | `[]` |  |
@@ -181,8 +181,8 @@ Kubernetes: `>=1.25.0-0`
 | eventManager.manager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | eventManager.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | eventManager.manager.image.repository | string | `"projectsveltos/event-manager"` | Docker image repository |
-| eventManager.manager.image.tag | string | `"v1.16.0"` |  |
-| eventManager.manager.image.digest | string | `"sha256:f5a52803beba14b4781c0e4d6213b41ec81b56f2d7e034df5e29ebed0fa33308"` |  |
+| eventManager.manager.image.tag | string | `"v1.17.0"` |  |
+| eventManager.manager.image.digest | string | `"sha256:4014dae7b0c47b4411318fd87d21756b49c2d18bb39e6b2267def5dd18cc25bd"` |  |
 | eventManager.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | eventManager.nodeSelector | object | `{}` |  |
 | eventManager.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
@@ -201,12 +201,12 @@ Kubernetes: `>=1.25.0-0`
 | hcManager.manager.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | hcManager.manager.args[1] | string | `"--shard-key="` |  |
 | hcManager.manager.args[2] | string | `"--v=5"` |  |
-| hcManager.manager.args[3] | string | `"--version=v1.16.0"` |  |
+| hcManager.manager.args[3] | string | `"--version=v1.17.0"` |  |
 | hcManager.manager.extraArgs | object | `{}` |  |
 | hcManager.manager.argsAgentMgmtCluster[0] | string | `"--diagnostics-address=:8443"` |  |
 | hcManager.manager.argsAgentMgmtCluster[1] | string | `"--shard-key="` |  |
 | hcManager.manager.argsAgentMgmtCluster[2] | string | `"--v=5"` |  |
-| hcManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.16.0"` |  |
+| hcManager.manager.argsAgentMgmtCluster[3] | string | `"--version=v1.17.0"` |  |
 | hcManager.manager.argsAgentMgmtCluster[4] | string | `"--agent-in-mgmt-cluster=true"` |  |
 | hcManager.manager.extraArgsAgentMgmtCluster | object | `{}` |  |
 | hcManager.manager.extraEnv | list | `[]` |  |
@@ -214,8 +214,8 @@ Kubernetes: `>=1.25.0-0`
 | hcManager.manager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | hcManager.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | hcManager.manager.image.repository | string | `"projectsveltos/healthcheck-manager"` | Docker image repository |
-| hcManager.manager.image.tag | string | `"v1.16.0"` |  |
-| hcManager.manager.image.digest | string | `"sha256:564304068dd7b2c176df65915d35081fa6e1c92a7c47ab5483e29071aaacbf68"` |  |
+| hcManager.manager.image.tag | string | `"v1.17.0"` |  |
+| hcManager.manager.image.digest | string | `"sha256:b97c14ca1efff5a9d487ca271f1fc6906de25431e5e2ec757fe450b5486820fd"` |  |
 | hcManager.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | hcManager.nodeSelector | object | `{}` |  |
 | hcManager.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
@@ -230,8 +230,8 @@ Kubernetes: `>=1.25.0-0`
 | crdManagerJob.crdManager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | crdManagerJob.crdManager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | crdManagerJob.crdManager.image.repository | string | `"projectsveltos/crd-manager"` | Docker image repository |
-| crdManagerJob.crdManager.image.tag | string | `"v1.16.0"` |  |
-| crdManagerJob.crdManager.image.digest | string | `"sha256:b723bd22df0b1152a23a160e6c321eae9aa51cfd8a7d6de84d93b2b115219117"` |  |
+| crdManagerJob.crdManager.image.tag | string | `"v1.17.0"` |  |
+| crdManagerJob.crdManager.image.digest | string | `"sha256:c1e907c776ea610dc8c6b0216de163dfcd3f60aad3ceeb79ddedc877da4eb50e"` |  |
 | crdManagerJob.crdManager.imagePullPolicy | string | `"IfNotPresent"` |  |
 | crdManagerJob.crdManager.nodeSelector | object | `{}` |  |
 | crdManagerJob.crdManager.tolerations | list | `[]` |  |
@@ -247,8 +247,8 @@ Kubernetes: `>=1.25.0-0`
 | registerMgmtClusterJob.registerMgmtCluster.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | registerMgmtClusterJob.registerMgmtCluster.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | registerMgmtClusterJob.registerMgmtCluster.image.repository | string | `"projectsveltos/register-mgmt-cluster"` | Docker image repository |
-| registerMgmtClusterJob.registerMgmtCluster.image.tag | string | `"v1.16.0"` |  |
-| registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:3d7639cd680f7715627f77a8cb993652b3c710f96228f9c09532ef8d09a94ba8"` |  |
+| registerMgmtClusterJob.registerMgmtCluster.image.tag | string | `"v1.17.0"` |  |
+| registerMgmtClusterJob.registerMgmtCluster.image.digest | string | `"sha256:1e0c23d2fbce307e4133bb7dae4921b023d258ce475d8cff0644a270655d29b1"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.imagePullPolicy | string | `"IfNotPresent"` |  |
 | registerMgmtClusterJob.registerMgmtCluster.nodeSelector | object | `{}` |  |
 | registerMgmtClusterJob.registerMgmtCluster.tolerations | list | `[]` |  |
@@ -266,8 +266,8 @@ Kubernetes: `>=1.25.0-0`
 | scManager.manager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | scManager.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | scManager.manager.image.repository | string | `"projectsveltos/sveltoscluster-manager"` | Docker image repository |
-| scManager.manager.image.tag | string | `"v1.16.0"` |  |
-| scManager.manager.image.digest | string | `"sha256:12b498869a164026f1ad02aa0d9c47dbeb25e60f1e55f4d5b3bb1a16607ec33a"` |  |
+| scManager.manager.image.tag | string | `"v1.17.0"` |  |
+| scManager.manager.image.digest | string | `"sha256:175f89e8d131422d8386225db73c6f4ed8d11631e27e063917694e6800e87d33"` |  |
 | scManager.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | scManager.nodeSelector | object | `{}` |  |
 | scManager.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
@@ -302,8 +302,8 @@ Kubernetes: `>=1.25.0-0`
 | shardController.manager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | shardController.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | shardController.manager.image.repository | string | `"projectsveltos/shard-controller"` | Docker image repository |
-| shardController.manager.image.tag | string | `"v1.16.0"` |  |
-| shardController.manager.image.digest | string | `"sha256:7d31160f4aefe1e0892619656fe36b7921bf29069697574d2575d7874e43a095"` |  |
+| shardController.manager.image.tag | string | `"v1.17.0"` |  |
+| shardController.manager.image.digest | string | `"sha256:7bcac2f2dfd906fdd9dc3730bd8f2e5d96f4ce69401777734613e4051e428322"` |  |
 | shardController.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | shardController.nodeSelector | object | `{}` |  |
 | shardController.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
@@ -323,8 +323,8 @@ Kubernetes: `>=1.25.0-0`
 | techsupportController.controller.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | techsupportController.controller.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | techsupportController.controller.image.repository | string | `"projectsveltos/techsupport"` | Docker image repository |
-| techsupportController.controller.image.tag | string | `"v1.16.0"` |  |
-| techsupportController.controller.image.digest | string | `"sha256:4e12d6454ace72f6e76d3819077eddb29f8064f62b30f3a15b6719b2b1fe5e03"` |  |
+| techsupportController.controller.image.tag | string | `"v1.17.0"` |  |
+| techsupportController.controller.image.digest | string | `"sha256:f99c406f74fe0acca1241afc6ca407c918c92d8d7a5ab3b9306c0053882ae8c0"` |  |
 | techsupportController.controller.resources | object | `{"limits":{"cpu":"500m","memory":"1024Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | techsupportController.nodeSelector | object | `{}` |  |
 | techsupportController.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
@@ -342,8 +342,8 @@ Kubernetes: `>=1.25.0-0`
 | mcpServer.controller.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | mcpServer.controller.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | mcpServer.controller.image.repository | string | `"projectsveltos/mcp-server"` | Docker image repository |
-| mcpServer.controller.image.tag | string | `"v1.16.0"` |  |
-| mcpServer.controller.image.digest | string | `"sha256:349d9fd4f2654a69ff1151c12b03057f05a877059a05d58a98463fcd775e6e94"` |  |
+| mcpServer.controller.image.tag | string | `"v1.17.0"` |  |
+| mcpServer.controller.image.digest | string | `"sha256:f14ba614d3fc860a637ee84f859d433dba4bfe7ece4dfdd2fac600e5b9e85680"` |  |
 | mcpServer.controller.resources | object | `{"limits":{"cpu":"500m","memory":"1024Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}` | Resource requests and limits |
 | mcpServer.nodeSelector | object | `{}` |  |
 | mcpServer.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |
