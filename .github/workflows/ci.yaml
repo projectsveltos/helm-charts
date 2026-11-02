@@ -180,6 +180,12 @@ jobs:
 
           echo chart="$chart" >> "$GITHUB_OUTPUT"
 
+      # ui-backend exits when the Sveltos CRDs (lib.projectsveltos.io, config.projectsveltos.io) are missing.
+      # The matrix only contains changed charts, so this runs only when the dashboard chart has been changed.
+      - name: Install Sveltos CRDs
+        if: steps.setup.outputs.chart == 'dashboard'
+        run: kubectl apply -f https://raw.githubusercontent.com/projectsveltos/sveltos/refs/heads/main/manifest/crds/sveltos_crds.yaml
+
       - name: Run helm install from main branch
         id: install
         env:
