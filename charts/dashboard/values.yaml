@@ -4,7 +4,15 @@ global:
   imagePullSecrets: []
 dashboard:
   annotations: {}
+  automountServiceAccountToken: false
+  # -- Pod securityContext. The image runs nginx as root unless set; 100/101 is its nginx user.
+  podSecurityContext: {}
+  # -- Init containers, as a list of Kubernetes Container entries.
+  extraInitContainers: []
   dashboard:
+    containerSecurityContext: {}
+    # -- Extra volumes mounted in the dashboard, each with name, mountPath, optional subPath and readOnly, and an emptyDir, secret or configMap source. Read-only rootfs needs writable /app/dist, /etc/nginx/conf.d, /run/nginx, /var/lib/nginx/tmp and /var/log/nginx.
+    extraVolumes: []
     image:
       repository: projectsveltos/dashboard
       tag: v1.17.0
