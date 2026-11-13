@@ -91,5 +91,8 @@ Render extra volumes from a list of extraVolumes entries.
   secret:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+  {{- if hasKey . "emptyDir" }}
+  emptyDir: {{- toYaml (.emptyDir | default dict) | nindent 4 }}
+  {{- end }}
 {{- end }}
 {{- end }}

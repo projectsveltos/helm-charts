@@ -1,0 +1,114 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: dashboard securityContext, init containers, volumes and token mount
+templates:
+  - templates/deployment.yaml
+# Rendered order in templates/deployment.yaml: 0 ServiceAccount, 1 ui-backend-manager Deployment, 2 dashboard Deployment
+tests:
+  - it: mounts no token and adds no securityContext, init containers or volumes by default
+    documentIndex: 2
+    asserts:
+      - equal:
+          path: spec.template.spec.automountServiceAccountToken
+          value: false
+      - notExists:
+          path: spec.template.spec.securityContext
+      - notExists:
+          path: spec.template.spec.initContainers
+      - notExists:
+          path: spec.template.spec.volumes
+      - notExists:
+          path: spec.template.spec.containers[0].securityContext
+      - notExists:
+          path: spec.template.spec.containers[0].volumeMounts
+  - it: can mount the token again
+    set:
+      dashboard.automountServiceAccountToken: true
+    documentIndex: 2
+    asserts:
+      - equal:
+          path: spec.template.spec.automountServiceAccountToken
+          value: true
+  - it: renders the non-root setup
+    set:
+      dashboard.podSecurityContext:
+        runAsNonRoot: true
+        runAsUser: 100
+        runAsGroup: 101
+        fsGroup: 101
+      dashboard.extraInitContainers:
+        - name: copy-dist
+          image: projectsveltos/dashboard:v1.17.0
+          command: ["sh", "-c", "cp -R /app/dist/. /work/"]
+          volumeMounts:
+            - name: dist
+              mountPath: /work
+      dashboard.dashboard.containerSecurityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: [ALL]
+      dashboard.dashboard.extraVolumes:
+        - name: dist
+          mountPath: /app/dist
+          emptyDir: {}
+        - name: nginx-conf
+          mountPath: /etc/nginx/conf.d
+          emptyDir:
+            sizeLimit: 1Mi
+        - name: extra-ca
+          mountPath: /etc/ssl/extra
+          readOnly: true
+          configMap:
+            name: extra-ca
+    documentIndex: 2
+    asserts:
+      - equal:
+          path: spec.template.spec.securityContext
+          value:
+            runAsNonRoot: true
+            runAsUser: 100
+            runAsGroup: 101
+            fsGroup: 101
+      - equal:
+          path: spec.template.spec.initContainers[0].name
+          value: copy-dist
+      - equal:
+          path: spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem
+          value: true
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - name: dist
+              emptyDir: {}
+            - name: nginx-conf
+              emptyDir:
+                sizeLimit: 1Mi
+            - name: extra-ca
+              configMap:
+                name: extra-ca
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - name: dist
+              mountPath: /app/dist
+            - name: nginx-conf
+              mountPath: /etc/nginx/conf.d
+            - name: extra-ca
+              mountPath: /etc/ssl/extra
+              readOnly: true
+  - it: leaves the ui-backend volumes unchanged
+    set:
+      uiBackendManager.manager.extraVolumes:
+        - name: oidc-proxy-ca
+          mountPath: /etc/oidc-proxy-ca
+          readOnly: true
+          secret:
+            secretName: kube-oidc-proxy-ca
+    documentIndex: 1
+    asserts:
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - name: oidc-proxy-ca
+              secret:
+                secretName: kube-oidc-proxy-ca
