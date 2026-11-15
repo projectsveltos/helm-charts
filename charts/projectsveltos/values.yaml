@@ -66,8 +66,8 @@ addonController:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/addon-controller
-      tag: v1.17.0
-      digest: sha256:95f36a53eab7d7284aec941d6c651b83051c52b004f5c2b6d156c81eceea47b5
+      tag: v1.17.1
+      digest: sha256:104140e3f42ee9dd366750696cd11d5371e182845be363dc9fdc697355e51281
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
@@ -109,8 +109,8 @@ addonController:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/addon-controller
-      tag: v1.17.0
-      digest: sha256:95f36a53eab7d7284aec941d6c651b83051c52b004f5c2b6d156c81eceea47b5
+      tag: v1.17.1
+      digest: sha256:104140e3f42ee9dd366750696cd11d5371e182845be363dc9fdc697355e51281
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
