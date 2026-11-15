@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 1.17.0](https://img.shields.io/badge/Version-1.17.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.17.0](https://img.shields.io/badge/AppVersion-v1.17.0-informational?style=flat-square)
+![Version: 1.17.1](https://img.shields.io/badge/Version-1.17.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.17.1](https://img.shields.io/badge/AppVersion-v1.17.1-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -60,8 +60,8 @@ Kubernetes: `>=1.25.0-0`
 | addonController.podAnnotations | object | `{}` |  |
 | addonController.initialization.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | addonController.initialization.image.repository | string | `"projectsveltos/addon-controller"` | Docker image repository |
-| addonController.initialization.image.tag | string | `"v1.17.0"` |  |
-| addonController.initialization.image.digest | string | `"sha256:95f36a53eab7d7284aec941d6c651b83051c52b004f5c2b6d156c81eceea47b5"` |  |
+| addonController.initialization.image.tag | string | `"v1.17.1"` |  |
+| addonController.initialization.image.digest | string | `"sha256:104140e3f42ee9dd366750696cd11d5371e182845be363dc9fdc697355e51281"` |  |
 | addonController.initialization.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}}` | Resource requests and limits |
 | addonController.controller.args[0] | string | `"--diagnostics-address=:8443"` |  |
 | addonController.controller.args[1] | string | `"--report-mode=0"` |  |
@@ -81,8 +81,8 @@ Kubernetes: `>=1.25.0-0`
 | addonController.controller.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | addonController.controller.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | addonController.controller.image.repository | string | `"projectsveltos/addon-controller"` | Docker image repository |
-| addonController.controller.image.tag | string | `"v1.17.0"` |  |
-| addonController.controller.image.digest | string | `"sha256:95f36a53eab7d7284aec941d6c651b83051c52b004f5c2b6d156c81eceea47b5"` |  |
+| addonController.controller.image.tag | string | `"v1.17.1"` |  |
+| addonController.controller.image.digest | string | `"sha256:104140e3f42ee9dd366750696cd11d5371e182845be363dc9fdc697355e51281"` |  |
 | addonController.controller.resources | object | `{"requests":{"memory":"512Mi"}}` | Resource requests and limits |
 | addonController.driftDetectionManagerPatchConfigMap.name | string | `"drift-detection-config"` |  |
 | addonController.driftDetectionManagerPatchConfigMap.data | object | `{}` |  |
