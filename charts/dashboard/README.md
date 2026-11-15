@@ -1,6 +1,6 @@
 # sveltos-dashboard
 
-![Version: 1.17.0](https://img.shields.io/badge/Version-1.17.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.17.0](https://img.shields.io/badge/AppVersion-1.17.0-informational?style=flat-square)
+![Version: 1.17.1](https://img.shields.io/badge/Version-1.17.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.17.0](https://img.shields.io/badge/AppVersion-1.17.0-informational?style=flat-square)
 
 A Helm chart for Sveltos dashboard
 
@@ -16,6 +16,11 @@ Kubernetes: `>=1.28.0-0`
 | global.useDigest | bool | `false` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | dashboard.annotations | object | `{}` |  |
+| dashboard.automountServiceAccountToken | bool | `false` |  |
+| dashboard.podSecurityContext | object | `{}` | Pod securityContext. The image runs nginx as root unless set; 100/101 is its nginx user. |
+| dashboard.extraInitContainers | list | `[]` | Init containers, as a list of Kubernetes Container entries. |
+| dashboard.dashboard.containerSecurityContext | object | `{}` |  |
+| dashboard.dashboard.extraVolumes | list | `[]` | Extra volumes mounted in the dashboard, each with name, mountPath, optional subPath and readOnly, and an emptyDir, secret or configMap source. Read-only rootfs needs writable /app/dist, /etc/nginx/conf.d, /run/nginx, /var/lib/nginx/tmp and /var/log/nginx. |
 | dashboard.dashboard.image.repository | string | `"projectsveltos/dashboard"` |  |
 | dashboard.dashboard.image.tag | string | `"v1.17.0"` |  |
 | dashboard.dashboard.image.digest | string | `"sha256:304790db22bf58fd68828ce5ae4abcab582b516ca2490d946520776b1f41776b"` |  |

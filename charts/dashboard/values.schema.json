@@ -11,9 +11,33 @@
                 "annotations": {
                     "type": "object"
                 },
+                "automountServiceAccountToken": {
+                    "type": "boolean"
+                },
+                "podSecurityContext": {
+                    "type": "object",
+                    "description": "Pod securityContext. The image runs nginx as root unless set; 100/101 is its nginx user."
+                },
+                "extraInitContainers": {
+                    "type": "array",
+                    "description": "Init containers, as a list of Kubernetes Container entries.",
+                    "items": {
+                        "type": "object"
+                    }
+                },
                 "dashboard": {
                     "type": "object",
                     "properties": {
+                        "containerSecurityContext": {
+                            "type": "object"
+                        },
+                        "extraVolumes": {
+                            "type": "array",
+                            "description": "Extra volumes mounted in the dashboard, each with name, mountPath, optional subPath and readOnly, and an emptyDir, secret or configMap source. Read-only rootfs needs writable /app/dist, /etc/nginx/conf.d, /run/nginx, /var/lib/nginx/tmp and /var/log/nginx.",
+                            "items": {
+                                "type": "object"
+                            }
+                        },
                         "image": {
                             "type": "object",
                             "properties": {

@@ -136,6 +136,13 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      automountServiceAccountToken: {{ .Values.dashboard.automountServiceAccountToken }}
+      {{- with .Values.dashboard.podSecurityContext }}
+      securityContext: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dashboard.extraInitContainers }}
+      initContainers: {{- toYaml . | nindent 6 }}
+      {{- end }}
       containers:
       - env:
         - name: KUBERNETES_CLUSTER_DOMAIN
@@ -168,6 +175,17 @@ spec:
         ports:
         - containerPort: 5173
         resources: {{- toYaml .Values.dashboard.dashboard.resources | nindent 10 }}
+        {{- with .Values.dashboard.dashboard.containerSecurityContext }}
+        securityContext: {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.dashboard.dashboard.extraVolumes }}
+        volumeMounts:
+        {{- include "projectsveltos.extraVolumeMounts" . | nindent 8 }}
+        {{- end }}
       nodeSelector: {{- toYaml .Values.dashboard.nodeSelector | nindent 8 }}
       affinity: {{- toYaml .Values.dashboard.affinity | nindent 8 }}
       tolerations: {{- toYaml .Values.dashboard.tolerations | nindent 8 }}
+      {{- with .Values.dashboard.dashboard.extraVolumes }}
+      volumes:
+      {{- include "projectsveltos.extraVolumes" . | nindent 6 }}
+      {{- end }}
