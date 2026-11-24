@@ -1,0 +1,52 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: addon-controller ClusterRole impersonation
+templates:
+  - templates/addon-controller-rbac.yaml
+tests:
+  - it: allows impersonation by default
+    documentSelector:
+      path: metadata.name
+      value: addon-controller-role
+    asserts:
+      - contains:
+          path: rules
+          content:
+            apiGroups:
+              - '*'
+            resources:
+              - '*'
+            verbs:
+              - get
+              - impersonate
+              - list
+              - watch
+  - it: drops the impersonate verb but keeps read access when rbac.impersonate is false
+    set:
+      addonController.rbac.impersonate: false
+    documentSelector:
+      path: metadata.name
+      value: addon-controller-role
+    asserts:
+      - contains:
+          path: rules
+          content:
+            apiGroups:
+              - '*'
+            resources:
+              - '*'
+            verbs:
+              - get
+              - list
+              - watch
+      - notContains:
+          path: rules
+          content:
+            apiGroups:
+              - '*'
+            resources:
+              - '*'
+            verbs:
+              - get
+              - impersonate
+              - list
+              - watch

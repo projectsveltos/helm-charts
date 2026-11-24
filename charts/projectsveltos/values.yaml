@@ -134,6 +134,9 @@ addonController:
   tolerations: []
   serviceAccount:
     annotations: {}
+  rbac:
+    # -- Set to false to drop the impersonate verb from the addon-controller ClusterRole. The addon-controller impersonates a ServiceAccount only when deploying to the management cluster a ClusterProfile or Profile carrying the projectsveltos.io/serviceaccount-name and projectsveltos.io/serviceaccount-namespace labels (multi-tenancy). Keep it true if those labels are used.
+    impersonate: true
   type: ClusterIP
   roleExtra:
     # @schema type:[array, null];item:object
