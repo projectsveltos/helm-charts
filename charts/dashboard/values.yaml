@@ -15,8 +15,8 @@ dashboard:
     extraVolumes: []
     image:
       repository: projectsveltos/dashboard
-      tag: v1.17.0
-      digest: sha256:304790db22bf58fd68828ce5ae4abcab582b516ca2490d946520776b1f41776b
+      tag: v1.18.0
+      digest: sha256:c8bd684e78f0c26469928d614156561a2539be308f909e7ebd0fc2f4a4a3a7b3
     resources:
       limits:
         cpu: 500m
@@ -122,8 +122,8 @@ uiBackendManager:
           - ALL
     image:
       repository: projectsveltos/ui-backend
-      tag: v1.17.0
-      digest: sha256:17e2ee08f001ee17b4841e842b1f078d7f036a2b2ec72407c8ab1ae4c8e9fbf2
+      tag: v1.18.0
+      digest: sha256:5f286fbf76f8bf2e7c45e6091dc052bfbb4697abd93be4d8514508752b89aa0a
     resources:
       limits:
         cpu: 500m
