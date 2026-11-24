@@ -85,6 +85,9 @@ spec:
   {{- if .Values.telemetry.disabled }}
     {{"-  --disable-telemetry=true" | nindent 8 }}
   {{- end }}
+  {{- if not .Values.agent.enabled }}
+        - --disable-sveltos-agent=true
+  {{- end }}
         - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
@@ -458,6 +461,7 @@ spec:
       {{- end }}
       serviceAccountName: sc-manager
       terminationGracePeriodSeconds: 10
+{{ if .Values.agent.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -596,6 +600,8 @@ spec:
       {{- end }}
       serviceAccountName: hc-manager
       terminationGracePeriodSeconds: 10
+{{ end }}
+{{ if .Values.agent.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -734,6 +740,7 @@ spec:
       {{- end }}
       serviceAccountName: event-manager
       terminationGracePeriodSeconds: 10
+{{ end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -825,6 +832,9 @@ spec:
     {{- if .Values.enableNatsWatcher }}
         - --enable-nats-watcher=true
     {{- end }}
+  {{- if not .Values.agent.enabled }}
+        - --disable-sveltos-agent=true
+  {{- end }}
         - --capi-onboard-annotation={{ .Values.global.capiOnboardAnnotation }}
         command:
         - /manager
@@ -1007,6 +1017,9 @@ spec:
   {{- if ne (len .Values.shardController.shardComponentsConfigMap.data) 0 }}
         - --shard-components-config={{ .Values.shardController.shardComponentsConfigMap.name }}
   {{- end }}
+  {{- end }}
+  {{- if not .Values.agent.enabled }}
+        - --disable-sveltos-agent=true
   {{- end }}
         command:
         - /manager

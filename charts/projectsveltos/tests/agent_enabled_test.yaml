@@ -1,0 +1,177 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: agent enabled
+templates:
+  - templates/deployment.yaml
+  - templates/configmap.yaml
+  - templates/event-manager.yaml
+tests:
+  - it: classifier-manager does not get --disable-sveltos-agent by default
+    documentSelector:
+      path: metadata.name
+      value: classifier-manager
+      skipEmptyTemplates: true
+    asserts:
+      - notContains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: classifier-manager gets --disable-sveltos-agent when agent.enabled is false
+    set:
+      agent.enabled: false
+    documentSelector:
+      path: metadata.name
+      value: classifier-manager
+      skipEmptyTemplates: true
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: classifier-manager gets --disable-sveltos-agent in agentless mode when agent.enabled is false
+    set:
+      agent.enabled: false
+      agent.managementCluster: true
+    documentSelector:
+      path: metadata.name
+      value: classifier-manager
+      skipEmptyTemplates: true
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --agent-in-mgmt-cluster=true
+  - it: addon-controller does not get --disable-sveltos-agent by default
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+      skipEmptyTemplates: true
+    asserts:
+      - notContains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: addon-controller gets --disable-sveltos-agent when agent.enabled is false
+    set:
+      agent.enabled: false
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+      skipEmptyTemplates: true
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: addon-controller gets --disable-sveltos-agent in agentless mode when agent.enabled is false
+    set:
+      agent.enabled: false
+      agent.managementCluster: true
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+      skipEmptyTemplates: true
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: shard-controller does not get --disable-sveltos-agent by default
+    documentSelector:
+      path: metadata.name
+      value: shard-controller
+      skipEmptyTemplates: true
+    asserts:
+      - notContains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: shard-controller gets --disable-sveltos-agent when agent.enabled is false
+    set:
+      agent.enabled: false
+    documentSelector:
+      path: metadata.name
+      value: shard-controller
+      skipEmptyTemplates: true
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: shard-controller gets --disable-sveltos-agent in agentless mode when agent.enabled is false
+    set:
+      agent.enabled: false
+      agent.managementCluster: true
+    documentSelector:
+      path: metadata.name
+      value: shard-controller
+      skipEmptyTemplates: true
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --disable-sveltos-agent=true
+  - it: addon-controller init container does not get --disable-sveltos-agent
+    set:
+      agent.enabled: false
+    documentSelector:
+      path: metadata.name
+      value: addon-controller
+      skipEmptyTemplates: true
+    asserts:
+      - notContains:
+          path: spec.template.spec.initContainers[0].args
+          content: --disable-sveltos-agent=true
+  - it: hc-manager is deployed by default
+    template: templates/deployment.yaml
+    asserts:
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: hc-manager
+          any: true
+  - it: hc-manager is not deployed when agent.enabled is false
+    set:
+      agent.enabled: false
+    template: templates/deployment.yaml
+    asserts:
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: hc-manager
+          any: true
+        not: true
+  - it: event-manager is deployed by default
+    template: templates/deployment.yaml
+    asserts:
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: event-manager
+          any: true
+  - it: event-manager is not deployed when agent.enabled is false
+    set:
+      agent.enabled: false
+    template: templates/deployment.yaml
+    asserts:
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: event-manager
+          any: true
+        not: true
+  - it: event-manager Service is rendered by default
+    template: templates/event-manager.yaml
+    asserts:
+      - hasDocuments:
+          count: 1
+      - isKind:
+          of: Service
+  - it: event-manager Service is not rendered when agent.enabled is false
+    set:
+      agent.enabled: false
+    template: templates/event-manager.yaml
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: event-manager ServiceMonitor is not rendered when agent.enabled is false
+    set:
+      agent.enabled: false
+      prometheus.enabled: true
+    template: templates/event-manager.yaml
+    asserts:
+      - hasDocuments:
+          count: 0
