@@ -1908,6 +1908,17 @@ entries:
     version: 0.4.0
   sveltos-crds:
   - apiVersion: v2
+    appVersion: 1.18.0
+    created: "2026-11-25T20:42:23.392447818Z"
+    description: A Helm chart for Projectsveltos CustomResourceDefinitions
+    digest: 73789d0e43df2035f942057e06f2f5b7d42ebff8e808d1dc6c5cdd06e2aa6f92
+    icon: https://github.com/projectsveltos/sveltos/raw/main/docs/assets/logo.png
+    name: sveltos-crds
+    type: application
+    urls:
+    - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-crds-1.18.0/sveltos-crds-1.18.0.tgz
+    version: 1.18.0
+  - apiVersion: v2
     appVersion: 1.17.0
     created: "2026-11-02T18:25:54.302637101Z"
     description: A Helm chart for Projectsveltos CustomResourceDefinitions
@@ -2841,4 +2852,4 @@ entries:
     urls:
     - https://github.com/projectsveltos/helm-charts/releases/download/sveltos-dashboard-0.47.0/sveltos-dashboard-0.47.0.tgz
     version: 0.47.0
-generated: "2026-11-25T20:42:06.674165388Z"
+generated: "2026-11-25T20:42:23.392894899Z"
