@@ -309,6 +309,10 @@
     "agent": {
       "type": "object",
       "properties": {
+        "enabled": {
+          "description": "Set to false to not deploy sveltos-agent. The classifier-manager, addon-controller and shard-controller are started with the disable-sveltos-agent flag set, and event-manager and healthcheck-manager are not deployed since they only work with sveltos-agent. Classifier, EventSource/EventTrigger, HealthCheck/ClusterHealthCheck and the reloader feature of ClusterProfile/Profile do not work. Turning it off does not remove a sveltos-agent that is already deployed.",
+          "type": "boolean"
+        },
         "managementCluster": {
           "type": "boolean"
         }
