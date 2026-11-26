@@ -30,7 +30,9 @@ rules:
   - '*'
   verbs:
   - get
+  {{- if .Values.addonController.rbac.impersonate }}
   - impersonate
+  {{- end }}
   - list
   - watch
 - apiGroups:

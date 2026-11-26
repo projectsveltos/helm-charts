@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 1.18.0](https://img.shields.io/badge/Version-1.18.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.18.0](https://img.shields.io/badge/AppVersion-v1.18.0-informational?style=flat-square)
+![Version: 1.18.1](https://img.shields.io/badge/Version-1.18.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.18.0](https://img.shields.io/badge/AppVersion-v1.18.0-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -94,6 +94,7 @@ Kubernetes: `>=1.25.0-0`
 | addonController.nodeSelector | object | `{}` |  |
 | addonController.tolerations | list | `[]` |  |
 | addonController.serviceAccount.annotations | object | `{}` |  |
+| addonController.rbac.impersonate | bool | `true` | Set to false to drop the impersonate verb from the addon-controller ClusterRole. The addon-controller impersonates a ServiceAccount only when deploying to the management cluster a ClusterProfile or Profile carrying the projectsveltos.io/serviceaccount-name and projectsveltos.io/serviceaccount-namespace labels (multi-tenancy). Keep it true if those labels are used. |
 | addonController.type | string | `"ClusterIP"` |  |
 | addonController.roleExtra.rules[0].apiGroups[0] | string | `""` |  |
 | addonController.roleExtra.rules[0].resources | list | `["configmaps"]` | Resource requests and limits |
