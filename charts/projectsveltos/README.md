@@ -1,6 +1,6 @@
 # projectsveltos
 
-![Version: 1.18.1](https://img.shields.io/badge/Version-1.18.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.18.0](https://img.shields.io/badge/AppVersion-v1.18.0-informational?style=flat-square)
+![Version: 1.18.3](https://img.shields.io/badge/Version-1.18.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.18.0](https://img.shields.io/badge/AppVersion-v1.18.0-informational?style=flat-square)
 
 Projectsveltos helm chart for Kubernetes
 
@@ -130,8 +130,8 @@ Kubernetes: `>=1.25.0-0`
 | classifierManager.manager.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the containers |
 | classifierManager.manager.image.registry | string | `""` | The Docker registry. Defaults to global.registry if empty. |
 | classifierManager.manager.image.repository | string | `"projectsveltos/classifier"` | Docker image repository |
-| classifierManager.manager.image.tag | string | `"v1.18.0"` |  |
-| classifierManager.manager.image.digest | string | `"sha256:05aa85af82b33de85275a9d1d95ed195fbfaebcae7dead440f8b5ff0f051623b"` |  |
+| classifierManager.manager.image.tag | string | `"v1.18.1"` |  |
+| classifierManager.manager.image.digest | string | `"sha256:ef4d52cce75cdea5cf0e81a145fcd2c3a7402478b32c6ecabba63b0ce15f6886"` |  |
 | classifierManager.manager.resources | object | `{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}` | Resource requests and limits |
 | classifierManager.nodeSelector | object | `{}` |  |
 | classifierManager.podSecurityContext | object | `{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}}` | The SecurityContext for the pod |

@@ -200,8 +200,8 @@ classifierManager:
       registry: ""
       # -- Docker image repository
       repository: projectsveltos/classifier
-      tag: v1.18.0
-      digest: sha256:05aa85af82b33de85275a9d1d95ed195fbfaebcae7dead440f8b5ff0f051623b
+      tag: v1.18.1
+      digest: sha256:ef4d52cce75cdea5cf0e81a145fcd2c3a7402478b32c6ecabba63b0ce15f6886
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
