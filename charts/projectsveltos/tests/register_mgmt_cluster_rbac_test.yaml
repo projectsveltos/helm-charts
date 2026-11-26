@@ -1,0 +1,232 @@
+# $schema: https://raw.githubusercontent.com/helm-unittest/helm-unittest/refs/heads/main/schema/helm-testsuite.json
+suite: register-mgmt-cluster identity
+templates:
+  - templates/register-mgmt-cluster-rbac.yaml
+  - templates/register-mgmt-cluster-job.yaml
+tests:
+  - it: the ServiceAccount is a hook of the phases the Job runs in
+    template: templates/register-mgmt-cluster-rbac.yaml
+    documentSelector:
+      path: kind
+      value: ServiceAccount
+    asserts:
+      - equal:
+          path: metadata.name
+          value: register-mgmt-cluster
+      - equal:
+          path: metadata.annotations["helm.sh/hook"]
+          value: post-install,post-upgrade
+      - equal:
+          path: metadata.annotations["helm.sh/hook-delete-policy"]
+          value: before-hook-creation,hook-succeeded
+  - it: keeps the annotations set for the ServiceAccount next to the hook annotations
+    set:
+      registerMgmtCluster.serviceAccount.annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/register
+    template: templates/register-mgmt-cluster-rbac.yaml
+    documentSelector:
+      path: kind
+      value: ServiceAccount
+    asserts:
+      - equal:
+          path: metadata.annotations["eks.amazonaws.com/role-arn"]
+          value: arn:aws:iam::123456789012:role/register
+      - equal:
+          path: metadata.annotations["helm.sh/hook"]
+          value: post-install,post-upgrade
+  - it: binds the ServiceAccount to cluster-admin only for the lifetime of the hook when the cluster is registered
+    template: templates/register-mgmt-cluster-rbac.yaml
+    asserts:
+      - hasDocuments:
+          count: 2
+      - equal:
+          path: metadata.annotations["helm.sh/hook"]
+          value: post-install,post-upgrade
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+      - equal:
+          path: metadata.annotations["helm.sh/hook-delete-policy"]
+          value: before-hook-creation,hook-succeeded
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+      - equal:
+          path: roleRef.name
+          value: cluster-admin
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+      - equal:
+          path: subjects
+          value:
+            - kind: ServiceAccount
+              name: register-mgmt-cluster
+              namespace: NAMESPACE
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+    release:
+      namespace: NAMESPACE
+  - it: creates the ServiceAccount and the bindings before the Job
+    asserts:
+      - equal:
+          path: metadata.annotations["helm.sh/hook-weight"]
+          value: "-10"
+        template: templates/register-mgmt-cluster-rbac.yaml
+        documentSelector:
+          path: kind
+          value: ServiceAccount
+      - equal:
+          path: metadata.annotations["helm.sh/hook-weight"]
+          value: "-5"
+        template: templates/register-mgmt-cluster-rbac.yaml
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+      - equal:
+          path: metadata.annotations["helm.sh/hook-weight"]
+          value: "0"
+        template: templates/register-mgmt-cluster-job.yaml
+  - it: the Job is replaced by the next run also when the previous one failed
+    template: templates/register-mgmt-cluster-job.yaml
+    asserts:
+      - equal:
+          path: metadata.annotations["helm.sh/hook"]
+          value: post-install,post-upgrade
+      - equal:
+          path: metadata.annotations["helm.sh/hook-delete-policy"]
+          value: before-hook-creation,hook-succeeded
+  - it: skip-self-registration in extraArgs gives the Job only the permissions it needs
+    set:
+      registerMgmtClusterJob.registerMgmtCluster.extraArgs:
+        skip-self-registration: true
+    template: templates/register-mgmt-cluster-rbac.yaml
+    asserts:
+      - hasDocuments:
+          count: 5
+      - equal:
+          path: roleRef
+          value:
+            apiGroup: rbac.authorization.k8s.io
+            kind: ClusterRole
+            name: register-mgmt-cluster
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+      - equal:
+          path: rules
+          value:
+            - apiGroups:
+                - lib.projectsveltos.io
+              resources:
+                - classifiers
+                - debuggingconfigurations
+              verbs:
+                - create
+                - get
+        documentSelector:
+          path: kind
+          value: ClusterRole
+      - equal:
+          path: rules
+          value:
+            - apiGroups:
+                - ""
+              resources:
+                - secrets
+              resourceNames:
+                - sveltos-license
+              verbs:
+                - delete
+                - get
+            - apiGroups:
+                - ""
+              resources:
+                - secrets
+              verbs:
+                - create
+        documentSelector:
+          path: kind
+          value: Role
+      - equal:
+          path: roleRef
+          value:
+            apiGroup: rbac.authorization.k8s.io
+            kind: Role
+            name: register-mgmt-cluster
+        documentSelector:
+          path: kind
+          value: RoleBinding
+  - it: skip-self-registration renders no cluster-admin binding and every resource is a hook
+    set:
+      registerMgmtClusterJob.registerMgmtCluster.extraArgs:
+        skip-self-registration: true
+    template: templates/register-mgmt-cluster-rbac.yaml
+    asserts:
+      - notEqual:
+          path: roleRef.name
+          value: cluster-admin
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+      - equal:
+          path: metadata.annotations["helm.sh/hook"]
+          value: post-install,post-upgrade
+        documentSelector:
+          path: kind
+          value: Role
+      - equal:
+          path: metadata.annotations["helm.sh/hook"]
+          value: post-install,post-upgrade
+        documentSelector:
+          path: kind
+          value: ClusterRole
+  - it: skip-self-registration as an argument gives the Job only the permissions it needs
+    set:
+      registerMgmtClusterJob.registerMgmtCluster.args:
+        - --labels=
+        - --skip-self-registration
+    template: templates/register-mgmt-cluster-rbac.yaml
+    asserts:
+      - hasDocuments:
+          count: 5
+  - it: skip-self-registration=true as an argument gives the Job only the permissions it needs
+    set:
+      registerMgmtClusterJob.registerMgmtCluster.args:
+        - --skip-self-registration=true
+    template: templates/register-mgmt-cluster-rbac.yaml
+    asserts:
+      - hasDocuments:
+          count: 5
+  - it: skip-self-registration set to the string false does not skip, as the Job renders it with =false
+    set:
+      registerMgmtClusterJob.registerMgmtCluster.extraArgs:
+        skip-self-registration: "false"
+    asserts:
+      - hasDocuments:
+          count: 2
+        template: templates/register-mgmt-cluster-rbac.yaml
+      - equal:
+          path: roleRef.name
+          value: cluster-admin
+        template: templates/register-mgmt-cluster-rbac.yaml
+        documentSelector:
+          path: kind
+          value: ClusterRoleBinding
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --skip-self-registration=false
+        template: templates/register-mgmt-cluster-job.yaml
+  - it: skip-self-registration with an empty value skips, as the Job renders it as a bare flag
+    set:
+      registerMgmtClusterJob.registerMgmtCluster.extraArgs:
+        skip-self-registration: ""
+    asserts:
+      - hasDocuments:
+          count: 5
+        template: templates/register-mgmt-cluster-rbac.yaml
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: --skip-self-registration
+        template: templates/register-mgmt-cluster-job.yaml

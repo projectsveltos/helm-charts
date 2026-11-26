@@ -87,8 +87,13 @@ tests:
       skipEmptyTemplates: true
     asserts:
       - hasDocuments:
-          count: 14
+          count: 13
           filterAware: true
+        template: templates/serviceaccount.yaml
+      - hasDocuments:
+          count: 1
+          filterAware: true
+        template: templates/register-mgmt-cluster-rbac.yaml
       - equal:
           path: metadata.namespace
           value: namespace-under-test

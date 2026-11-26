@@ -1,14 +1,137 @@
+{{- /*
+The register-mgmt-cluster Job runs once, after install and upgrade. Its ServiceAccount and the permissions
+bound to it are hooks of the same phases, so they exist only while the Job runs and are removed when it
+succeeded (if it fails they are kept, to be able to debug it, and replaced by the next run).
+The ServiceAccount (weight -10) and the RBAC resources (weight -5) are created before the Job (weight 0).
+
+When the management cluster is registered the Job creates, among others, a ClusterRole granting all
+verbs on all resources: only cluster-admin can create it. When the registration is skipped the Job
+needs only the permissions below.
+*/ -}}
+{{- $hook := "post-install,post-upgrade" -}}
+{{- $deletePolicy := "before-hook-creation,hook-succeeded" -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: register-mgmt-cluster
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: {{ $hook }}
+    helm.sh/hook-delete-policy: {{ $deletePolicy }}
+    helm.sh/hook-weight: "-10"
+    {{- with .Values.registerMgmtCluster.serviceAccount.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+{{- if include "projectsveltos.registerMgmtCluster.skipSelfRegistration" . }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: register-mgmt-cluster
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: {{ $hook }}
+    helm.sh/hook-delete-policy: {{ $deletePolicy }}
+    helm.sh/hook-weight: "-5"
+rules:
+# Creates the default Classifier and DebuggingConfiguration, if not present.
+- apiGroups:
+  - lib.projectsveltos.io
+  resources:
+  - classifiers
+  - debuggingconfigurations
+  verbs:
+  - create
+  - get
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: register-mgmt-cluster-rolebinding
   labels:
   {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: {{ $hook }}
+    helm.sh/hook-delete-policy: {{ $deletePolicy }}
+    helm.sh/hook-weight: "-5"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: register-mgmt-cluster
+subjects:
+- kind: ServiceAccount
+  name: register-mgmt-cluster
+  namespace: {{ .Release.Namespace | quote }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: register-mgmt-cluster
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: {{ $hook }}
+    helm.sh/hook-delete-policy: {{ $deletePolicy }}
+    helm.sh/hook-weight: "-5"
+rules:
+# Migrates the type of the license Secret: reads it, deletes it and creates it again.
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  resourceNames:
+  - sveltos-license
+  verbs:
+  - delete
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: register-mgmt-cluster
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: {{ $hook }}
+    helm.sh/hook-delete-policy: {{ $deletePolicy }}
+    helm.sh/hook-weight: "-5"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: register-mgmt-cluster
+subjects:
+- kind: ServiceAccount
+  name: register-mgmt-cluster
+  namespace: {{ .Release.Namespace | quote }}
+{{- else }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: register-mgmt-cluster-rolebinding
+  labels:
+  {{- include "projectsveltos.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: {{ $hook }}
+    helm.sh/hook-delete-policy: {{ $deletePolicy }}
+    helm.sh/hook-weight: "-5"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-admin
 subjects:
 - kind: ServiceAccount
-  name: 'register-mgmt-cluster'
-  namespace: '{{ .Release.Namespace }}'
+  name: register-mgmt-cluster
+  namespace: {{ .Release.Namespace | quote }}
+{{- end }}
