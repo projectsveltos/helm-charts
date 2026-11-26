@@ -201,7 +201,7 @@ classifierManager:
       # -- Docker image repository
       repository: projectsveltos/classifier
       tag: v1.18.1
-      digest: sha256:ef4d52cce75cdea5cf0e81a145fcd2c3a7402478b32c6ecabba63b0ce15f6886
+      digest: sha256:370de70e7661962a3228b2fd7387a38afd2498f1f770386171ae5d84b483c7b9
     # @schema skipProperties:true;additionalProperties:true
     # -- Resource requests and limits
     resources:
